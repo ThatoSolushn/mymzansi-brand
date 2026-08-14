@@ -21,6 +21,7 @@ export const NAV = [
       { title: 'Content & tone', href: 'guidelines/content/', blurb: 'How the service speaks — especially when something has gone wrong.' },
     ],
   },
+  { title: 'Roadmap', href: 'roadmap/', children: [] },
   { title: 'Tokens', href: 'tokens/', children: [] },
   { title: 'About', href: 'about/', children: [] },
 ];
@@ -193,6 +194,25 @@ td:first-child{color:var(--ink)}
 /* scale bars */
 .bar{display:block;height:10px;border-radius:3px;background:var(--accent)}
 
+/* roadmap */
+.rm{display:flex;flex-direction:column;gap:var(--s-sm);margin:var(--s-md) 0}
+.rm-item{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:var(--s-md);display:grid;gap:var(--s-xs)}
+.rm-head{display:flex;align-items:baseline;gap:var(--s-sm);flex-wrap:wrap}
+.rm-head h3{margin:0;font-size:1.12rem}
+.rm-num{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.1em}
+.rm-item p{margin:0;max-width:72ch;color:var(--ink2)}
+.rm-item p.what{color:var(--ink)}
+.chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;padding:3px 8px;border-radius:var(--r-full);white-space:nowrap;font-weight:600}
+.chip.next{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
+.chip.planned{background:var(--sunk);color:var(--ink2)}
+.chip.exploring{background:color-mix(in srgb,var(--warm) 18%,transparent);color:var(--warm)}
+.chip.blocked{background:color-mix(in srgb,var(--bad) 18%,transparent);color:var(--bad)}
+.rm-meta{display:grid;gap:6px;margin-top:6px;padding-top:var(--s-xs);border-top:1px solid var(--rule);font-size:.86rem}
+@media(min-width:640px){.rm-meta{grid-template-columns:1fr 1fr;gap:6px var(--s-md)}}
+.rm-meta div{display:flex;gap:8px}
+.rm-meta dt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);min-width:76px;padding-top:3px}
+.rm-meta dd{margin:0;color:var(--ink2)}
+
 /* filter box */
 .filter{width:100%;max-width:420px;padding:11px 13px;min-height:var(--touch);border:1px solid var(--rule);border-radius:var(--r-sm);background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;margin:var(--s-sm) 0}
 .count{font-family:var(--mono);font-size:11.5px;color:var(--ink3)}
@@ -225,6 +245,7 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
       }).join('')}
       <p class="sect">Reference</p>
       <ul>
+        <li><a href="${r}roadmap/"${active === 'roadmap/' ? ' aria-current="page"' : ''}>Roadmap</a></li>
         <li><a href="${r}tokens/"${active === 'tokens/' ? ' aria-current="page"' : ''}>All tokens</a></li>
         <li><a href="${r}about/"${active === 'about/' ? ' aria-current="page"' : ''}>About &amp; status</a></li>
       </ul></aside>`
@@ -279,6 +300,7 @@ ${sideNav}
     <div>
       <h4>Reference</h4>
       <ul>
+        <li><a href="${r}roadmap/">Roadmap</a></li>
         <li><a href="${r}tokens/">All tokens</a></li>
         <li><a href="${r}about/">About &amp; status</a></li>
         <li><a href="${r}TOKENS.md">Markdown catalogue</a></li>

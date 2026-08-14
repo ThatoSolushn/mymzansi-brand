@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Roadmap — MyMzansi Design System</title>
+<meta name="description" content="Eight things this system does not have yet, in rough order of what unblocks the most. Nothing here is committed work — it is a statement of intent, and the dependencies are stated so the sequencing is arguable.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../">
+      <span class="b1">Design system</span>
+      <span class="b2">MyMzansi</span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../guidelines/">Guidelines</a><a href="../roadmap/" aria-current="true">Roadmap</a><a href="../tokens/">Tokens</a><a href="../about/">About</a></nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../guidelines/colour/">Colour</a></li><li><a href="../guidelines/typography/">Typography</a></li><li><a href="../guidelines/language/">Language</a></li><li><a href="../guidelines/space/">Space &amp; layout</a></li><li><a href="../guidelines/iconography/">Iconography</a></li><li><a href="../guidelines/motion/">Motion</a></li><li><a href="../guidelines/accessibility/">Accessibility</a></li><li><a href="../guidelines/content/">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../roadmap/" aria-current="page">Roadmap</a></li>
+        <li><a href="../tokens/">All tokens</a></li>
+        <li><a href="../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">What is coming</p>
+    <h1>Roadmap</h1>
+    <p class="lede">Eight things this system does not have yet, in rough order of what unblocks the most. Nothing here is committed work — it is a statement of intent, and the dependencies are stated so the sequencing is arguable.</p>
+  </div>
+  
+<aside class="callout note"><b class="ct">Where this stands</b><div><p>The system today is <b>foundations only</b>: tokens, rules, and the evidence behind them. Everything on this page sits above that layer. Where an item is blocked, it says so and by what — an honest roadmap is more useful than an ambitious one.</p></div></aside>
+
+<div class="tw"><table style="min-width:480px">
+    <thead><tr><th>Status</th><th>Meaning</th><th>Items</th></tr></thead>
+    <tbody><tr><td><span class="chip next">Next up</span></td><td>Ready to start; nothing blocking</td><td>2</td></tr><tr><td><span class="chip planned">Planned</span></td><td>Wanted, but depends on earlier work</td><td>3</td></tr><tr><td><span class="chip exploring">Exploring</span></td><td>Shape not yet settled; needs research or a commission</td><td>2</td></tr><tr><td><span class="chip blocked">Needs a mandate</span></td><td>Requires authority this concept does not have</td><td>1</td></tr></tbody>
+  </table></div>
+
+<h2 id="items">The list</h2>
+<div class="rm">
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">01</span>
+        <h3>Brand guidelines</h3>
+        <span class="chip next">Next up</span>
+      </div>
+      <p class="what">The identity layer above the tokens: how the wordmark, the colour band and the voice are used, and — more importantly — what may not be done with them.</p>
+      <p>Most of the reasoning already exists in prose. What is missing is the applied half: logo clear-space and minimum sizes, co-branding with departments, the identity band's proportions as a rule rather than a happy accident, and worked misuse examples. The misuse section matters most, because it is what stops the system being applied decoratively.</p>
+      
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>A decision on whether a wordmark exists at all, and who owns it.</dd></div>
+        <div><dt>Unblocks</dt><dd>Templates, illustration guidelines, and anything a department would produce independently.</dd></div>
+      </dl>
+    </article>
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">02</span>
+        <h3>Components with code references</h3>
+        <span class="chip next">Next up</span>
+      </div>
+      <p class="what">The tier this system most obviously lacks. Each component documented with its anatomy, its states, its accessibility contract, and working code for every supported platform.</p>
+      <p>The pattern is already proven in the reference app: Button, Card, StatusRow, Section and the identity band are built entirely from tokens. What is needed is to lift them into documented components with live examples, prop tables, and the code shown inline per platform. Every component carries its own accessibility contract — minimum target size, required accessible name, what must never be conveyed by colour alone — so the rules travel with the thing rather than living in a separate document nobody opens.</p>
+      
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>A component inventory, and a decision on which framework the canonical implementation targets.</dd></div>
+        <div><dt>Unblocks</dt><dd>Templates, the Figma library, and any meaningful conformity assessment.</dd></div>
+      </dl>
+    </article>
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">03</span>
+        <h3>Templates</h3>
+        <span class="chip planned">Planned</span>
+      </div>
+      <p class="what">Whole screens and flows assembled from components — the level at which most teams actually start work.</p>
+      <p>The candidates are already specified in REQUIREMENTS.md: a consent surface, an assurance-failure path, a device-recovery flow, an access log, a delegation setup. These are the screens where getting it wrong excludes someone, so shipping them as templates is worth more than shipping another button variant. Each template should state which requirement IDs it satisfies, so a team can trace a screen back to the rule it implements.</p>
+      
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>Components.</dd></div>
+        <div><dt>Unblocks</dt><dd>Faster adoption, and a common baseline for the awards assessment.</dd></div>
+      </dl>
+    </article>
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">04</span>
+        <h3>Icon library</h3>
+        <span class="chip planned">Planned</span>
+      </div>
+      <p class="what">A browsable, searchable set with the semantic mapping made concrete — every icon rendered, named, downloadable, and tied to the meaning it is allowed to carry.</p>
+      <p>The semantic layer already exists in tokens.json: sixteen names such as <code>icon.semantic.verified</code> and <code>icon.semantic.restricted</code> that point at Material Symbols glyphs. The library turns that into something a designer can search, and enforces the rule that consumers reference the meaning rather than the glyph — so the set can be replaced without touching a single screen. It should also flag which icons are safe to use unaccompanied, which in practice is very few.</p>
+      
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>Nothing blocking. Mostly rendering and packaging work.</dd></div>
+        <div><dt>Unblocks</dt><dd>The Figma library, and consistent icon use across departments.</dd></div>
+      </dl>
+    </article>
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">05</span>
+        <h3>Figma library</h3>
+        <span class="chip planned">Planned</span>
+      </div>
+      <p class="what">The tokens and components as a published Figma library, kept in step with code rather than redrawn alongside it.</p>
+      <p>The important word is <i>synchronised</i>. A Figma file that is manually kept in step with code diverges within one sprint. The intended path is Tokens Studio pointed at the same <code>tokens.json</code> in this repository, so a colour change lands in design and code from one edit. MyMzansi already has an in-progress Figma design system, so this should extend that rather than compete with it.</p>
+      
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>Tokens Studio wired to the repository; agreement on who owns the file.</dd></div>
+        <div><dt>Unblocks</dt><dd>Designers working in the system without reading a token file.</dd></div>
+      </dl>
+    </article>
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">06</span>
+        <h3>Illustration guidelines</h3>
+        <span class="chip exploring">Exploring</span>
+      </div>
+      <p class="what">How the service depicts people — which is a harder and more consequential question here than in most design systems.</p>
+      <p>This is where a South African public service is most likely to cause harm without meaning to. Representation across a very diverse population, whether people are drawn at all, how disability is depicted, and whether illustration is used to soften moments that should not be softened — a grant failure is not an occasion for a friendly character. There is also a hard constraint: illustration is the heaviest thing on a page, and large images decoded on the main thread are the most common cause of jank on low-end devices, as well as data the user is paying for.</p>
+      
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>A commissioned illustrator, and research with the people depicted. This should not be designed from a desk.</dd></div>
+        <div><dt>Unblocks</dt><dd>Templates that need imagery; empty and error states.</dd></div>
+      </dl>
+    </article>
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">07</span>
+        <h3>AI documentation</h3>
+        <span class="chip exploring">Exploring</span>
+      </div>
+      <p class="what">A machine-readable contract so that an AI agent building on this system follows its rules rather than approximating them.</p>
+      <p>The groundwork is done and, unusually, this system was written for agents from the start: BRAND.md opens with twelve MUST/MUST NOT rules in RFC 2119 form and a verification checklist, and REQUIREMENTS.md carries 137 citable requirement IDs. What is missing is the machine-facing surface — a stable index at a predictable path, structured rule metadata rather than prose an agent must infer from, and ideally a server exposing the tokens and rules as callable tools so an agent queries the system instead of guessing at it.</p>
+      <p>The rules most often broken by generated code are already known: hardcoded values instead of tokens, maize used as a mark, and fixed-width containers on translatable text. Those three deserve to be machine-checkable, not merely documented.</p>
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>Nothing blocking. The rules exist; they need a machine-readable shape.</dd></div>
+        <div><dt>Unblocks</dt><dd>Reliable AI-assisted implementation, and automated conformity checking.</dd></div>
+      </dl>
+    </article>
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">08</span>
+        <h3>Adoption awards</h3>
+        <span class="chip blocked">Needs a mandate</span>
+      </div>
+      <p class="what">Recognition for departments and vendors that implement the system properly — assessed against measurable conformity rather than appearance.</p>
+      <p>The strength of an awards programme is that it makes conformity worth something to the people who decide budgets. The design of it matters: assessed against automated checks first, so it rewards accessibility and inclusion rather than visual polish. A credible scheme would test contrast conformance across a live service, target sizes, language coverage across all twelve official languages, behaviour on a low-end device over a slow network, and the presence of working failure paths — not whether the screens look tidy.</p>
+      <p>Two design constraints worth setting now. Assessment should be reproducible — a service either passes the automated suite or does not — and results should be published in full, including failures, or the award becomes decorative.</p>
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>Institutional authority this concept does not have. An award is only meaningful if the body granting it has standing, so this depends entirely on the programme being adopted rather than on any work in this repository.</dd></div>
+        <div><dt>Unblocks</dt><dd>A reason for departments to conform when nobody is compelling them to.</dd></div>
+      </dl>
+    </article></div>
+
+<h2 id="sequencing">Why this order</h2>
+<p>Components come first because almost everything else depends on them: templates are assembled from components, the Figma library mirrors them, and a conformity assessment needs something concrete to assess. Brand guidelines sit alongside because they are largely written already and gate anything a department would produce on its own.</p>
+<p>The awards programme is last not because it matters least — it may be the item with the most leverage over adoption — but because it is the only one that cannot be built. It needs an institution willing to stand behind it.</p>
+
+<aside class="callout warn"><b class="ct">To be clear</b><div><p>This is unofficial concept work. Nothing on this page is a commitment by any organ of the South African state, and no timeline is implied.</p></div></aside>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../guidelines/colour/">Colour</a></li><li><a href="../guidelines/typography/">Typography</a></li><li><a href="../guidelines/language/">Language</a></li><li><a href="../guidelines/space/">Space &amp; layout</a></li><li><a href="../guidelines/iconography/">Iconography</a></li><li><a href="../guidelines/motion/">Motion</a></li><li><a href="../guidelines/accessibility/">Accessibility</a></li><li><a href="../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../roadmap/">Roadmap</a></li>
+        <li><a href="../tokens/">All tokens</a></li>
+        <li><a href="../about/">About &amp; status</a></li>
+        <li><a href="../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

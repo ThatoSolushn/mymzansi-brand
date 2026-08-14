@@ -54,6 +54,10 @@ ${callout(`<p>Most government products design the happy path and treat failure a
 <h2 id="guidelines">Guidelines</h2>
 ${cards(guideCards)}
 
+<h2 id="next">What is coming</h2>
+<p>The system today is foundations only — tokens, rules and evidence. Components, templates, an icon and Figma library, illustration guidance, machine-readable AI documentation and an adoption awards programme are all still ahead.</p>
+<p><a href="roadmap/"><b>See the roadmap →</b></a></p>
+
 <h2 id="using">Using the system</h2>
 <p>Tokens are published for every platform from one source. Nothing downstream is hand-edited.</p>
 ${table(
@@ -644,6 +648,139 @@ ${table(
   });
 }
 
+
+/* ================================================================== roadmap */
+
+const ROADMAP = [
+  {
+    n: '01',
+    title: 'Brand guidelines',
+    status: 'next',
+    what: 'The identity layer above the tokens: how the wordmark, the colour band and the voice are used, and — more importantly — what may not be done with them.',
+    detail: 'Most of the reasoning already exists in prose. What is missing is the applied half: logo clear-space and minimum sizes, co-branding with departments, the identity band\'s proportions as a rule rather than a happy accident, and worked misuse examples. The misuse section matters most, because it is what stops the system being applied decoratively.',
+    needs: 'A decision on whether a wordmark exists at all, and who owns it.',
+    unblocks: 'Templates, illustration guidelines, and anything a department would produce independently.',
+  },
+  {
+    n: '02',
+    title: 'Components with code references',
+    status: 'next',
+    what: 'The tier this system most obviously lacks. Each component documented with its anatomy, its states, its accessibility contract, and working code for every supported platform.',
+    detail: 'The pattern is already proven in the reference app: Button, Card, StatusRow, Section and the identity band are built entirely from tokens. What is needed is to lift them into documented components with live examples, prop tables, and the code shown inline per platform. Every component carries its own accessibility contract — minimum target size, required accessible name, what must never be conveyed by colour alone — so the rules travel with the thing rather than living in a separate document nobody opens.',
+    needs: 'A component inventory, and a decision on which framework the canonical implementation targets.',
+    unblocks: 'Templates, the Figma library, and any meaningful conformity assessment.',
+  },
+  {
+    n: '03',
+    title: 'Templates',
+    status: 'planned',
+    what: 'Whole screens and flows assembled from components — the level at which most teams actually start work.',
+    detail: 'The candidates are already specified in REQUIREMENTS.md: a consent surface, an assurance-failure path, a device-recovery flow, an access log, a delegation setup. These are the screens where getting it wrong excludes someone, so shipping them as templates is worth more than shipping another button variant. Each template should state which requirement IDs it satisfies, so a team can trace a screen back to the rule it implements.',
+    needs: 'Components.',
+    unblocks: 'Faster adoption, and a common baseline for the awards assessment.',
+  },
+  {
+    n: '04',
+    title: 'Icon library',
+    status: 'planned',
+    what: 'A browsable, searchable set with the semantic mapping made concrete — every icon rendered, named, downloadable, and tied to the meaning it is allowed to carry.',
+    detail: 'The semantic layer already exists in tokens.json: sixteen names such as <code>icon.semantic.verified</code> and <code>icon.semantic.restricted</code> that point at Material Symbols glyphs. The library turns that into something a designer can search, and enforces the rule that consumers reference the meaning rather than the glyph — so the set can be replaced without touching a single screen. It should also flag which icons are safe to use unaccompanied, which in practice is very few.',
+    needs: 'Nothing blocking. Mostly rendering and packaging work.',
+    unblocks: 'The Figma library, and consistent icon use across departments.',
+  },
+  {
+    n: '05',
+    title: 'Figma library',
+    status: 'planned',
+    what: 'The tokens and components as a published Figma library, kept in step with code rather than redrawn alongside it.',
+    detail: 'The important word is <i>synchronised</i>. A Figma file that is manually kept in step with code diverges within one sprint. The intended path is Tokens Studio pointed at the same <code>tokens.json</code> in this repository, so a colour change lands in design and code from one edit. MyMzansi already has an in-progress Figma design system, so this should extend that rather than compete with it.',
+    needs: 'Tokens Studio wired to the repository; agreement on who owns the file.',
+    unblocks: 'Designers working in the system without reading a token file.',
+  },
+  {
+    n: '06',
+    title: 'Illustration guidelines',
+    status: 'exploring',
+    what: 'How the service depicts people — which is a harder and more consequential question here than in most design systems.',
+    detail: 'This is where a South African public service is most likely to cause harm without meaning to. Representation across a very diverse population, whether people are drawn at all, how disability is depicted, and whether illustration is used to soften moments that should not be softened — a grant failure is not an occasion for a friendly character. There is also a hard constraint: illustration is the heaviest thing on a page, and large images decoded on the main thread are the most common cause of jank on low-end devices, as well as data the user is paying for.',
+    needs: 'A commissioned illustrator, and research with the people depicted. This should not be designed from a desk.',
+    unblocks: 'Templates that need imagery; empty and error states.',
+  },
+  {
+    n: '07',
+    title: 'AI documentation',
+    status: 'exploring',
+    what: 'A machine-readable contract so that an AI agent building on this system follows its rules rather than approximating them.',
+    detail: 'The groundwork is done and, unusually, this system was written for agents from the start: BRAND.md opens with twelve MUST/MUST NOT rules in RFC 2119 form and a verification checklist, and REQUIREMENTS.md carries 137 citable requirement IDs. What is missing is the machine-facing surface — a stable index at a predictable path, structured rule metadata rather than prose an agent must infer from, and ideally a server exposing the tokens and rules as callable tools so an agent queries the system instead of guessing at it.',
+    detail2: 'The rules most often broken by generated code are already known: hardcoded values instead of tokens, maize used as a mark, and fixed-width containers on translatable text. Those three deserve to be machine-checkable, not merely documented.',
+    needs: 'Nothing blocking. The rules exist; they need a machine-readable shape.',
+    unblocks: 'Reliable AI-assisted implementation, and automated conformity checking.',
+  },
+  {
+    n: '08',
+    title: 'Adoption awards',
+    status: 'blocked',
+    what: 'Recognition for departments and vendors that implement the system properly — assessed against measurable conformity rather than appearance.',
+    detail: 'The strength of an awards programme is that it makes conformity worth something to the people who decide budgets. The design of it matters: assessed against automated checks first, so it rewards accessibility and inclusion rather than visual polish. A credible scheme would test contrast conformance across a live service, target sizes, language coverage across all twelve official languages, behaviour on a low-end device over a slow network, and the presence of working failure paths — not whether the screens look tidy.',
+    detail2: 'Two design constraints worth setting now. Assessment should be reproducible — a service either passes the automated suite or does not — and results should be published in full, including failures, or the award becomes decorative.',
+    needs: 'Institutional authority this concept does not have. An award is only meaningful if the body granting it has standing, so this depends entirely on the programme being adopted rather than on any work in this repository.',
+    unblocks: 'A reason for departments to conform when nobody is compelling them to.',
+  },
+];
+
+const STATUS_LABEL = { next: 'Next up', planned: 'Planned', exploring: 'Exploring', blocked: 'Needs a mandate' };
+
+function roadmap() {
+  const items = ROADMAP.map((i) => `
+    <article class="rm-item">
+      <div class="rm-head">
+        <span class="rm-num">${i.n}</span>
+        <h3>${esc(i.title)}</h3>
+        <span class="chip ${i.status}">${STATUS_LABEL[i.status]}</span>
+      </div>
+      <p class="what">${i.what}</p>
+      <p>${i.detail}</p>
+      ${i.detail2 ? `<p>${i.detail2}</p>` : ''}
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>${i.needs}</dd></div>
+        <div><dt>Unblocks</dt><dd>${i.unblocks}</dd></div>
+      </dl>
+    </article>`).join('');
+
+  const counts = ROADMAP.reduce((a, i) => ((a[i.status] = (a[i.status] || 0) + 1), a), {});
+
+  return page({
+    title: 'Roadmap',
+    eyebrow: 'What is coming',
+    depth: 1,
+    active: 'roadmap/',
+    lead: 'Eight things this system does not have yet, in rough order of what unblocks the most. Nothing here is committed work — it is a statement of intent, and the dependencies are stated so the sequencing is arguable.',
+    body: `
+${callout(`<p>The system today is <b>foundations only</b>: tokens, rules, and the evidence behind them. Everything on this page sits above that layer. Where an item is blocked, it says so and by what — an honest roadmap is more useful than an ambitious one.</p>`, { title: 'Where this stands' })}
+
+${table(
+  ['Status', 'Meaning', 'Items'],
+  [
+    ['<span class="chip next">Next up</span>', 'Ready to start; nothing blocking', String(counts.next ?? 0)],
+    ['<span class="chip planned">Planned</span>', 'Wanted, but depends on earlier work', String(counts.planned ?? 0)],
+    ['<span class="chip exploring">Exploring</span>', 'Shape not yet settled; needs research or a commission', String(counts.exploring ?? 0)],
+    ['<span class="chip blocked">Needs a mandate</span>', 'Requires authority this concept does not have', String(counts.blocked ?? 0)],
+  ],
+  { min: 480 },
+)}
+
+<h2 id="items">The list</h2>
+<div class="rm">${items}</div>
+
+<h2 id="sequencing">Why this order</h2>
+<p>Components come first because almost everything else depends on them: templates are assembled from components, the Figma library mirrors them, and a conformity assessment needs something concrete to assess. Brand guidelines sit alongside because they are largely written already and gate anything a department would produce on its own.</p>
+<p>The awards programme is last not because it matters least — it may be the item with the most leverage over adoption — but because it is the only one that cannot be built. It needs an institution willing to stand behind it.</p>
+
+${callout(`<p>This is unofficial concept work. Nothing on this page is a commitment by any organ of the South African state, and no timeline is implied.</p>`, { tone: 'warn', title: 'To be clear' })}
+`,
+  });
+}
+
 /* ==================================================================== index */
 
 export const pages = [
@@ -657,6 +794,7 @@ export const pages = [
   { path: 'guidelines/motion/index.html', html: motion() },
   { path: 'guidelines/accessibility/index.html', html: accessibility() },
   { path: 'guidelines/content/index.html', html: content() },
+  { path: 'roadmap/index.html', html: roadmap() },
   { path: 'tokens/index.html', html: tokensPage() },
   { path: 'about/index.html', html: about() },
 ];
