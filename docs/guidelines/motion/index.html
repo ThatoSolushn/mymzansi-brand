@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Motion — MyMzansi Design System</title>
+<meta name="description" content="Every animation must hold 60fps on an entry-level handset. That is a 16.7ms frame budget, and in practice only two properties.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../../">
+      <span class="b1">Design system</span>
+      <span class="b2">MyMzansi</span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../../guidelines/" aria-current="true">Guidelines</a><a href="../../tokens/">Tokens</a><a href="../../about/">About</a></nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/" aria-current="page">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Guideline</p>
+    <h1>Motion</h1>
+    <p class="lede">Every animation must hold 60fps on an entry-level handset. That is a 16.7ms frame budget, and in practice only two properties.</p>
+  </div>
+  
+<h2 id="budget">What may be animated</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Animate</th><th>Never animate</th><th>Why</th></tr></thead>
+    <tbody><tr><td><code>transform</code></td><td><code>width</code> <code>height</code> <code>top</code> <code>left</code></td><td>Transforms are composited; layout properties reflow the whole subtree every frame.</td></tr><tr><td><code>opacity</code></td><td><code>background-color</code> <code>box-shadow</code></td><td>Paint-heavy — fine on a flagship, visible jank on a cheap handset.</td></tr><tr><td>Composited filters, sparingly</td><td>Anything driven per-frame from the main thread</td><td>Main-thread work competes with everything else the phone is doing.</td></tr></tbody>
+  </table></div>
+<p>Images are the most common cause of jank on low-end devices: large images decoded on the main thread drop frames and cost the user data. Motion comes from code, not from video or Lottie files.</p>
+
+<h2 id="tokens">Tokens</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+    <tbody><tr><td><code>instant</code></td><td><code>100ms</code></td><td>Maximum acceptable latency before a tap shows feedback.</td></tr><tr><td><code>quick</code></td><td><code>180ms</code></td><td>Micro-interactions: toggles, chips, hover.</td></tr><tr><td><code>base</code></td><td><code>280ms</code></td><td>Default. Most state changes.</td></tr><tr><td><code>slow</code></td><td><code>380ms</code></td><td>Entrances, expansions, meters.</td></tr><tr><td><code>deliberate</code></td><td><code>1100ms</code></td><td>RESERVED for the verification moment only. No other use.</td></tr><tr><td><code>standard</code></td><td><code>0.2, 0.8, 0.3, 1</code></td><td>Default. Fast out, settles gently.</td></tr><tr><td><code>overshoot</code></td><td><code>0.2, 1.5, 0.4, 1</code></td><td>Confirmation only. One overshoot, never a bounce loop.</td></tr><tr><td><code>exit</code></td><td><code>0.4, 0, 1, 1</code></td><td>Leaving the screen. Accelerate away.</td></tr><tr><td><code>interval</code></td><td><code>45ms</code></td><td></td></tr><tr><td><code>maxTotal</code></td><td><code>300ms</code></td><td>HARD CAP regardless of item count. Compute interval as min(45ms, 300ms / itemCount).</td></tr></tbody>
+  </table></div>
+<aside class="callout note"><b class="ct">Hard cap</b><div><p>The stagger total is capped at <b>300ms</b> regardless of item count — compute the interval as <code>min(45ms, 300ms / itemCount)</code>. A long stagger looks elegant on a designer's laptop and feels broken on a slow connection where the data arrived late already.</p></div></aside>
+
+<h2 id="principles">Four principles</h2>
+<ol>
+  <li><b>Motion explains, it does not decorate.</b> Every animation answers one of: where did this come from, what changed, or did it work? If it answers none, cut it.</li>
+  <li><b>Spend it on verification.</b> Trust is the product, and the moment the state confirms who you are is the one place a signature animation earns its cost.</li>
+  <li><b>Fast in, slower out.</b> A tap shows feedback within 100ms. Confirmations may take their time — that is where confidence lives.</li>
+  <li><b>Reduced motion is not a lesser version.</b> Same information, same hierarchy, arriving rather than moving. Test it as a first-class state.</li>
+</ol>
+
+<h2 id="exception">One documented exception</h2>
+<aside class="callout warn"><b class="ct">Named, not tolerated</b><div><p>The verification ring sweep animates <code>stroke-dashoffset</code>, which is not a compositor property. It is affordable because it is one small element animating once. It must remain the <b>only</b> exception — recorded as named, so it does not quietly become a precedent.</p></div></aside>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+        <li><a href="../../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

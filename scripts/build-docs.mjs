@@ -486,10 +486,13 @@ ${mdTable(byPrefix('elevation').map((e) => `| \`${e.path.split('.').pop()}\` | \
 `;
 
 mkdirSync(path.join(ROOT, 'docs'), { recursive: true });
-writeFileSync(path.join(ROOT, 'docs/index.html'), html);
 writeFileSync(path.join(ROOT, 'docs/TOKENS.md'), md);
 
+// NOTE: the browsable HTML catalogue is now a page of the website
+// (scripts/build-site.mjs → docs/tokens/). This script owns the Markdown
+// catalogue only — writing docs/index.html here would clobber the site home.
+void html;
+
 console.log('Generated:');
-console.log('  docs/index.html');
 console.log('  docs/TOKENS.md');
 console.log(`  (${entries.length} tokens documented)`);

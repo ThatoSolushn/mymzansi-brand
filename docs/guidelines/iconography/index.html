@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Iconography — MyMzansi Design System</title>
+<meta name="description" content="One icon set, referenced by meaning rather than by glyph, so changing the set means changing one file.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../../">
+      <span class="b1">Design system</span>
+      <span class="b2">MyMzansi</span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../../guidelines/" aria-current="true">Guidelines</a><a href="../../tokens/">Tokens</a><a href="../../about/">About</a></nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/" aria-current="page">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Guideline</p>
+    <h1>Iconography</h1>
+    <p class="lede">One icon set, referenced by meaning rather than by glyph, so changing the set means changing one file.</p>
+  </div>
+  
+<h2 id="set">The set</h2>
+<p><b>Material Symbols Outlined</b> — Apache-2.0, and already loading on the live MyMzansi site. Standardising on it adds no new dependency and aligns with the digital-public-goods posture.</p>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+    <tbody><tr><td>Style</td><td>Outlined</td></tr><tr><td>Optical size</td><td>24</td></tr><tr><td>Weight / Grade</td><td>400 / 0</td></tr><tr><td>Fill</td><td>0</td></tr></tbody>
+  </table></div>
+<p>Use one style throughout. Do not mix outlined and filled to signal state — use the status rail plus a text label.</p>
+
+<h2 id="rules">Rules</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Rule</th><th>Reason</th></tr></thead>
+    <tbody><tr><td>An icon never appears without a text label for a primary action</td><td>Icon meaning is not universal across twelve language communities.</td></tr><tr><td>Icons never carry state alone</td><td>WCAG §1.4.1. Pair with text or position.</td></tr><tr><td>Icon colour inherits from its semantic token</td><td>Never a decorative colour.</td></tr><tr><td>Meaningful icons meet 3:1 against their background</td><td>WCAG §1.4.11. Purely decorative icons are exempt.</td></tr><tr><td>Prefer the status rail to icon circles in lists</td><td>Faster to scan, cheaper to render, no ambiguity.</td></tr></tbody>
+  </table></div>
+
+<h2 id="sizes">Sizes</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>CSS</th></tr></thead>
+    <tbody><tr><td><code>sm</code></td><td><span class="num">18px</span></td><td><code>--dimension-icon-sm</code></td></tr><tr><td><code>md</code></td><td><span class="num">20px</span></td><td><code>--dimension-icon-md</code></td></tr><tr><td><code>lg</code></td><td><span class="num">24px</span></td><td><code>--dimension-icon-lg</code></td></tr><tr><td><code>xl</code></td><td><span class="num">28px</span></td><td><code>--dimension-icon-xl</code></td></tr></tbody>
+  </table></div>
+
+<h2 id="semantic">Semantic names</h2>
+<p>Reference <code>icon.semantic.*</code> — never a raw glyph name.</p>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Glyph</th><th>Notes</th></tr></thead>
+    <tbody><tr><td><code>verified</code></td><td><code>verified</code></td><td>Identity confirmed at full assurance.</td></tr><tr><td><code>partial</code></td><td><code>shield_with_heart</code></td><td>Stepped-down assurance level.</td></tr><tr><td><code>failed</code></td><td><code>error</code></td><td>System could not complete. NEVER phrase as user error.</td></tr><tr><td><code>restricted</code></td><td><code>lock</code></td><td>Not yet available at this assurance level.</td></tr><tr><td><code>consent</code></td><td><code>handshake</code></td><td></td></tr><tr><td><code>audit</code></td><td><code>history</code></td><td></td></tr><tr><td><code>revoke</code></td><td><code>block</code></td><td></td></tr><tr><td><code>dispute</code></td><td><code>flag</code></td><td></td></tr><tr><td><code>delegate</code></td><td><code>supervisor_account</code></td><td></td></tr><tr><td><code>document</code></td><td><code>badge</code></td><td></td></tr><tr><td><code>payment</code></td><td><code>payments</code></td><td></td></tr><tr><td><code>language</code></td><td><code>translate</code></td><td></td></tr><tr><td><code>signLanguage</code></td><td><code>sign_language</code></td><td></td></tr><tr><td><code>assist</code></td><td><code>support_agent</code></td><td></td></tr><tr><td><code>location</code></td><td><code>location_on</code></td><td></td></tr><tr><td><code>offline</code></td><td><code>cloud_off</code></td><td></td></tr></tbody>
+  </table></div>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+        <li><a href="../../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

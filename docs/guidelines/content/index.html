@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Content &amp; tone — MyMzansi Design System</title>
+<meta name="description" content="Plain, warm and direct. The reading-age target is low, and it should be — a service that only serves confident readers is not a public service.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../../">
+      <span class="b1">Design system</span>
+      <span class="b2">MyMzansi</span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../../guidelines/" aria-current="true">Guidelines</a><a href="../../tokens/">Tokens</a><a href="../../about/">About</a></nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/" aria-current="page">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Guideline</p>
+    <h1>Content &amp; tone</h1>
+    <p class="lede">Plain, warm and direct. The reading-age target is low, and it should be — a service that only serves confident readers is not a public service.</p>
+  </div>
+  
+<h2 id="errors">Error copy</h2>
+<aside class="callout stop"><b class="ct">R10</b><div><p><b>The system failed, not the person.</b> The grammar of an error decides who is at fault, and at that moment it is the system that failed.</p></div></aside>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Never</th><th>Always</th></tr></thead>
+    <tbody><tr><td>“Invalid fingerprint”</td><td>“We couldn’t read that”</td></tr><tr><td>“Authentication failed”</td><td>“We couldn’t confirm it’s you”</td></tr><tr><td>“You entered the wrong PIN”</td><td>“That PIN didn’t match”</td></tr><tr><td>“Access denied”</td><td>“You need Level 2 for this — here’s how”</td></tr></tbody>
+  </table></div>
+<p>Name the likely cause when it is not the user — a dry sensor, a slow connection. And where a failure is common for a group, such as worn fingerprints from manual work or thin skin with age, <b>say so on the screen</b>. Being failed by a government system in public is humiliating, and naming the cause is the cheapest dignity intervention available.</p>
+
+<h2 id="logs">Log and audit copy</h2>
+<p>Write entries as <b>sentences ending in why</b>, not as table rows.</p>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Not this</th><th>This</th></tr></thead>
+    <tbody><tr><td><code>SASSA · proof-of-life · 11/08 · API</code></td><td>“SASSA checked you were alive so your grant could be paid”</td></tr></tbody>
+  </table></div>
+<aside class="callout note"><b class="ct">Design for the bad case</b><div><p>An audit log that cannot display something wrong is decorative. Build the “no reason given” state into the primary view — it is what tells a citizen, on sight, that the thing is capable of catching something.</p></div></aside>
+
+<h2 id="deadends">Never design a dead end</h2>
+<p>Every failure path resolves to a concrete next action with <b>a place, a distance, an opening time and an expected wait</b>. “Please visit your nearest office” is not a next step; it is a shrug that costs someone a taxi fare to decode.</p>
+<p>And say what is <i>not</i> lost. The most common way these systems waste people's time is silently discarding a half-finished journey.</p>
+
+<h2 id="consent">Consent surfaces</h2>
+<p>State what will <b>not</b> be shared, not only what will. Listing inclusions alone asks the reader to infer the boundary; naming the exclusions converts a disclosure into a promise.</p>
+<p>Give the legal basis twice — in plain language and as a citation — because there are two audiences: the citizen, and their lawyer.</p>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+        <li><a href="../../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -5,8 +5,9 @@
   "scripts": {
     "build": "node scripts/build-tokens.mjs",
     "docs": "node scripts/build-docs.mjs",
+    "site": "node scripts/build-site.mjs",
     "validate": "node scripts/validate-tokens.mjs",
-    "check": "npm run build && npm run docs && npm run validate"
+    "check": "npm run build && npm run docs && npm run site && npm run validate"
   },
   "version": "1.0.0",
   "main": "./dist/js/tokens.js",

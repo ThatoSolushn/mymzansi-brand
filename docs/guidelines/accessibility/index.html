@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Accessibility — MyMzansi Design System</title>
+<meta name="description" content="WCAG 2.1 Level AA, computed rather than asserted, and enforced in CI so a rule that is written down is a rule that holds.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../../">
+      <span class="b1">Design system</span>
+      <span class="b2">MyMzansi</span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../../guidelines/" aria-current="true">Guidelines</a><a href="../../tokens/">Tokens</a><a href="../../about/">About</a></nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/" aria-current="page">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Guideline</p>
+    <h1>Accessibility</h1>
+    <p class="lede">WCAG 2.1 Level AA, computed rather than asserted, and enforced in CI so a rule that is written down is a rule that holds.</p>
+  </div>
+  
+<h2 id="criteria">Criteria applied</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Criterion</th><th>Applies to</th><th>Threshold</th></tr></thead>
+    <tbody><tr><td>1.4.3 Contrast (Minimum) — AA</td><td>Body text under 18.66px bold / 24px</td><td><b>4.5:1</b></td></tr><tr><td>1.4.3 — large text</td><td>≥18.66px bold or ≥24px</td><td><b>3:1</b></td></tr><tr><td>1.4.6 Contrast (Enhanced) — AAA</td><td>Body text, enhanced</td><td>7:1</td></tr><tr><td>1.4.11 Non-text Contrast</td><td>Controls, state indicators, meaningful graphics</td><td><b>3:1</b></td></tr><tr><td>1.4.1 Use of Colour</td><td>Any information carried by colour</td><td>Needs a second cue</td></tr></tbody>
+  </table></div>
+
+<h2 id="failures">What failed, and what changed</h2>
+<p>Six pairings failed the first audit. All are corrected; the record is kept so the reasoning is not lost.</p>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Pairing</th><th>Was</th><th>Now</th><th>Fix</th></tr></thead>
+    <tbody><tr><td>Ochre as label text on the light ground</td><td><span class="num">3.50</span><span class="g fail">FAIL</span></td><td><span class="num">4.76</span><span class="g aa">AA</span></td><td><code>#C1663A → #A8542E</code></td></tr><tr><td>White text on ochre fill</td><td><span class="num">4.02</span><span class="g fail">FAIL</span></td><td><span class="num">5.29</span><span class="g aa">AA</span></td><td><code>Same darkening</code></td></tr><tr><td>Aloe #3A7D44 on a warm off-white</td><td><span class="num">4.36</span><span class="g fail">FAIL</span></td><td><span class="num">4.51</span><span class="g aa">AA</span></td><td><code>Ground lightened to #F5F3ED</code></td></tr><tr><td>Caution as text</td><td><span class="num">2.24</span><span class="g fail">FAIL</span></td><td><span class="num">5.02</span><span class="g aa">AA</span></td><td><code>#E0A21C → #8F5E0A</code></td></tr><tr><td>Meta text, light theme</td><td><span class="num">2.75</span><span class="g fail">FAIL</span></td><td><span class="num">4.82</span><span class="g aa">AA</span></td><td><code>#8A938F → #646D68</code></td></tr><tr><td>Meta text, dark theme</td><td><span class="num">4.40</span><span class="g fail">FAIL</span></td><td><span class="num">5.74</span><span class="g aa">AA</span></td><td><code>#767E88 → #8A929B</code></td></tr></tbody>
+  </table></div>
+
+<h2 id="verified">Verified results</h2>
+<p>Every text pairing in both themes now meets AA or better. <b>Zero failures.</b></p>
+<h3>Light</h3>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>On ground</th><th>On surface</th></tr></thead>
+    <tbody><tr><td><code>text</code></td><td><span class="dot" style="background:#16191A"></span><code>#16191A</code></td><td><span class="num">15.93</span><span class="g aaa">AAA</span></td><td><span class="num">17.68</span><span class="g aaa">AAA</span></td></tr><tr><td><code>text-2</code></td><td><span class="dot" style="background:#4A5450"></span><code>#4A5450</code></td><td><span class="num">7.07</span><span class="g aaa">AAA</span></td><td><span class="num">7.85</span><span class="g aaa">AAA</span></td></tr><tr><td><code>text-3</code></td><td><span class="dot" style="background:#646D68"></span><code>#646D68</code></td><td><span class="num">4.82</span><span class="g aa">AA</span></td><td><span class="num">5.34</span><span class="g aa">AA</span></td></tr><tr><td><code>accent</code></td><td><span class="dot" style="background:#2F6B3A"></span><code>#2F6B3A</code></td><td><span class="num">5.76</span><span class="g aa">AA</span></td><td><span class="num">6.39</span><span class="g aa">AA</span></td></tr><tr><td><code>accent-warm</code></td><td><span class="dot" style="background:#A8542E"></span><code>#A8542E</code></td><td><span class="num">4.76</span><span class="g aa">AA</span></td><td><span class="num">5.29</span><span class="g aa">AA</span></td></tr><tr><td><code>anchor</code></td><td><span class="dot" style="background:#1B2A4A"></span><code>#1B2A4A</code></td><td><span class="num">12.82</span><span class="g aaa">AAA</span></td><td><span class="num">14.22</span><span class="g aaa">AAA</span></td></tr></tbody>
+  </table></div>
+<h3>Dark</h3>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>On ground</th><th>On surface</th></tr></thead>
+    <tbody><tr><td><code>text</code></td><td><span class="dot" style="background:#ECEAE4"></span><code>#ECEAE4</code></td><td><span class="num">15.04</span><span class="g aaa">AAA</span></td><td><span class="num">13.5</span><span class="g aaa">AAA</span></td></tr><tr><td><code>text-2</code></td><td><span class="dot" style="background:#A8AFB8"></span><code>#A8AFB8</code></td><td><span class="num">8.18</span><span class="g aaa">AAA</span></td><td><span class="num">7.34</span><span class="g aaa">AAA</span></td></tr><tr><td><code>text-3</code></td><td><span class="dot" style="background:#8A929B"></span><code>#8A929B</code></td><td><span class="num">5.74</span><span class="g aa">AA</span></td><td><span class="num">5.15</span><span class="g aa">AA</span></td></tr><tr><td><code>accent</code></td><td><span class="dot" style="background:#58B06A"></span><code>#58B06A</code></td><td><span class="num">6.75</span><span class="g aa">AA</span></td><td><span class="num">6.06</span><span class="g aa">AA</span></td></tr><tr><td><code>accent-warm</code></td><td><span class="dot" style="background:#DE8A5E"></span><code>#DE8A5E</code></td><td><span class="num">6.81</span><span class="g aa">AA</span></td><td><span class="num">6.11</span><span class="g aa">AA</span></td></tr><tr><td><code>anchor</code></td><td><span class="dot" style="background:#93A9D6"></span><code>#93A9D6</code></td><td><span class="num">7.66</span><span class="g aaa">AAA</span></td><td><span class="num">6.87</span><span class="g aa">AA</span></td></tr></tbody>
+  </table></div>
+
+<h2 id="enforced">Enforced, not documented</h2>
+<p><code>npm run validate</code> runs <b>106 checks</b> and exits non-zero on failure, so it can gate CI. It also flags any pairing that passes <i>within 10% of its threshold</i> — the exact shape of the <code>aloe-lt</code> defect, which looked fine right up until the ground moved.</p>
+<aside class="callout note"><b class="ct">The operating principle</b><div><p>A rule that is not in <code>scripts/validate-tokens.mjs</code> is a rule that will be broken.</p></div></aside>
+
+<h2 id="requirements">Beyond contrast</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Requirement</th><th>Standard</th></tr></thead>
+    <tbody><tr><td>No colour-only information</td><td>§1.4.1</td></tr><tr><td>Touch targets 44px, 48px where adjacent or destructive</td><td>§2.5.5, §2.5.8</td></tr><tr><td>Text resizes to 200% without loss</td><td>§1.4.4</td></tr><tr><td>Reflow at 320px equivalent</td><td>§1.4.10</td></tr><tr><td>Visible focus indicator</td><td>§2.4.7</td></tr><tr><td><code>prefers-reduced-motion</code> honoured</td><td>§2.3.3</td></tr><tr><td>Every control has an accessible name</td><td>§4.1.2</td></tr><tr><td>Language of page <i>and of parts</i> declared</td><td>§3.1.1, §3.1.2 — load-bearing across twelve languages</td></tr><tr><td>Errors identified in text, with a fix</td><td>§3.3.1, §3.3.3</td></tr></tbody>
+  </table></div>
+
+<h2 id="outstanding">What is still outstanding</h2>
+<aside class="callout warn"><b class="ct">Stated, not papered over</b><div><ol>
+  <li><b>Colour-vision deficiency has not been simulated.</b> Aloe versus ochre is the pairing most likely to collapse under deuteranopia. Do not assert CVD-safety.</li>
+  <li><b>Sunlight legibility on low-cost LCDs has not been tested.</b> Ratios are computed against an ideal display; the real viewing condition is a cheap panel outdoors.</li>
+  <li><b>Contrast ratios are a floor, not a proof.</b> The WCAG 2.1 formula overstates legibility for light-on-dark and understates some mid-tone pairs.</li>
+</ol></div></aside>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+        <li><a href="../../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

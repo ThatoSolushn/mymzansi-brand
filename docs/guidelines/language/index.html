@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Language — MyMzansi Design System</title>
+<meta name="description" content="The most distinctive fact about South Africa is not a pattern. It is that twelve official languages share one state — and since 2023, one of them is South African Sign Language.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../../">
+      <span class="b1">Design system</span>
+      <span class="b2">MyMzansi</span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../../guidelines/" aria-current="true">Guidelines</a><a href="../../tokens/">Tokens</a><a href="../../about/">About</a></nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/" aria-current="page">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Guideline</p>
+    <h1>Language</h1>
+    <p class="lede">The most distinctive fact about South Africa is not a pattern. It is that twelve official languages share one state — and since 2023, one of them is South African Sign Language.</p>
+  </div>
+  
+<h2 id="structural">Identity that cannot be stripped</h2>
+<p>Build the visual identity out of language and it is impossible to appropriate, impossible to remove in a redesign, and functional and beautiful in the same gesture. No other country designs under this constraint.</p>
+<p>Most products bury language in a settings screen, chosen once and never seen again. The proposal here is the opposite: <b>language is a first-class object in the interface</b> — visible on the home surface, switchable in one action, and changeable mid-transaction without losing progress, because someone helping a relative at a counter may need to switch halfway through.</p>
+
+<h2 id="orthography">The constraint nobody budgets for</h2>
+<p>The Nguni languages — isiZulu, isiXhosa, siSwati, isiNdebele — use <b>conjunctive orthography</b>: what English writes as a phrase, they write as a single word. The Sotho-Tswana languages are disjunctive and behave differently again.</p>
+<p>The practical result is that a label which fits in English will overflow, and it will overflow as an <b>unbreakable single token</b> — far worse than a long phrase.</p>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+    <tbody><tr><td>No fixed-width containers</td><td>Buttons, tabs, chips, badges and table headers size to their content.</td></tr><tr><td>Budget 2× the English length</td><td>For any translatable label.</td></tr><tr><td>Allow mid-word breaking</td><td>Never let ellipsis be the fallback for a primary action label — truncation is passed to screen readers too.</td></tr><tr><td>Never bake text into images</td><td>It cannot be translated, scaled, or read aloud.</td></tr><tr><td>Declare the language of each part</td><td>WCAG §3.1.2. This is what lets a screen reader pronounce isiZulu as isiZulu rather than as mispronounced English.</td></tr></tbody>
+  </table></div>
+
+<h2 id="sasl">South African Sign Language</h2>
+<aside class="callout note"><b class="ct">The idea worth taking</b><div><p>SASL became the <b>twelfth official language</b> in 2023, by constitutional amendment. Treat it as a <b>first-class content type</b>, not an accessibility bolt-on: short signed video for consent surfaces, assurance explanations, and anything with legal consequence.</p>
+<p>It sits <i>beside</i> the text, not ghettoised in a corner, and it must degrade gracefully where bandwidth cannot carry video — saying so when it does.</p>
+<p>No other government product does this. It is constitutionally grounded and would be genuinely unprecedented.</p></div></aside>
+
+<h2 id="copy">Never invent translations</h2>
+<aside class="callout stop"><b class="ct">R12</b><div><p>All non-English copy produced by a designer, a developer or an AI agent is <b>indicative, for layout only</b>, and must be marked as requiring native-speaker review. Machine translation must not ship unreviewed.</p></div></aside>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+        <li><a href="../../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

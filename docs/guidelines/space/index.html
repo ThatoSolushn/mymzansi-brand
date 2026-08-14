@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space &amp; layout — MyMzansi Design System</title>
+<meta name="description" content="A spacing scale, corner radii, and the touch-target minimums that are not open to negotiation.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../../">
+      <span class="b1">Design system</span>
+      <span class="b2">MyMzansi</span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../../guidelines/" aria-current="true">Guidelines</a><a href="../../tokens/">Tokens</a><a href="../../about/">About</a></nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/" aria-current="page">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Guideline</p>
+    <h1>Space &amp; layout</h1>
+    <p class="lede">A spacing scale, corner radii, and the touch-target minimums that are not open to negotiation.</p>
+  </div>
+  
+<h2 id="space">Spacing</h2>
+<p>Use layout <b>gap</b>, not per-element margins. Margins collapse and double unpredictably.</p>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>CSS</th><th>Scale</th></tr></thead>
+    <tbody><tr><td><code>3xs</code></td><td><span class="num">2px</span></td><td><code>--dimension-space-3xs</code></td><td><span class="bar" style="width:2px"></span></td></tr><tr><td><code>2xs</code></td><td><span class="num">4px</span></td><td><code>--dimension-space-2xs</code></td><td><span class="bar" style="width:4px"></span></td></tr><tr><td><code>xs</code></td><td><span class="num">8px</span></td><td><code>--dimension-space-xs</code></td><td><span class="bar" style="width:8px"></span></td></tr><tr><td><code>sm</code></td><td><span class="num">12px</span></td><td><code>--dimension-space-sm</code></td><td><span class="bar" style="width:12px"></span></td></tr><tr><td><code>md</code></td><td><span class="num">16px</span></td><td><code>--dimension-space-md</code></td><td><span class="bar" style="width:16px"></span></td></tr><tr><td><code>lg</code></td><td><span class="num">24px</span></td><td><code>--dimension-space-lg</code></td><td><span class="bar" style="width:24px"></span></td></tr><tr><td><code>xl</code></td><td><span class="num">40px</span></td><td><code>--dimension-space-xl</code></td><td><span class="bar" style="width:40px"></span></td></tr><tr><td><code>2xl</code></td><td><span class="num">60px</span></td><td><code>--dimension-space-2xl</code></td><td><span class="bar" style="width:60px"></span></td></tr></tbody>
+  </table></div>
+
+<h2 id="radius">Radius</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>CSS</th><th>Scale</th></tr></thead>
+    <tbody><tr><td><code>sm</code></td><td><span class="num">4px</span></td><td><code>--dimension-radius-sm</code></td><td><span class="bar" style="width:4px"></span></td></tr><tr><td><code>md</code></td><td><span class="num">8px</span></td><td><code>--dimension-radius-md</code></td><td><span class="bar" style="width:8px"></span></td></tr><tr><td><code>lg</code></td><td><span class="num">12px</span></td><td><code>--dimension-radius-lg</code></td><td><span class="bar" style="width:12px"></span></td></tr><tr><td><code>full</code></td><td><span class="num">999px</span></td><td><code>--dimension-radius-full</code></td><td><span class="bar" style="width:220px"></span></td></tr></tbody>
+  </table></div>
+
+<h2 id="touch">Touch targets</h2>
+<aside class="callout stop"><b class="ct">Non-negotiable</b><div><p>WCAG 2.5.5 / 2.5.8. Users include people with motor impairment and older people on small, cheap screens. This is a floor, not a target.</p></div></aside>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>When</th></tr></thead>
+    <tbody><tr><td><code>min</code></td><td><span class="num">44px</span></td><td>MINIMUM interactive target. Non-negotiable — WCAG 2.5.5 / 2.5.8.</td></tr><tr><td><code>min-spaced</code></td><td><span class="num">48px</span></td><td>Use where targets sit adjacent, or where the action is destructive or irreversible.</td></tr></tbody>
+  </table></div>
+
+<h2 id="surfaces">Surfaces</h2>
+<p>Cards lift off the bone ground as white surfaces. Hierarchy comes from the surface change, not from shadows a cheap phone has to paint.</p>
+<p>Prefer a <b>left status rail</b> to icon circles in lists: faster to scan, no cross-cultural icon ambiguity, and far cheaper to render in a long list.</p>
+<aside class="callout warn"><b class="ct">A known limitation</b><div><p>Card borders are <code>#E4DFD4</code> — <b>1.33:1</b> on white. WCAG §1.4.11 covers controls and meaningful state, not decorative grouping, so this <b>conforms</b>. But it still reads poorly in bright outdoor light, which is the real usage condition. Let the status rails carry structure where it matters.</p></div></aside>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+        <li><a href="../../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

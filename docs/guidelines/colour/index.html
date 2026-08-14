@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Colour — MyMzansi Design System</title>
+<meta name="description" content="Colours drawn from specific South African material sources — not from the flag, which reads as municipal letterhead and is politically flat.">
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../../">
+      <span class="b1">Design system</span>
+      <span class="b2">MyMzansi</span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../../guidelines/" aria-current="true">Guidelines</a><a href="../../tokens/">Tokens</a><a href="../../about/">About</a></nav>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../../guidelines/colour/" aria-current="page">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Guideline</p>
+    <h1>Colour</h1>
+    <p class="lede">Colours drawn from specific South African material sources — not from the flag, which reads as municipal letterhead and is politically flat.</p>
+  </div>
+  
+<h2 id="sources">Where the colours come from</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody><tr><td><code>indigo</code></td><td>Shweshwe indigo — the discharge-printed cotton, European and Indian in origin, made Xhosa and Sotho by adoption</td><td>Anchor, headers, dark surfaces</td></tr><tr><td><code>aloe</code></td><td>Aloe and veld</td><td>Primary action, success</td></tr><tr><td><code>maize</code></td><td>Maize</td><td>Joy and arrival — <b>ground only</b></td></tr><tr><td><code>ochre</code></td><td>Highveld soil and mine dump</td><td>Warm accent, restricted state</td></tr><tr><td><code>bone</code></td><td>Warm paper</td><td>Page ground</td></tr><tr><td><code>ink</code></td><td>Near-black with a green bias</td><td>Body text</td></tr></tbody>
+  </table></div>
+<aside class="callout warn"><b class="ct">Structure over motif</b><div><p>If a visual identity is wanted beyond colour, do <b>not</b> apply Ndebele geometry or beadwork motifs as a decorative skin. That visual culture has a documented history of extraction, it makes one people's language stand for twelve, and it survives exactly one redesign. What can legitimately be taken is <b>method, not motif</b>: hard edges, flat unmodulated colour, confident blocking, strong dividing lines. If pattern is genuinely wanted, commission a living artist with credit and an ongoing licence.</p></div></aside>
+
+<h2 id="palette">Palette</h2>
+<p>Primitive colours. <b>Never reference these from a component</b> — use a theme or semantic token so light and dark resolve on their own.</p>
+<div class="grid"><figure class="sw">
+      <div class="chip" style="background:#16191A"></div>
+      <figcaption>
+        <div class="nm">ink</div>
+        <code class="val">#16191A</code>
+        
+        <p class="desc">Near-black, slight green bias so it belongs to aloe rather than floating above it.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-ink</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.ink</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>15.93</b></span><span>night <b>1.02</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#4A5450"></div>
+      <figcaption>
+        <div class="nm">ink-2</div>
+        <code class="val">#4A5450</code>
+        
+        <p class="desc">Secondary text.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-ink-2</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.ink2</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>7.07</b></span><span>night <b>2.31</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#646D68"></div>
+      <figcaption>
+        <div class="nm">ink-3</div>
+        <code class="val">#646D68</code>
+        
+        <p class="desc">Meta/caption text. Corrected from #8A938F which failed AA at 2.75:1.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-ink-3</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.ink3</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>4.82</b></span><span>night <b>3.39</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#F5F3ED"></div>
+      <figcaption>
+        <div class="nm">bone</div>
+        <code class="val">#F5F3ED</code>
+        
+        <p class="desc">Warm paper ground. Lightened from #F2EFE8 so aloe-lt clears AA on it.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-bone</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.bone</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>1</b></span><span>night <b>16.31</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#EAE6DC"></div>
+      <figcaption>
+        <div class="nm">bone-2</div>
+        <code class="val">#EAE6DC</code>
+        
+        <p class="desc">Recessed surface on light theme.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-bone-2</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.bone2</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>1.12</b></span><span>night <b>14.52</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#FFFFFF"></div>
+      <figcaption>
+        <div class="nm">white</div>
+        <code class="val">#FFFFFF</code>
+        
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-white</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.white</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>1.11</b></span><span>night <b>18.1</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#1B2A4A"></div>
+      <figcaption>
+        <div class="nm">indigo</div>
+        <code class="val">#1B2A4A</code>
+        
+        <p class="desc">Shweshwe indigo. Anchor, headers, dark surfaces.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-indigo</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.indigo</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>12.82</b></span><span>night <b>1.27</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#2C3F66"></div>
+      <figcaption>
+        <div class="nm">indigo-2</div>
+        <code class="val">#2C3F66</code>
+        
+        <p class="desc">Lifted indigo.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-indigo-2</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.indigo2</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>9.42</b></span><span>night <b>1.73</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#93A9D6"></div>
+      <figcaption>
+        <div class="nm">indigo-lt</div>
+        <code class="val">#93A9D6</code>
+        
+        <p class="desc">Indigo for dark theme foreground use.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-indigo-lt</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.indigoLt</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>2.13</b></span><span>night <b>7.66</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#2F6B3A"></div>
+      <figcaption>
+        <div class="nm">aloe</div>
+        <code class="val">#2F6B3A</code>
+        
+        <p class="desc">Aloe green. Primary action and success. Use this, not aloe-lt, on tinted grounds.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-aloe</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.aloe</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>5.76</b></span><span>night <b>2.83</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#3A7D44"></div>
+      <figcaption>
+        <div class="nm">aloe-lt</div>
+        <code class="val">#3A7D44</code>
+        
+        <p class="desc">EXISTING MyMzansi token. FRAGILE: 5.00:1 on pure white but only 4.36:1 on a warm off-white. Restricted to pure-white backgrounds. Prefer aloe.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-aloe-lt</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.aloeLt</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>4.51</b></span><span>night <b>3.62</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#58B06A"></div>
+      <figcaption>
+        <div class="nm">aloe-br</div>
+        <code class="val">#58B06A</code>
+        
+        <p class="desc">Aloe for dark theme foreground use.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-aloe-br</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.aloeBr</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>2.42</b></span><span>night <b>6.75</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#FBC549"></div>
+      <figcaption>
+        <div class="nm">maize</div>
+        <code class="val">#FBC549</code>
+        
+        <p class="desc">EXISTING MyMzansi token. The joy colour. GROUND ONLY in light theme — see color.rules.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-maize</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.maize</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>1.44</b></span><span>night <b>11.36</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#A8542E"></div>
+      <figcaption>
+        <div class="nm">ochre</div>
+        <code class="val">#A8542E</code>
+        
+        <p class="desc">Highveld earth. Warm accent. Corrected from #C1663A which failed AA as text at 3.50:1.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-ochre</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.ochre</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>4.76</b></span><span>night <b>3.42</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#DE8A5E"></div>
+      <figcaption>
+        <div class="nm">ochre-br</div>
+        <code class="val">#DE8A5E</code>
+        
+        <p class="desc">Ochre for dark theme foreground use.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-ochre-br</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.ochreBr</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>2.39</b></span><span>night <b>6.81</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#B3271E"></div>
+      <figcaption>
+        <div class="nm">crit</div>
+        <code class="val">#B3271E</code>
+        
+        <p class="desc">Critical / destructive.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-crit</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.crit</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>5.87</b></span><span>night <b>2.78</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#E4756A"></div>
+      <figcaption>
+        <div class="nm">crit-br</div>
+        <code class="val">#E4756A</code>
+        
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-crit-br</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.critBr</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>2.68</b></span><span>night <b>6.08</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#8F5E0A"></div>
+      <figcaption>
+        <div class="nm">caution</div>
+        <code class="val">#8F5E0A</code>
+        
+        <p class="desc">Caution AS TEXT. Corrected from #E0A21C which failed at 2.24:1. For caution as a FILL use maize with ink on top.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-caution</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.caution</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>5.02</b></span><span>night <b>3.25</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#E9BC55"></div>
+      <figcaption>
+        <div class="nm">caution-br</div>
+        <code class="val">#E9BC55</code>
+        
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-caution-br</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.cautionBr</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>1.61</b></span><span>night <b>10.16</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#2C5D8A"></div>
+      <figcaption>
+        <div class="nm">info</div>
+        <code class="val">#2C5D8A</code>
+        
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-info</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.info</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>6.23</b></span><span>night <b>2.62</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#7FAAD4"></div>
+      <figcaption>
+        <div class="nm">info-br</div>
+        <code class="val">#7FAAD4</code>
+        
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-info-br</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.infoBr</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>2.2</b></span><span>night <b>7.41</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#12161F"></div>
+      <figcaption>
+        <div class="nm">night</div>
+        <code class="val">#12161F</code>
+        
+        <p class="desc">Dark theme page ground.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-night</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.night</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>16.31</b></span><span>night <b>1</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#1A2030"></div>
+      <figcaption>
+        <div class="nm">night-2</div>
+        <code class="val">#1A2030</code>
+        
+        <p class="desc">Dark theme panel.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-night-2</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.night2</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>14.63</b></span><span>night <b>1.11</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#3A4557"></div>
+      <figcaption>
+        <div class="nm">night-3</div>
+        <code class="val">#3A4557</code>
+        
+        <p class="desc">Dark theme rule/border.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-night-3</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.night3</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>8.73</b></span><span>night <b>1.87</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#ECEAE4"></div>
+      <figcaption>
+        <div class="nm">chalk</div>
+        <code class="val">#ECEAE4</code>
+        
+        <p class="desc">Dark theme primary text.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-chalk</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.chalk</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>1.08</b></span><span>night <b>15.04</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#A8AFB8"></div>
+      <figcaption>
+        <div class="nm">chalk-2</div>
+        <code class="val">#A8AFB8</code>
+        
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-chalk-2</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.chalk2</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>1.99</b></span><span>night <b>8.18</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#8A929B"></div>
+      <figcaption>
+        <div class="nm">chalk-3</div>
+        <code class="val">#8A929B</code>
+        
+        <p class="desc">Dark theme meta text. Corrected from #767E88 which failed at 4.40:1.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-chalk-3</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.chalk3</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>2.84</b></span><span>night <b>5.74</b></span></div>
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#E4DFD4"></div>
+      <figcaption>
+        <div class="nm">rule</div>
+        <code class="val">#E4DFD4</code>
+        
+        <p class="desc">Light theme border. Decorative only — 1.33:1, does not meet 3:1.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-palette-rule</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.palette.rule</code></dd></div>
+        </dl>
+        <div class="ratios"><span>bone <b>1.2</b></span><span>night <b>13.62</b></span></div>
+      </figcaption>
+    </figure></div>
+
+<h2 id="theme">Theme tokens</h2>
+<p>What components actually reference. The same name resolves to a different value per theme, so a component is written once.</p>
+<h3>Light</h3>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>On ground</th><th>On surface</th></tr></thead>
+    <tbody><tr><td><code>text</code></td><td><span class="dot" style="background:#16191A"></span><code>#16191A</code></td><td><span class="num">15.93</span><span class="g aaa">AAA</span></td><td><span class="num">17.68</span><span class="g aaa">AAA</span></td></tr><tr><td><code>text-2</code></td><td><span class="dot" style="background:#4A5450"></span><code>#4A5450</code></td><td><span class="num">7.07</span><span class="g aaa">AAA</span></td><td><span class="num">7.85</span><span class="g aaa">AAA</span></td></tr><tr><td><code>text-3</code></td><td><span class="dot" style="background:#646D68"></span><code>#646D68</code></td><td><span class="num">4.82</span><span class="g aa">AA</span></td><td><span class="num">5.34</span><span class="g aa">AA</span></td></tr><tr><td><code>accent</code></td><td><span class="dot" style="background:#2F6B3A"></span><code>#2F6B3A</code></td><td><span class="num">5.76</span><span class="g aa">AA</span></td><td><span class="num">6.39</span><span class="g aa">AA</span></td></tr><tr><td><code>accent-warm</code></td><td><span class="dot" style="background:#A8542E"></span><code>#A8542E</code></td><td><span class="num">4.76</span><span class="g aa">AA</span></td><td><span class="num">5.29</span><span class="g aa">AA</span></td></tr><tr><td><code>anchor</code></td><td><span class="dot" style="background:#1B2A4A"></span><code>#1B2A4A</code></td><td><span class="num">12.82</span><span class="g aaa">AAA</span></td><td><span class="num">14.22</span><span class="g aaa">AAA</span></td></tr></tbody>
+  </table></div>
+<h3>Dark</h3>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Token</th><th>Value</th><th>On ground</th><th>On surface</th></tr></thead>
+    <tbody><tr><td><code>text</code></td><td><span class="dot" style="background:#ECEAE4"></span><code>#ECEAE4</code></td><td><span class="num">15.04</span><span class="g aaa">AAA</span></td><td><span class="num">13.5</span><span class="g aaa">AAA</span></td></tr><tr><td><code>text-2</code></td><td><span class="dot" style="background:#A8AFB8"></span><code>#A8AFB8</code></td><td><span class="num">8.18</span><span class="g aaa">AAA</span></td><td><span class="num">7.34</span><span class="g aaa">AAA</span></td></tr><tr><td><code>text-3</code></td><td><span class="dot" style="background:#8A929B"></span><code>#8A929B</code></td><td><span class="num">5.74</span><span class="g aa">AA</span></td><td><span class="num">5.15</span><span class="g aa">AA</span></td></tr><tr><td><code>accent</code></td><td><span class="dot" style="background:#58B06A"></span><code>#58B06A</code></td><td><span class="num">6.75</span><span class="g aa">AA</span></td><td><span class="num">6.06</span><span class="g aa">AA</span></td></tr><tr><td><code>accent-warm</code></td><td><span class="dot" style="background:#DE8A5E"></span><code>#DE8A5E</code></td><td><span class="num">6.81</span><span class="g aa">AA</span></td><td><span class="num">6.11</span><span class="g aa">AA</span></td></tr><tr><td><code>anchor</code></td><td><span class="dot" style="background:#93A9D6"></span><code>#93A9D6</code></td><td><span class="num">7.66</span><span class="g aaa">AAA</span></td><td><span class="num">6.87</span><span class="g aa">AA</span></td></tr></tbody>
+  </table></div>
+
+<h2 id="semantic">Semantic colour</h2>
+<p>Meaning-carrying colours, deliberately separate from the brand accent.</p>
+<div class="grid"><figure class="sw">
+      <div class="chip" style="background:#2F6B3A"></div>
+      <figcaption>
+        <div class="nm">success</div>
+        <code class="val">#2F6B3A</code>
+        <div class="alias">→ color.palette.aloe</div>
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-success</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.success</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#58B06A"></div>
+      <figcaption>
+        <div class="nm">success-dark</div>
+        <code class="val">#58B06A</code>
+        <div class="alias">→ color.palette.aloe-br</div>
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-success-dark</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.successDark</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#8F5E0A"></div>
+      <figcaption>
+        <div class="nm">caution-text</div>
+        <code class="val">#8F5E0A</code>
+        <div class="alias">→ color.palette.caution</div>
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-caution-text</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.cautionText</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#FBC549"></div>
+      <figcaption>
+        <div class="nm">caution-fill</div>
+        <code class="val">#FBC549</code>
+        <div class="alias">→ color.palette.maize</div>
+        <p class="desc">Fill only. Pair with color.palette.ink on top (11.10:1).</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-caution-fill</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.cautionFill</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#E9BC55"></div>
+      <figcaption>
+        <div class="nm">caution-dark</div>
+        <code class="val">#E9BC55</code>
+        <div class="alias">→ color.palette.caution-br</div>
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-caution-dark</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.cautionDark</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#B3271E"></div>
+      <figcaption>
+        <div class="nm">critical</div>
+        <code class="val">#B3271E</code>
+        <div class="alias">→ color.palette.crit</div>
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-critical</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.critical</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#E4756A"></div>
+      <figcaption>
+        <div class="nm">critical-dark</div>
+        <code class="val">#E4756A</code>
+        <div class="alias">→ color.palette.crit-br</div>
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-critical-dark</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.criticalDark</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#2C5D8A"></div>
+      <figcaption>
+        <div class="nm">info</div>
+        <code class="val">#2C5D8A</code>
+        <div class="alias">→ color.palette.info</div>
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-info</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.info</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#7FAAD4"></div>
+      <figcaption>
+        <div class="nm">info-dark</div>
+        <code class="val">#7FAAD4</code>
+        <div class="alias">→ color.palette.info-br</div>
+        
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-info-dark</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.infoDark</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure><figure class="sw">
+      <div class="chip" style="background:#A8542E"></div>
+      <figcaption>
+        <div class="nm">restricted</div>
+        <code class="val">#A8542E</code>
+        <div class="alias">→ color.palette.ochre</div>
+        <p class="desc">Not-yet-available, as distinct from failed. A warm limit, not a grey one.</p>
+        <dl class="plat">
+          <div><dt>CSS</dt><dd><code>--color-semantic-restricted</code></dd></div>
+          <div><dt>JS</dt><dd><code>color.semantic.restricted</code></dd></div>
+        </dl>
+        
+      </figcaption>
+    </figure></div>
+<p><code>restricted</code> is deliberately distinct from <code>critical</code>. An action someone cannot take <i>yet</i> is not an error, and a warm limit reads differently from a red failure to a person who has just been told their fingerprint would not read.</p>
+
+<h2 id="maize">The maize rule</h2>
+<aside class="callout stop"><b class="ct">R2 — non-negotiable</b><div><p>Maize reaches only <b>1.44:1</b> against the light ground. It cannot be corrected by darkening — reaching 3:1 costs 27% lightness, at which point it is a brown, not the joy colour.</p>
+<p><b>In light theme, maize is a ground, never a mark.</b> Never text, never an icon, never a border, never the sole indicator of a state. Ink on maize is 11.1:1 (AAA). On the dark ground it is unrestricted at 11.36:1.</p></div></aside>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Maize used as…</th><th>Ratio</th><th>Verdict</th></tr></thead>
+    <tbody><tr><td>Text on white</td><td><span class="num">1.59:1</span></td><td><b>Fails badly</b></td></tr><tr><td>A filled state indicator on the light ground</td><td><span class="num">1.44:1</span></td><td><b>Fails §1.4.11</b></td></tr><tr><td>A ground with ink text on top</td><td><span class="num">11.1:1</span></td><td>AAA</td></tr><tr><td>Anything on the dark ground</td><td><span class="num">11.36:1</span></td><td>AAA</td></tr><tr><td>Against an indigo track</td><td><span class="num">8.93:1</span></td><td>AAA</td></tr></tbody>
+  </table></div>
+<p><b>Worked example.</b> An assurance meter filling maize against a light track is imperceptible. Two fixes, apply both: put the meter on an <b>indigo</b> track, and state the level in <b>text</b>. The text is the more important of the two — it satisfies §1.4.1, which makes the meter redundant reinforcement rather than the only carrier of the information.</p>
+
+<h2 id="fragile">A fragile inherited token</h2>
+<aside class="callout warn"><b class="ct">Worth raising independently</b><div><p><code>aloe-lt</code> <code>#3A7D44</code> is an existing MyMzansi token. It reaches <b>5:1</b> on pure white but only <b>4.36:1</b> on a warm off-white. It is not broken — it is <i>fragile</i>. Any tinted ground, disabled state or overlay tips it under AA without anyone noticing, because it still looks green and still looks fine.</p>
+<p>Two acceptable fixes: darken it to <code>#2F6B3A</code>, or write a rule that it is a pure-white-background-only colour. Having neither is how a design system quietly ships inaccessible screens.</p></div></aside>
+<p>The validator now flags any pairing that passes within 10% of its threshold, because this is the shape such defects take.</p>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../../guidelines/colour/">Colour</a></li><li><a href="../../guidelines/typography/">Typography</a></li><li><a href="../../guidelines/language/">Language</a></li><li><a href="../../guidelines/space/">Space &amp; layout</a></li><li><a href="../../guidelines/iconography/">Iconography</a></li><li><a href="../../guidelines/motion/">Motion</a></li><li><a href="../../guidelines/accessibility/">Accessibility</a></li><li><a href="../../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../../tokens/">All tokens</a></li>
+        <li><a href="../../about/">About &amp; status</a></li>
+        <li><a href="../../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

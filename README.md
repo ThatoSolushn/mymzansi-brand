@@ -15,9 +15,10 @@ npm run check      # build + validate. No dependencies, no install step.
 | Script | Does |
 |---|---|
 | `npm run build` | Generates all platform outputs into `dist/` |
-| `npm run docs` | Generates the style dictionary into `docs/` |
+| `npm run docs` | Generates the Markdown token catalogue |
+| `npm run site` | Generates the documentation website into `docs/` |
 | `npm run validate` | Runs 106 WCAG 2.1 and integrity checks. Exits non-zero on failure |
-| `npm run check` | All three. **Use this in CI.** |
+| `npm run check` | All of the above. **Use this in CI.** |
 
 ---
 
@@ -28,7 +29,9 @@ tokens.json                    ← SINGLE SOURCE OF TRUTH. Edit only this.
 BRAND.md                       ← Design rules, agent directives, full WCAG audit
 REQUIREMENTS.md                ← What must exist: 137 requirements with acceptance criteria
 scripts/build-tokens.mjs       ← Platform generator. Zero dependencies.
-scripts/build-docs.mjs         ← Style dictionary generator. Zero dependencies.
+scripts/build-docs.mjs         ← Markdown catalogue generator. Zero dependencies.
+scripts/build-site.mjs         ← Website generator. Zero dependencies.
+scripts/site/                  ← Site layout, shared helpers and page content
 scripts/validate-tokens.mjs    ← WCAG + integrity validator (CI gate). Zero dependencies.
 dist/                          ← GENERATED. Never edit by hand.
   css/tokens.css
@@ -37,14 +40,24 @@ dist/                          ← GENERATED. Never edit by hand.
   swift/MzTokens.swift
   kotlin/MzTokens.kt
   dart/mz_tokens.dart
-docs/                          ← GENERATED. The style dictionary.
-  index.html                       (browsable: swatches, specimens, contrast)
-  TOKENS.md                        (same catalogue, reviewable and diffable)
+docs/                          ← GENERATED. The documentation website.
+  index.html                       home
+  guidelines/<topic>/index.html    eight foundation guidelines
+  tokens/index.html                the full searchable dictionary
+  about/index.html                 status, provenance, confidence
+  assets/site.css                  generated FROM the tokens
+  TOKENS.md                        the catalogue as Markdown
 ```
 
-## The style dictionary
+## The website
 
-`docs/index.html` is the reference to hand a developer or designer. For every token it shows the value, where it came from, the description, **the identifier it becomes on each platform**, and the measured contrast against both grounds. Open it directly — it is a single self-contained file with no external requests.
+`docs/` is a static, multi-page documentation site — the thing to hand a developer or designer. Twelve pages: eight guidelines (colour, typography, language, space, iconography, motion, accessibility, content), a searchable dictionary of all tokens, and a status page.
+
+Every number on it is computed from `tokens.json` at build time, so the documentation cannot drift from the system. Its stylesheet is generated **from the tokens**, which makes the site an instance of the design system rather than a description of one.
+
+Zero dependencies, no build framework, no external network requests — the site holds to the same budget it asks of the product.
+
+**To publish:** repository → Settings → Pages → *Deploy from a branch* → `main` / `/docs`.
 
 `docs/TOKENS.md` is the same catalogue in Markdown, so token changes show up as readable diffs in review.
 
