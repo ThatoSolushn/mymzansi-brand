@@ -194,24 +194,65 @@ td:first-child{color:var(--ink)}
 /* scale bars */
 .bar{display:block;height:10px;border-radius:3px;background:var(--accent)}
 
+/* theme toggle */
+.tt{display:inline-flex;align-items:center;gap:7px;min-height:var(--touch);padding:8px 12px;border-radius:var(--r-sm);
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:inherit;font:inherit;font-size:.82rem;
+  font-weight:600;cursor:pointer;line-height:1}
+.tt:hover{background:rgba(255,255,255,.2)}
+.tt svg{width:15px;height:15px;flex:none}
+.tt .tt-sun{display:none}
+.tt .tt-moon{display:block}
+:root[data-theme="dark"] .tt .tt-sun{display:block}
+:root[data-theme="dark"] .tt .tt-moon{display:none}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .tt .tt-sun{display:block}
+  :root:not([data-theme="light"]) .tt .tt-moon{display:none}
+}
+.tt-label{display:none}
+@media(min-width:560px){.tt-label{display:inline}}
+
 /* roadmap */
-.rm{display:flex;flex-direction:column;gap:var(--s-sm);margin:var(--s-md) 0}
-.rm-item{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:var(--s-md);display:grid;gap:var(--s-xs)}
-.rm-head{display:flex;align-items:baseline;gap:var(--s-sm);flex-wrap:wrap}
-.rm-head h3{margin:0;font-size:1.12rem}
-.rm-num{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.1em}
-.rm-item p{margin:0;max-width:72ch;color:var(--ink2)}
-.rm-item p.what{color:var(--ink)}
-.chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;padding:3px 8px;border-radius:var(--r-full);white-space:nowrap;font-weight:600}
+.rm-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s-xs);margin:var(--s-md) 0 var(--s-lg)}
+.rm-leg{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-md);padding:var(--s-sm);display:grid;gap:5px;justify-items:start}
+.rm-leg .n{font-size:1.7rem;font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.rm-leg .d{font-size:.79rem;color:var(--ink3);line-height:1.4}
+
+.rm-phase{margin:var(--s-xl) 0 0}
+.rm-phase-head{display:flex;align-items:center;gap:var(--s-sm);margin-bottom:var(--s-xs);flex-wrap:wrap}
+.rm-phase-head h2{margin:0}
+.rm-phase-note{color:var(--ink2);margin:0 0 var(--s-sm);max-width:70ch;font-size:.95rem}
+
+.rm-grid{display:grid;grid-template-columns:1fr;gap:var(--s-sm)}
+@media(min-width:820px){.rm-grid{grid-template-columns:1fr 1fr}}
+
+.rm-card{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-lg);padding:var(--s-md);
+  display:flex;flex-direction:column;gap:var(--s-xs);border-top:3px solid var(--rule)}
+.rm-card.next{border-top-color:var(--ok)}
+.rm-card.planned{border-top-color:var(--ink3)}
+.rm-card.exploring{border-top-color:var(--warm)}
+.rm-card.blocked{border-top-color:var(--bad)}
+.rm-card h3{margin:0;font-size:1.06rem;line-height:1.25}
+.rm-top{display:flex;align-items:center;justify-content:space-between;gap:var(--s-xs)}
+.rm-num{font-family:var(--mono);font-size:11px;color:var(--ink3);letter-spacing:.12em}
+.rm-what{margin:0;color:var(--ink2);font-size:.92rem;max-width:none}
+.rm-card details{margin-top:auto;padding-top:var(--s-xs);border-top:1px solid var(--rule)}
+.rm-card summary{cursor:pointer;font-size:.83rem;font-weight:700;color:var(--accent);list-style:none;
+  min-height:32px;display:flex;align-items:center;gap:6px}
+.rm-card summary::-webkit-details-marker{display:none}
+.rm-card summary::after{content:"▸";transition:transform var(--dur) var(--ease);display:inline-block}
+.rm-card details[open] summary::after{transform:rotate(90deg)}
+.rm-card details p{font-size:.89rem;color:var(--ink2);margin:var(--s-xs) 0 0;max-width:none}
+.rm-meta{display:grid;gap:var(--s-xs);margin:var(--s-sm) 0 0;padding-top:var(--s-xs);border-top:1px solid var(--rule);font-size:.85rem}
+.rm-meta div{display:grid;gap:2px}
+.rm-meta dt{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3)}
+.rm-meta dd{margin:0;color:var(--ink2)}
+
+.chip{display:inline-flex;align-items:center;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;
+  text-transform:uppercase;padding:4px 9px;border-radius:var(--r-full);white-space:nowrap;font-weight:600}
 .chip.next{background:color-mix(in srgb,var(--ok) 18%,transparent);color:var(--ok)}
 .chip.planned{background:var(--sunk);color:var(--ink2)}
-.chip.exploring{background:color-mix(in srgb,var(--warm) 18%,transparent);color:var(--warm)}
+.chip.exploring{background:color-mix(in srgb,var(--warm) 20%,transparent);color:var(--warm)}
 .chip.blocked{background:color-mix(in srgb,var(--bad) 18%,transparent);color:var(--bad)}
-.rm-meta{display:grid;gap:6px;margin-top:6px;padding-top:var(--s-xs);border-top:1px solid var(--rule);font-size:.86rem}
-@media(min-width:640px){.rm-meta{grid-template-columns:1fr 1fr;gap:6px var(--s-md)}}
-.rm-meta div{display:flex;gap:8px}
-.rm-meta dt{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);min-width:76px;padding-top:3px}
-.rm-meta dd{margin:0;color:var(--ink2)}
 
 /* filter box */
 .filter{width:100%;max-width:420px;padding:11px 13px;min-height:var(--touch);border:1px solid var(--rule);border-radius:var(--r-sm);background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;margin:var(--s-sm) 0}
@@ -260,6 +301,11 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
 <meta name="description" content="${esc(lead || title)}">
 <meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="${r}assets/site.css">
+<script>
+/* Applied before first paint so an explicit choice never flashes the wrong theme.
+   No stored value means "follow the system", which is the default state. */
+(function(){try{var t=localStorage.getItem('mz-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -270,6 +316,11 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
       <span class="b2">MyMzansi</span>
     </a>
     <nav class="mast-nav" aria-label="Main">${nav}</nav>
+    <button class="tt" id="themeToggle" type="button" aria-live="polite" aria-label="Switch to dark theme">
+      <svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <span class="tt-label" id="themeLabel">Dark</span>
+    </button>
   </div>
 </header>
 <div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -308,6 +359,27 @@ ${sideNav}
     </div>
   </div>
 </footer>
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeToggle'), lbl=document.getElementById('themeLabel');
+  var mq=window.matchMedia('(prefers-color-scheme: dark)');
+  function current(){var t=root.getAttribute('data-theme');return t==='light'||t==='dark'?t:(mq.matches?'dark':'light');}
+  function sync(){
+    var next=current()==='dark'?'light':'dark';
+    lbl.textContent=next.charAt(0).toUpperCase()+next.slice(1);
+    btn.setAttribute('aria-label','Switch to '+next+' theme');
+  }
+  btn.addEventListener('click',function(){
+    var next=current()==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('mz-theme',next);}catch(e){}
+    sync();
+  });
+  // Follow the system while no explicit choice has been stored.
+  mq.addEventListener('change',function(){if(!root.getAttribute('data-theme'))sync();});
+  sync();
+})();
+</script>
 </body>
 </html>
 `;

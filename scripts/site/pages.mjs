@@ -728,53 +728,78 @@ const ROADMAP = [
   },
 ];
 
-const STATUS_LABEL = { next: 'Next up', planned: 'Planned', exploring: 'Exploring', blocked: 'Needs a mandate' };
+const PHASES = [
+  { key: 'next', label: 'Next up', note: 'Ready to start. Nothing blocks these, and between them they unblock most of the rest.' },
+  { key: 'planned', label: 'Planned', note: 'Wanted, but each depends on earlier work landing first.' },
+  { key: 'exploring', label: 'Exploring', note: 'The shape is not settled. These need research or a commission before they can be scoped.' },
+  { key: 'blocked', label: 'Needs a mandate', note: 'Cannot be built from this repository. Depends on institutional authority the concept does not have.' },
+];
+const STATUS_LABEL = Object.fromEntries(PHASES.map((p) => [p.key, p.label]));
 
-function roadmap() {
-  const items = ROADMAP.map((i) => `
-    <article class="rm-item">
-      <div class="rm-head">
-        <span class="rm-num">${i.n}</span>
-        <h3>${esc(i.title)}</h3>
-        <span class="chip ${i.status}">${STATUS_LABEL[i.status]}</span>
-      </div>
-      <p class="what">${i.what}</p>
+function rmCard(i) {
+  return `<article class="rm-card ${i.status}">
+    <div class="rm-top">
+      <span class="rm-num">${i.n}</span>
+      <span class="chip ${i.status}">${STATUS_LABEL[i.status]}</span>
+    </div>
+    <h3>${esc(i.title)}</h3>
+    <p class="rm-what">${i.what}</p>
+    <details>
+      <summary>Why, and what it needs</summary>
       <p>${i.detail}</p>
       ${i.detail2 ? `<p>${i.detail2}</p>` : ''}
       <dl class="rm-meta">
         <div><dt>Needs</dt><dd>${i.needs}</dd></div>
         <div><dt>Unblocks</dt><dd>${i.unblocks}</dd></div>
       </dl>
-    </article>`).join('');
+    </details>
+  </article>`;
+}
 
+function roadmap() {
   const counts = ROADMAP.reduce((a, i) => ((a[i.status] = (a[i.status] || 0) + 1), a), {});
+
+  const legend = `<div class="rm-legend">${PHASES.map((ph) => `
+    <div class="rm-leg">
+      <span class="chip ${ph.key}">${ph.label}</span>
+      <span class="n">${counts[ph.key] ?? 0}</span>
+      <span class="d">${esc(ph.note.split('.')[0])}.</span>
+    </div>`).join('')}</div>`;
+
+  const phases = PHASES.map((ph) => {
+    const items = ROADMAP.filter((i) => i.status === ph.key);
+    if (!items.length) return '';
+    return `<section class="rm-phase">
+      <div class="rm-phase-head">
+        <h2 id="${ph.key}">${esc(ph.label)}</h2>
+        <span class="chip ${ph.key}">${items.length} item${items.length === 1 ? '' : 's'}</span>
+      </div>
+      <p class="rm-phase-note">${esc(ph.note)}</p>
+      <div class="rm-grid">${items.map(rmCard).join('')}</div>
+    </section>`;
+  }).join('');
 
   return page({
     title: 'Roadmap',
     eyebrow: 'What is coming',
     depth: 1,
     active: 'roadmap/',
-    lead: 'Eight things this system does not have yet, in rough order of what unblocks the most. Nothing here is committed work — it is a statement of intent, and the dependencies are stated so the sequencing is arguable.',
+    lead: 'Eight things this system does not have yet, grouped by how ready they are. Nothing here is committed work — it is a statement of intent, with dependencies stated so the sequencing is arguable.',
     body: `
 ${callout(`<p>The system today is <b>foundations only</b>: tokens, rules, and the evidence behind them. Everything on this page sits above that layer. Where an item is blocked, it says so and by what — an honest roadmap is more useful than an ambitious one.</p>`, { title: 'Where this stands' })}
 
-${table(
-  ['Status', 'Meaning', 'Items'],
-  [
-    ['<span class="chip next">Next up</span>', 'Ready to start; nothing blocking', String(counts.next ?? 0)],
-    ['<span class="chip planned">Planned</span>', 'Wanted, but depends on earlier work', String(counts.planned ?? 0)],
-    ['<span class="chip exploring">Exploring</span>', 'Shape not yet settled; needs research or a commission', String(counts.exploring ?? 0)],
-    ['<span class="chip blocked">Needs a mandate</span>', 'Requires authority this concept does not have', String(counts.blocked ?? 0)],
-  ],
-  { min: 480 },
-)}
-
-<h2 id="items">The list</h2>
-<div class="rm">${items}</div>
+${legend}
+${phases}
 
 <h2 id="sequencing">Why this order</h2>
-<p>Components come first because almost everything else depends on them: templates are assembled from components, the Figma library mirrors them, and a conformity assessment needs something concrete to assess. Brand guidelines sit alongside because they are largely written already and gate anything a department would produce on its own.</p>
-<p>The awards programme is last not because it matters least — it may be the item with the most leverage over adoption — but because it is the only one that cannot be built. It needs an institution willing to stand behind it.</p>
+<p><b>Components come first</b> because almost everything else depends on them: templates are assembled from components, the Figma library mirrors them, and a conformity assessment needs something concrete to assess. Brand guidelines sit alongside because they are largely written already, and they gate anything a department would produce on its own.</p>
+<p><b>The awards programme is last</b> not because it matters least — it may be the item with the most leverage over adoption — but because it is the only one that cannot be built. It needs an institution willing to stand behind it.</p>
+
+${table(
+  ['This', 'Depends on', 'And unblocks'],
+  ROADMAP.map((i) => [`${code(i.n)} ${esc(i.title)}`, i.needs.split('.')[0] + '.', i.unblocks]),
+  { min: 720 },
+)}
 
 ${callout(`<p>This is unofficial concept work. Nothing on this page is a commitment by any organ of the South African state, and no timeline is implied.</p>`, { tone: 'warn', title: 'To be clear' })}
 `,
