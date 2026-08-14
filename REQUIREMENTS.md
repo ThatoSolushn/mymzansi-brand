@@ -152,6 +152,8 @@ Every feature is tested against these people. They are not edge cases; they are 
 | FR-F1-04 | MUST | The current assurance level is visible on the home surface at all times. |
 | FR-F1-05 | SHOULD | Recently completed transactions are visible with their outcome and any amount paid. |
 | FR-F1-06 | MUST | The interface language is visible and changeable from the home surface in one action. |
+| FR-F1-07 | MUST | Account and settings are reachable from **every** screen via one consistently placed control, not duplicated or hunted for per screen. |
+| FR-F1-08 | MUST | Signing out is available from that same control, for whoever is signed in — not a capability only some personas happen to have. |
 
 **Acceptance**
 
@@ -162,6 +164,11 @@ Then their credentials are visible without scrolling
 And the pending request states organisation, purpose and age
 And their assurance level is visible
 And the active language is visible and changeable in one action
+
+Given any signed-in person, on any screen
+When they open the account menu
+Then profile, settings and sign out are all reachable from that one control
+And this holds regardless of which persona (FR-F13-07) they are
 ```
 
 ---
