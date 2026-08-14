@@ -4,6 +4,7 @@
  * The stylesheet is built FROM the tokens, so the documentation site is itself
  * an instance of the design system rather than a description of one.
  */
+import { createHash } from 'node:crypto';
 import { val, esc, meta, ratio, LIGHT_BG } from './lib.mjs';
 
 export const NAV = [
@@ -194,22 +195,21 @@ td:first-child{color:var(--ink)}
 /* scale bars */
 .bar{display:block;height:10px;border-radius:3px;background:var(--accent)}
 
-/* theme toggle */
-.tt{display:inline-flex;align-items:center;gap:7px;min-height:var(--touch);padding:8px 12px;border-radius:var(--r-sm);
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:inherit;font:inherit;font-size:.82rem;
-  font-weight:600;cursor:pointer;line-height:1}
-.tt:hover{background:rgba(255,255,255,.2)}
-.tt svg{width:15px;height:15px;flex:none}
-.tt .tt-sun{display:none}
-.tt .tt-moon{display:block}
-:root[data-theme="dark"] .tt .tt-sun{display:block}
-:root[data-theme="dark"] .tt .tt-moon{display:none}
-@media(prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .tt .tt-sun{display:block}
-  :root:not([data-theme="light"]) .tt .tt-moon{display:none}
-}
-.tt-label{display:none}
-@media(min-width:560px){.tt-label{display:inline}}
+/* theme toggle — a generic on/off switch */
+.tt{display:inline-flex;align-items:center;gap:9px;min-height:var(--touch);padding:6px 4px 6px 10px;
+  background:none;border:0;color:inherit;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;line-height:1}
+.tt-label{opacity:.86}
+.tt-track{position:relative;width:40px;height:22px;border-radius:var(--r-full);flex:none;
+  background:rgba(255,255,255,.24);border:1px solid rgba(255,255,255,.32);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.tt-knob{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;
+  transition:transform var(--dur) var(--ease)}
+.tt[aria-checked="true"] .tt-track{background:var(--maize);border-color:var(--maize)}
+/* The knob darkens when on: white on maize is 1.59:1 and would disappear into
+   the track. Indigo on maize is 8.93:1, so the state stays legible (WCAG 1.4.11). */
+.tt[aria-checked="true"] .tt-knob{transform:translateX(18px);background:var(--anchor)}
+.tt:hover .tt-track{border-color:rgba(255,255,255,.6)}
+.tt:focus-visible{outline:2px solid #fff;outline-offset:2px;border-radius:var(--r-sm)}
 
 /* roadmap */
 .rm-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s-xs);margin:var(--s-md) 0 var(--s-lg)}
@@ -270,6 +270,14 @@ footer.site{border-top:1px solid var(--rule);background:var(--sunk)}
 `;
 }
 
+/**
+ * Content hash of the stylesheet, appended to its URL.
+ *
+ * Without this a browser happily serves a cached site.css after a rebuild, and
+ * the page renders with stale rules — which looks like a CSS bug and is not one.
+ */
+const CSS_V = createHash('sha256').update(stylesheet()).digest('hex').slice(0, 8);
+
 export function page({ title, eyebrow = '', depth = 0, active = '', body, side = true, lead = '' }) {
   const r = rel(depth);
   const nav = NAV.map((n) => {
@@ -300,7 +308,7 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
 <title>${esc(title)} — MyMzansi Design System</title>
 <meta name="description" content="${esc(lead || title)}">
 <meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="${r}assets/site.css">
+<link rel="stylesheet" href="${r}assets/site.css?v=${CSS_V}">
 <script>
 /* Applied before first paint so an explicit choice never flashes the wrong theme.
    No stored value means "follow the system", which is the default state. */
@@ -316,10 +324,9 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
       <span class="b2">MyMzansi</span>
     </a>
     <nav class="mast-nav" aria-label="Main">${nav}</nav>
-    <button class="tt" id="themeToggle" type="button" aria-live="polite" aria-label="Switch to dark theme">
-      <svg class="tt-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="tt-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-      <span class="tt-label" id="themeLabel">Dark</span>
+    <button class="tt" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme">
+      <span class="tt-label" aria-hidden="true">Dark</span>
+      <span class="tt-track" aria-hidden="true"><span class="tt-knob"></span></span>
     </button>
   </div>
 </header>
@@ -361,16 +368,12 @@ ${sideNav}
 </footer>
 <script>
 (function(){
-  var root=document.documentElement, btn=document.getElementById('themeToggle'), lbl=document.getElementById('themeLabel');
+  var root=document.documentElement, btn=document.getElementById('themeToggle');
   var mq=window.matchMedia('(prefers-color-scheme: dark)');
-  function current(){var t=root.getAttribute('data-theme');return t==='light'||t==='dark'?t:(mq.matches?'dark':'light');}
-  function sync(){
-    var next=current()==='dark'?'light':'dark';
-    lbl.textContent=next.charAt(0).toUpperCase()+next.slice(1);
-    btn.setAttribute('aria-label','Switch to '+next+' theme');
-  }
+  function isDark(){var t=root.getAttribute('data-theme');return t==='dark'||(t!=='light'&&mq.matches);}
+  function sync(){btn.setAttribute('aria-checked',String(isDark()));}
   btn.addEventListener('click',function(){
-    var next=current()==='dark'?'light':'dark';
+    var next=isDark()?'light':'dark';
     root.setAttribute('data-theme',next);
     try{localStorage.setItem('mz-theme',next);}catch(e){}
     sync();

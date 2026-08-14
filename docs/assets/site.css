@@ -161,22 +161,21 @@ td:first-child{color:var(--ink)}
 /* scale bars */
 .bar{display:block;height:10px;border-radius:3px;background:var(--accent)}
 
-/* theme toggle */
-.tt{display:inline-flex;align-items:center;gap:7px;min-height:var(--touch);padding:8px 12px;border-radius:var(--r-sm);
-  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:inherit;font:inherit;font-size:.82rem;
-  font-weight:600;cursor:pointer;line-height:1}
-.tt:hover{background:rgba(255,255,255,.2)}
-.tt svg{width:15px;height:15px;flex:none}
-.tt .tt-sun{display:none}
-.tt .tt-moon{display:block}
-:root[data-theme="dark"] .tt .tt-sun{display:block}
-:root[data-theme="dark"] .tt .tt-moon{display:none}
-@media(prefers-color-scheme:dark){
-  :root:not([data-theme="light"]) .tt .tt-sun{display:block}
-  :root:not([data-theme="light"]) .tt .tt-moon{display:none}
-}
-.tt-label{display:none}
-@media(min-width:560px){.tt-label{display:inline}}
+/* theme toggle — a generic on/off switch */
+.tt{display:inline-flex;align-items:center;gap:9px;min-height:var(--touch);padding:6px 4px 6px 10px;
+  background:none;border:0;color:inherit;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;line-height:1}
+.tt-label{opacity:.86}
+.tt-track{position:relative;width:40px;height:22px;border-radius:var(--r-full);flex:none;
+  background:rgba(255,255,255,.24);border:1px solid rgba(255,255,255,.32);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease)}
+.tt-knob{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;
+  transition:transform var(--dur) var(--ease)}
+.tt[aria-checked="true"] .tt-track{background:var(--maize);border-color:var(--maize)}
+/* The knob darkens when on: white on maize is 1.59:1 and would disappear into
+   the track. Indigo on maize is 8.93:1, so the state stays legible (WCAG 1.4.11). */
+.tt[aria-checked="true"] .tt-knob{transform:translateX(18px);background:var(--anchor)}
+.tt:hover .tt-track{border-color:rgba(255,255,255,.6)}
+.tt:focus-visible{outline:2px solid #fff;outline-offset:2px;border-radius:var(--r-sm)}
 
 /* roadmap */
 .rm-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--s-xs);margin:var(--s-md) 0 var(--s-lg)}
