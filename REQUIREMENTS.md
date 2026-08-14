@@ -39,6 +39,8 @@ When two requirements conflict, resolve in this order:
 
 Requirements for the **Trust & Inclusion Layer** of MyMzansi: identity presentation, consent, audit, assurance fallback, recovery, and delegation. Plus the cross-cutting language, accessibility and channel requirements that apply to all of it.
 
+As of F13, this also covers a structurally different population: foreign nationals applying for and holding a visa. See F13's own scope note — this is a materially different institutional question (Home Affairs / Border Management Authority mandate, not a MyMzansi-native one) and is flagged as such, not quietly folded in.
+
 ### 1.2 What this does not cover
 
 Registry management, biometric matching, payment rails, departmental back-office systems, or the service catalogue. Those are assumed to exist and are integrated with, not specified here.
@@ -57,6 +59,7 @@ Registry management, biometric matching, payment rails, departmental back-office
 | GOV.UK Verify (failure) | Federated coverage gaps → F3, F5 |
 | Draft SA Digital ID regulations, public comment | Device-dependency objection → F5 |
 | Constitution 18th Amendment (2023) | SASL as 12th official language → F10 |
+| UK Electronic Travel Authorisation / EU ETIAS | Digital travel authorisation checked electronically rather than a physical visa sticker, precedent that a visa can legitimately live as a status check rather than a document → F13 |
 
 ---
 
@@ -108,6 +111,7 @@ Every feature is tested against these people. They are not edge cases; they are 
 | P8 | Caregiver collecting for a relative | Must act for someone else lawfully → F8 |
 | P9 | Low vision / motor impairment | Contrast and target size → NFR-A11Y |
 | P10 | Distrusts government with data | Needs verifiable evidence, not reassurance → F6, F7 |
+| P11 | Foreign visitor, doesn't know local emergency numbers | Wrong or unknown number reached in a crisis → F13 |
 
 ---
 
@@ -127,6 +131,7 @@ Every feature is tested against these people. They are not edge cases; they are 
 | **F10** | Language and South African Sign Language | MUST | — | Specified, not built |
 | **F11** | Credential conformance and interoperability | SHOULD | C | Not started |
 | **F12** | Municipal adapter | COULD | F | Not started |
+| **F13** | Visa application, digital visa, and role-based menus | SHOULD | G | Prototyped |
 
 ---
 
@@ -538,6 +543,58 @@ Then no text is truncated and no container overflows
 
 ---
 
+### F13 — Visa application, digital visa, and role-based menus
+
+**Beneficiary:** a foreign national travelling to South Africa — someone who, unlike every other beneficiary in this document, does not start with a South African ID and may not read any official language fluently.
+**Purpose:** extend the wallet pattern already built for residents (F1–F3) to a structurally different population, and generalise a principle this document has not needed until now: **the menu itself must change with who is signed in**, not just what that person is permitted to do within one fixed menu.
+
+> **Scope boundary — read before implementing.** F13 is the visitor's *own* self-service experience: apply, hold the credential, know their status, know how to stay lawful, get help in an emergency. It is explicitly **not** a verification, enforcement, or border-control tool for officials — that is a different system with a different threat model, and conflating the two is exactly how a helpful feature turns into a surveillance one. This boundary is the same instinct as WONT-04 (§7): a technical capability existing here does not settle the adjacent political question of who gets one, and this document does not attempt to.
+
+| ID | Priority | Requirement |
+|---|---|---|
+| FR-F13-01 | MUST | A prospective visitor can start a visa application holding **no** existing South African credential. |
+| FR-F13-02 | MUST | The application captures, at minimum: reason for travel (from a defined, named category list), intended arrival and departure dates, and a travel-document reference. |
+| FR-F13-03 | MUST | Submitting an application returns a reference number **immediately**, independent of how long adjudication takes. |
+| FR-F13-04 | MUST | Application status is one of a small, named, plain-language set (for example: Submitted, Under review, Approved, Refused) — never a raw code, and never silent. |
+| FR-F13-05 | MUST | A refused application states the reason category and the legitimate next step (reapply, appeal, or an alternative category) — R11, never a dead end. |
+| FR-F13-06 | MUST | Once approved, the visa is held as a credential in the **same wallet pattern as F1** — type, conditions, issue date and expiry date, all stated in text. |
+| FR-F13-07 | MUST | **The menu presented is determined by the signed-in person's status, not a single fixed menu for everyone.** A visitor holding an approved visa sees a deliberately narrower surface than a citizen — this is the generalisable principle F13 introduces, not a one-off design choice. |
+| FR-F13-08 | MUST | At minimum, a visitor's surface includes: their visa (type, status, expiry), key safety contact numbers, and information relevant to travellers currently in the country. Nothing citizen-specific (grants, municipal services, voting) is shown. |
+| FR-F13-09 | MUST | Emergency contact numbers are reachable in **one action from wherever the visitor lands** — never nested behind the visa detail. |
+| FR-F13-10 | MUST | Once inside a defined window before expiry (e.g. 30 days), status is shown as a **countdown**, not only a calendar date — P11 exists because a date alone is easy to misjudge in an unfamiliar country. |
+| FR-F13-11 | SHOULD | Before expiry, a visitor is shown every legitimate option available to them (leave the country, apply to extend, apply under a different category) — no option omitted by default. |
+| FR-F13-12 | MUST | Every language requirement in F10 applies to a visitor identically to a citizen. English is the floor, not the assumption. |
+| FR-F13-13 | MUST | Visa status shown to the visitor **MUST** be asserted by the issuing authority's system, never computed or inferred client-side. A front end that could show "approved" without the authority actually having approved it is a defect, not a caching optimisation. |
+
+**Acceptance**
+
+```gherkin
+Given a visitor holds no South African credential
+When they start a visa application
+Then they choose a reason for travel from a named list
+And they receive a reference number immediately on submission
+
+Given a visitor's application is refused
+When they view the outcome
+Then the reason category is stated
+And a legitimate next step is offered — never a dead end
+
+Given a visitor holds an approved, valid visa
+When they open the app
+Then their menu shows only their visa, its expiry, emergency contacts and traveller-relevant information
+And no citizen-specific option (grants, municipal services) is present
+And emergency contact numbers are reachable in one action from wherever they land
+
+Given a visitor's visa is within 30 days of expiry
+When they view their visa
+Then the expiry is shown as a countdown, not only a date
+And their legitimate next steps are listed, with none omitted
+```
+
+> **Institutional note.** Unlike F1–F12, F13's natural owner is plausibly the Department of Home Affairs / Border Management Authority rather than a generic "MyMzansi" umbrella — see Q9. Prototyped here to demonstrate the pattern (role-based menus, a credential that narrows rather than expands the surface), not to claim a mandate this document cannot grant.
+
+---
+
 ## 6. Cross-cutting non-functional requirements
 
 ### 6.1 Accessibility
@@ -602,6 +659,7 @@ Then no text is truncated and no container overflows
 | WONT-03 | Determining eligibility for identity documents | Home Affairs statutory function |
 | WONT-04 | Status of undocumented residents and asylum seekers | **Deliberately unresolved.** A technical question intersecting the most politically charged debate in the country. Any serious proposal needs a stated position; this document does not invent one. |
 | WONT-05 | Biometric matching algorithms | Existing registry function |
+| WONT-06 | Verification of a visitor's status **by** officials, border control, or law enforcement | F13 is the visitor's own self-service surface, not a lookup tool for authorities — see F13's scope boundary. A different system, a different threat model, and a decision this document does not make. |
 
 ---
 
@@ -619,6 +677,7 @@ Then no text is truncated and no container overflows
 | P8 caregiver | F8 entire |
 | P9 low vision / motor | NFR-A11Y-01 … -08 |
 | P10 distrust | F6, F7 entire |
+| P11 visitor, unfamiliar emergency numbers | FR-F13-08, -09, -10 |
 
 | International lesson | Requirement |
 |---|---|
@@ -629,6 +688,7 @@ Then no text is truncated and no container overflows
 | Myinfo attribute sharing | F2 entire |
 | Verify coverage failure | FR-F3-09, FR-F5-06 |
 | SA device-dependency objection | FR-F5-01, -02, -11 |
+| UK ETA / EU ETIAS | FR-F13-06, -13 |
 
 ---
 
@@ -646,6 +706,8 @@ Do not resolve these silently. Each changes what gets built.
 | Q6 | What is the position on non-citizens and undocumented residents? | WONT-04 |
 | Q7 | Which assurance level does each government service require? Needs a service-by-service mapping that does not yet exist. | FR-F3-01 |
 | Q8 | Is the access log a new system or an extension of the data exchange layer? | F6 |
+| Q9 | Who actually owns F13 institutionally — Home Affairs, the Border Management Authority, or a MyMzansi-native service? The requirement is written to be owner-agnostic; adoption is not. | F13 |
+| Q10 | Is visa status checked live against the issuing authority on every view, or cached with a defined staleness bound? FR-F13-13 rules out client-side inference either way, but doesn't settle this. | FR-F13-13 |
 
 ---
 
