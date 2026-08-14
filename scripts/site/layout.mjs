@@ -5,7 +5,10 @@
  * an instance of the design system rather than a description of one.
  */
 import { createHash } from 'node:crypto';
-import { val, esc, meta, ratio, LIGHT_BG } from './lib.mjs';
+import { val, esc, meta, ratio, LIGHT_BG, extLink } from './lib.mjs';
+import { markMono, faviconHref } from './mark.mjs';
+
+const MYMZANSI_URL = 'https://www.mymzansi.gov.za/';
 
 export const NAV = [
   {
@@ -13,6 +16,7 @@ export const NAV = [
     href: 'guidelines/',
     children: [
       { title: 'Colour', href: 'guidelines/colour/', blurb: 'Palette, themes, semantic meaning, and the contrast rules that govern them.' },
+      { title: 'Identity mark', href: 'guidelines/identity-mark/', blurb: 'A proposed mark, and what it takes — and deliberately does not take — from the official MyMzansi logo.' },
       { title: 'Typography', href: 'guidelines/typography/', blurb: 'The type scale, and what twelve official languages demand of it.' },
       { title: 'Language', href: 'guidelines/language/', blurb: 'Twelve official languages, including South African Sign Language.' },
       { title: 'Space & layout', href: 'guidelines/space/', blurb: 'Spacing scale, radii, and non-negotiable touch targets.' },
@@ -22,6 +26,7 @@ export const NAV = [
       { title: 'Content & tone', href: 'guidelines/content/', blurb: 'How the service speaks — especially when something has gone wrong.' },
     ],
   },
+  { title: 'Programme', href: 'programme/', children: [] },
   { title: 'Roadmap', href: 'roadmap/', children: [] },
   { title: 'Tokens', href: 'tokens/', children: [] },
   { title: 'About', href: 'about/', children: [] },
@@ -87,6 +92,8 @@ export function stylesheet() {
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:var(--accent)}
+a[target="_blank"]{white-space:nowrap}
+a[target="_blank"] span[aria-hidden]{opacity:.7}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
 .skip{position:absolute;left:-9999px}
 .skip:focus{left:var(--s-md);top:var(--s-xs);z-index:99;background:var(--surface);padding:var(--s-xs) var(--s-sm);border-radius:var(--r-sm);border:1px solid var(--rule)}
@@ -100,7 +107,9 @@ a{color:var(--accent)}
 /* masthead */
 .masthead{background:var(--anchor);color:var(--onAnchor)}
 .mast-in{max-width:1180px;margin:0 auto;padding:var(--s-sm) var(--s-md);display:flex;align-items:center;gap:var(--s-md);flex-wrap:wrap}
-.brand{display:flex;flex-direction:column;text-decoration:none;color:inherit;gap:1px}
+.brand{display:flex;flex-direction:row;align-items:center;gap:10px;text-decoration:none;color:inherit}
+.brand .mzmark-mono{flex:none}
+.b-text{display:flex;flex-direction:column;gap:1px}
 .brand .b1{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.72}
 .brand .b2{font-size:1.05rem;font-weight:800;letter-spacing:-.02em}
 .mast-nav{display:flex;gap:var(--s-xs);margin-left:auto;flex-wrap:wrap}
@@ -294,6 +303,7 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
       }).join('')}
       <p class="sect">Reference</p>
       <ul>
+        <li><a href="${r}programme/"${active === 'programme/' ? ' aria-current="page"' : ''}>The programme</a></li>
         <li><a href="${r}roadmap/"${active === 'roadmap/' ? ' aria-current="page"' : ''}>Roadmap</a></li>
         <li><a href="${r}tokens/"${active === 'tokens/' ? ' aria-current="page"' : ''}>All tokens</a></li>
         <li><a href="${r}about/"${active === 'about/' ? ' aria-current="page"' : ''}>About &amp; status</a></li>
@@ -308,6 +318,7 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
 <title>${esc(title)} — MyMzansi Design System</title>
 <meta name="description" content="${esc(lead || title)}">
 <meta name="color-scheme" content="light dark">
+<link rel="icon" href="${faviconHref()}">
 <link rel="stylesheet" href="${r}assets/site.css?v=${CSS_V}">
 <script>
 /* Applied before first paint so an explicit choice never flashes the wrong theme.
@@ -320,8 +331,11 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
 <header class="masthead">
   <div class="mast-in">
     <a class="brand" href="${r}">
-      <span class="b1">Design system</span>
-      <span class="b2">MyMzansi</span>
+      ${markMono({ size: 30 })}
+      <span class="b-text">
+        <span class="b1">Design system</span>
+        <span class="b2">MyMzansi</span>
+      </span>
     </a>
     <nav class="mast-nav" aria-label="Main">${nav}</nav>
     <button class="tt" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme">
@@ -348,8 +362,8 @@ ${sideNav}
   <div class="foot-in">
     <div>
       <h4>Status</h4>
-      <p><b>Unofficial concept work.</b> ${esc(meta.affiliation ?? '')} Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
-      <p>Version ${esc(meta.version ?? '—')} · every page generated from <code>tokens.json</code>.</p>
+      <p><b>Unofficial concept work.</b> ${esc(meta.affiliation ?? '')} Tokens marked EXISTING were read from the live ${extLink(MYMZANSI_URL, 'mymzansi.gov.za')} stylesheet; everything else is proposed.</p>
+      <p>Version ${esc(meta.version ?? '—')} · every page generated from <code>tokens.json</code> · see how it maps to the <a href="${r}programme/">official programme</a>.</p>
     </div>
     <div>
       <h4>Guidelines</h4>
@@ -358,6 +372,7 @@ ${sideNav}
     <div>
       <h4>Reference</h4>
       <ul>
+        <li><a href="${r}programme/">The MyMzansi programme</a></li>
         <li><a href="${r}roadmap/">Roadmap</a></li>
         <li><a href="${r}tokens/">All tokens</a></li>
         <li><a href="${r}about/">About &amp; status</a></li>

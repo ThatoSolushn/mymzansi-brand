@@ -7,9 +7,13 @@
  */
 import {
   entries, group, token, val, leaf, names, ratio, grade, isHex, esc, fmt, code, dot,
-  gradeChip, swatches, cards, table, callout, LIGHT_BG, LIGHT_SURF, DARK_BG, DARK_SURF, meta,
+  gradeChip, swatches, cards, table, callout, extLink, LIGHT_BG, LIGHT_SURF, DARK_BG, DARK_SURF, meta,
 } from './lib.mjs';
 import { page, NAV } from './layout.mjs';
+import { markTri } from './mark.mjs';
+
+const MZ = 'https://www.mymzansi.gov.za';
+const mzUrl = (p) => `${MZ}${p}`;
 
 const R = (a, b) => ratio(a, b);
 const maize = val('color.palette.maize');
@@ -29,7 +33,9 @@ function home() {
     side: false,
     lead: 'Tokens, rules and evidence for building South African government services that nobody is excluded from — and that hold up on a four-year-old phone.',
     body: `
-${callout(`<p>This is <b>unofficial concept work</b>. It is not endorsed by or affiliated with the Presidency's Digital Services Unit, the Department of Communications and Digital Technologies, or any organ of the South African state. Tokens marked <b>EXISTING</b> were read from the live mymzansi.gov.za stylesheet; everything else is a proposal for discussion.</p>`, { tone: 'warn', title: 'Please read first' })}
+${callout(`<p>This is <b>unofficial concept work</b>. It is not endorsed by or affiliated with the Presidency's Digital Services Unit, the Department of Communications and Digital Technologies, or any organ of the South African state. Tokens marked <b>EXISTING</b> were read from the live ${extLink(MZ + '/', 'mymzansi.gov.za')} stylesheet; everything else is a proposal for discussion.</p>`, { tone: 'warn', title: 'Please read first' })}
+
+<div style="display:flex;justify-content:center;padding:var(--s-md) 0 var(--s-lg)">${markTri({ size: 132, count: 6 })}</div>
 
 <h2 id="what">What this is</h2>
 <p>A single source of truth — <code>tokens.json</code>, in the W3C Design Tokens format — plus the rules that govern how those tokens may be used, and the evidence behind each rule. Every page on this site is generated from that file, so the documentation cannot drift from the system.</p>
@@ -53,6 +59,10 @@ ${callout(`<p>Most government products design the happy path and treat failure a
 
 <h2 id="guidelines">Guidelines</h2>
 ${cards(guideCards)}
+
+<h2 id="programme">Built for a specific programme</h2>
+<p>This is not a generic design system — it exists to serve <a href="programme/">MyMzansi</a>, South Africa's national digital government initiative. Its mission, principles and roadmap come from the Presidency's Digital Services Unit, not from here. See how this system's rules trace back to their own stated principles, in their own words.</p>
+<p><a href="programme/"><b>Read the strategic context →</b></a> · ${extLink(MZ + '/', 'Visit mymzansi.gov.za')}</p>
 
 <h2 id="next">What is coming</h2>
 <p>The system today is foundations only — tokens, rules and evidence. Components, templates, an icon and Figma library, illustration guidance, machine-readable AI documentation and an adoption awards programme are all still ahead.</p>
@@ -649,6 +659,155 @@ ${table(
 }
 
 
+
+/* ============================================================ identity mark */
+
+function identityMark() {
+  const maize = val('color.palette.maize');
+  const indigo = val('color.palette.indigo');
+
+  return page({
+    title: 'Identity mark',
+    eyebrow: 'Guideline · proposal',
+    depth: 2,
+    active: 'guidelines/identity-mark/',
+    lead: 'A companion mark for this system — built from the same idea as the official MyMzansi logo, in our own accessible palette, without reproducing their asset.',
+    body: `
+${callout(`<p>This is a <b>proposal</b>, not an adopted mark. It has no standing with the Presidency's Digital Services Unit and has not been reviewed by whoever owns the actual MyMzansi brand. Treat it as a sketch of what "incorporating that thinking" could look like.</p>`, { tone: 'warn', title: 'Status' })}
+
+<h2 id="theirs">The official mark</h2>
+<p>MyMzansi's logo (${extLink(MZ + '/', 'mymzansi.gov.za')}) draws a fingerprint as concentric dashed arcs, shaped into the silhouette of South Africa, cycling through the national flag's colours, under the line <i>"One person, one government, one touch."</i> It is a genuinely good piece of design — it fuses biometric identity with the nation in a single image, which is exactly what the programme is.</p>
+<p>We do not reproduce that asset on this site. It is a specific, owned mark belonging to a distinct government initiative, not a motif that is ours to reuse — the same principle this system already applies to Ndebele geometry in the <a href="../colour/#sources">Colour guideline</a>: take the method, not somebody else's specific mark.</p>
+
+<h2 id="ours">What we propose instead</h2>
+<div style="display:flex;justify-content:center;padding:var(--s-lg) 0">${markTri({ size: 168, count: 6, title: 'Proposed MyMzansi design system mark' })}</div>
+<p>The method carried over is <b>concentric dashed arcs as a shorthand for identity</b> — a fingerprint read abstractly, not literally. Three differences from the official mark, each deliberate:</p>
+${table(
+  ['Their mark', 'This proposal', 'Why'],
+  [
+    ['Traces the outline of South Africa', 'No representational shape — a pinwheel of rings', 'Tracing the national map is exactly the kind of specific, ownable device that should not be duplicated by an unofficial companion system.'],
+    ['Cycles through the raw flag palette', 'Uses this system\'s own tokens: <code>accent</code>, <code>accent-warm</code>, <code>anchor</code>', 'Flag colour reads as municipal letterhead and, as shown in the Colour guideline, several raw flag tones fail WCAG contrast outright. Every colour in this mark is already audited.'],
+    ['One fixed rendering', 'Theme-reactive — resolves through CSS custom properties', 'The mark is generated from the same tokens as everything else on this site. Change the palette, and the mark updates with it.'],
+  ],
+)}
+
+<h2 id="colours">Why these three colours</h2>
+${table(
+  ['Ring colour', 'Token', 'Why it is safe here'],
+  [
+    ['Aloe', code('var(--accent)'), `${R(val("color.palette.aloe"), LIGHT_BG)}:1 on the light ground, ${R(val("color.palette.aloe-br"), DARK_BG)}:1 on the dark ground — both AA. See <a href="../colour/#theme">Theme tokens</a>.`],
+    ['Ochre', code('var(--warm)'), `${R(val("color.palette.ochre"), LIGHT_BG)}:1 on the light ground — the corrected value; the original failed at 3.50:1. See <a href="../colour/#failures">what failed</a>.`],
+    ['Indigo', code('var(--anchor)'), `${R(indigo, LIGHT_BG)}:1 on light, and it is the one colour that stays fixed across both themes, because it doubles as the masthead fill.`],
+  ],
+)}
+${callout(`<p>None of the three rings uses <code>maize</code>. §4.5's rule — maize is a <b>ground, never a mark</b> in light theme — applies here exactly as it would to any other stroke or icon. The one exception is the masthead version below, where the background itself is fixed indigo rather than the page ground, which is the specific condition under which maize is safe as a mark (${R(maize, indigo)}:1).</p>`, { title: 'This mark follows its own rules' })}
+
+<h2 id="variants">Three sizes, three jobs</h2>
+${table(
+  ['Where', 'Treatment', 'Why'],
+  [
+    ['Masthead', 'Single colour — maize rings on the fixed indigo fill', 'The masthead background never changes with theme, so the mark on it does not need to either. Kept small and quiet.'],
+    ['Content figure', 'Full three-colour, theme-reactive, larger', 'Where the mark can be looked at rather than glanced past — this page, a future About/home hero.'],
+    ['Favicon', 'Static, baked to hex, indigo backdrop', 'Favicons cannot read page CSS variables, and need a solid backdrop to register as a coloured square at 16px.'],
+  ],
+)}
+
+<h2 id="rules">If this is taken further</h2>
+<ul>
+  <li>Do not recolour individual rings — the three-colour set is fixed, so it stays recognisable as one mark rather than a decoration re-skinned per page.</li>
+  <li>Do not pair it with a literal South Africa outline elsewhere on the same screen — that would reintroduce the exact overlap with the official mark this proposal avoids.</li>
+  <li>Minimum size ~24px; below that the dash pattern stops reading as rings and just looks like noise.</li>
+  <li>Clear space of at least one ring-gap on all sides before another element starts.</li>
+</ul>
+<p>This is the first concrete piece of <a href="../../roadmap/#next">Brand guidelines</a> on the roadmap. A wordmark, lock-up rules and misuse examples are still open — see the roadmap for what depends on a decision here.</p>
+`,
+  });
+}
+
+/* ================================================================= programme */
+
+function programme() {
+  const MAPPING = [
+    ['Accessibility', 'Batho Pele', 'Services must be easy to access and understand, especially for vulnerable populations.', 'The WCAG 2.1 AA audit — 106 automated checks, six failures found and corrected, all published.', '../guidelines/accessibility/'],
+    ['Upholding Responsiveness', 'Batho Pele', 'A government that listens to and promptly addresses public needs.', '"The system failed, not the person" — error copy that names the system as the point of failure, never the citizen.', '../guidelines/content/#errors'],
+    ['Interoperability', 'Service principle', 'Open standards, integration across platforms, open-source to prevent vendor lock-in.', 'Tokens published in the open W3C DTCG format, with zero dependencies and no vendor lock-in by design.', '../about/#build'],
+    ['Privacy and Security by Design', 'Service principle', 'Privacy protections embedded from the outset, not added later.', 'Consent surfaces state what will <i>not</i> be shared, not only what will — an explicit requirement, not a default.', '../guidelines/content/#consent'],
+    ['Simplicity', 'Service principle', 'Reducing complexity, enhancing usability, streamlining process.', 'Body text set at 16px rather than the 14px most mobile systems default to, and a reading age kept deliberately low.', '../guidelines/typography/#minimums'],
+    ['Scalability and Modularity', 'Service principle', 'Modular, reusable components that support growth without disrupting what exists.', 'The three-layer token architecture — palette → theme/semantic → component — so one edit updates every platform.', '../tokens/'],
+    ['Agile. Incremental. Iterative.', 'Service principle', 'Continuous improvement delivered in small, adaptive cycles.', 'A validator that runs on every change and flags anything passing within 10% of its threshold, before it becomes a defect.', '../guidelines/accessibility/#enforced'],
+    ['Reusability', 'Service principle', 'Designing components that can be leveraged across multiple contexts.', 'One <code>tokens.json</code> generates CSS, React Native, Tailwind, Swift, Kotlin and Dart from a single edit.', '../#using'],
+    ['"Granny operations"', 'People assumption', 'Interfaces accessible and intuitive for users with varying digital literacy.', 'Tiered assurance that downgrades capability rather than blocking someone outright when a fingerprint will not read.', '../guidelines/colour/#maize'],
+  ];
+
+  return page({
+    title: 'The MyMzansi programme',
+    eyebrow: 'Strategic context',
+    depth: 1,
+    active: 'programme/',
+    lead: 'This design system exists to serve a specific national programme. Its purpose, principles and roadmap are set by the Presidency\'s Digital Services Unit, not by this repository — here is what they say, and where this system tries to hold up its end.',
+    body: `
+${callout(`<p>Everything on this page is <b>quoted or closely paraphrased from the live site</b> at ${extLink(MZ + '/', 'mymzansi.gov.za')}, current as of this writing. It can change without notice — this page is not authoritative; theirs is. Where wording is condensed, the source page is linked so it can be checked directly.</p>`, { title: 'Source' })}
+
+<h2 id="purpose">Purpose, vision, mission</h2>
+${table(
+  ['', 'What they say', 'Source'],
+  [
+    ['Purpose', '"South Africa is at a pivotal moment in its digital transformation journey... This roadmap sets out steps to deliver on the change wanted by people in South Africa."', extLink(mzUrl('/roadmap/purpose'), 'Purpose')],
+    ['Vision', '"To deliver a safe and inclusive future by changing how government services are designed and accessed."', extLink(mzUrl('/roadmap/vision'), 'Vision')],
+    ['Mission', '"To simplify and improve how residents, businesses, and government interact by using shared technology, modern design, and collaborative delivery models."', extLink(mzUrl('/roadmap/mission'), 'Mission')],
+  ],
+)}
+
+<h2 id="principles">Principles</h2>
+<p>The roadmap names three tiers of principle. The first is not a technology framework — it predates this programme by three decades.</p>
+
+<h3>Batho Pele</h3>
+<p>South Africa's public-service doctrine since 1997 — "People First." The roadmap states plainly that these values are "the foundation for this roadmap": <b>Accessibility</b>, <b>Upholding Responsiveness</b>, <b>Promoting Accountability</b>.</p>
+
+<h3>Service principles</h3>
+<p>How Digital Public Infrastructure is meant to behave in practice: <b>Interoperability</b> (open standards, no vendor lock-in), <b>Decentralised Delivery and Design</b>, <b>Privacy and Security by Design</b>, <b>Simplicity</b>, <b>Scalability and Modularity</b>, <b>Agile. Incremental. Iterative.</b>, <b>Agency. Empowering.</b>, <b>Reusability</b>.</p>
+
+<h3>Universal principles</h3>
+<p>Openness, inclusivity, security and interoperability "for all users" — plus explicit adoption of the <b>DPI Safeguards</b> framework. Full text: ${extLink(mzUrl('/roadmap/principles'), 'Principles')}.</p>
+
+${callout(`<p>One line from the Assumptions page is worth quoting directly, because it states an inclusion bar most technology programmes never write down: interfaces should suit <b>"users with varying levels of digital literacy, including accessible, intuitive interfaces suitable for all, such as \'granny operations.\'"</b> Source: ${extLink(mzUrl('/roadmap/assumptions'), 'Assumptions')}.</p>`, { title: 'The bar, in their own words' })}
+
+<h2 id="dpi">Digital Public Infrastructure</h2>
+<p>"DPI refers to foundational technology building blocks — such as identity, data exchange, payments, and trusted digital channels — that enable secure, inclusive, and scalable government services." The roadmap names its influences directly: <b>India, Brazil, and Estonia</b> — the same three precedents this system's earlier research drew on independently.</p>
+
+<h2 id="phases">Phases</h2>
+${table(
+  ['Phase', 'Focus'],
+  [
+    ['Phase 1 · 2025–2027', 'Social protection, digital identity, unified digital channels. Pilot the Digital ID, Data Exchange, and first government payment integrations.'],
+    ['Phase 2 · 2028–2030', 'Scale Phase 1 technologies across healthcare, education, business services, and beyond.'],
+  ],
+)}
+<p>Four initiatives carry Phase 1: <b>Digital Identity</b>, <b>Data Exchange</b>, <b>Digital Payments</b>, <b>Trusted Digital Channels</b>. Full breakdown: ${extLink(mzUrl('/roadmap/phases'), 'Phases')} · ${extLink(mzUrl('/roadmap/initiatives'), 'Initiatives')}.</p>
+
+<h2 id="mapping">Where this system tries to hold up its end</h2>
+<p>Naming a principle is not the same as satisfying it. This table is this system's own claim, checked against something concrete rather than left as a slogan — follow the links and judge for yourself.</p>
+${table(
+  ['Their principle', 'Tier', 'What it means', 'What holds up this end of it'],
+  MAPPING.map(([p, tier, meaning, ours, href]) => [`<b>${esc(p)}</b>`, esc(tier), esc(meaning), `${ours} <a href="${href}">→</a>`]),
+  { min: 900 },
+)}
+
+<h2 id="governance">Governance</h2>
+<p>MyMzansi is a project under <b>Operation Vulindlela</b>, led by the Presidency and coordinated with the Department of Communications and Digital Technologies (DCDT) and National Treasury. An inter-ministerial committee and an inter-departmental working group oversee it. None of that governance extends to this repository — see <a href="../about/">About &amp; status</a>.</p>
+
+<div style="text-align:center;padding:var(--s-lg) 0">
+  <a class="card" href="${MZ}/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;max-width:360px">
+    <span class="card-eyebrow">Official programme</span>
+    <h3>mymzansi.gov.za</h3>
+    <p>Purpose, roadmap, phases, initiatives, and how to get involved — from the source.</p>
+    <span class="card-go">Visit ↗</span>
+  </a>
+</div>
+`,
+  });
+}
+
 /* ================================================================== roadmap */
 
 const ROADMAP = [
@@ -819,6 +978,8 @@ export const pages = [
   { path: 'guidelines/motion/index.html', html: motion() },
   { path: 'guidelines/accessibility/index.html', html: accessibility() },
   { path: 'guidelines/content/index.html', html: content() },
+  { path: 'guidelines/identity-mark/index.html', html: identityMark() },
+  { path: 'programme/index.html', html: programme() },
   { path: 'roadmap/index.html', html: roadmap() },
   { path: 'tokens/index.html', html: tokensPage() },
   { path: 'about/index.html', html: about() },

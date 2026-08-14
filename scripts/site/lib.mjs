@@ -95,6 +95,10 @@ export function names(e) {
 
 /* ------------------------------------------------------------- utilities */
 
+/** An external link, visually marked, opened safely. */
+export const extLink = (href, label) =>
+  `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer">${esc(label)} <span aria-hidden="true">↗</span></a>`;
+
 export const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 

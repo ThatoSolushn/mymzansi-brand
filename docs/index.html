@@ -6,7 +6,8 @@
 <title>A design system for public services — MyMzansi Design System</title>
 <meta name="description" content="Tokens, rules and evidence for building South African government services that nobody is excluded from — and that hold up on a four-year-old phone.">
 <meta name="color-scheme" content="light dark">
-<link rel="stylesheet" href="./assets/site.css?v=a6376968">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMCIgZmlsbD0iIzFCMkE0QSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjkuOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNS4xNSAzLjczIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDMyIDMyKSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjE5LjUxIiBmaWxsPSJub25lIiBzdHJva2U9IiNGQkM1NDkiIHN0cm9rZS13aWR0aD0iMi4xMzMzMzMzMzMzMzMzMzMzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjguODkgNi40NCIgdHJhbnNmb3JtPSJyb3RhdGUoNDcgMzIgMzIpIi8+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjkuMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuMTYgMTAuOTgiIHRyYW5zZm9ybT0icm90YXRlKDk0IDMyIDMyKSIvPjwvc3ZnPg==">
+<link rel="stylesheet" href="./assets/site.css?v=bc022ec7">
 <script>
 /* Applied before first paint so an explicit choice never flashes the wrong theme.
    No stored value means "follow the system", which is the default state. */
@@ -18,10 +19,13 @@
 <header class="masthead">
   <div class="mast-in">
     <a class="brand" href="./">
-      <span class="b1">Design system</span>
-      <span class="b2">MyMzansi</span>
+      <svg class="mzmark-mono" width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="4.42" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2.30 1.67" transform="rotate(0 15 15)"/><circle cx="15" cy="15" r="8.71" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="3.97 2.87" transform="rotate(47 15 15)"/><circle cx="15" cy="15" r="13.00" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="6.77 4.90" transform="rotate(94 15 15)"/></svg>
+      <span class="b-text">
+        <span class="b1">Design system</span>
+        <span class="b2">MyMzansi</span>
+      </span>
     </a>
-    <nav class="mast-nav" aria-label="Main"><a href="./guidelines/">Guidelines</a><a href="./roadmap/">Roadmap</a><a href="./tokens/">Tokens</a><a href="./about/">About</a></nav>
+    <nav class="mast-nav" aria-label="Main"><a href="./guidelines/">Guidelines</a><a href="./programme/">Programme</a><a href="./roadmap/">Roadmap</a><a href="./tokens/">Tokens</a><a href="./about/">About</a></nav>
     <button class="tt" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme">
       <span class="tt-label" aria-hidden="true">Dark</span>
       <span class="tt-track" aria-hidden="true"><span class="tt-knob"></span></span>
@@ -39,7 +43,9 @@
     <p class="lede">Tokens, rules and evidence for building South African government services that nobody is excluded from — and that hold up on a four-year-old phone.</p>
   </div>
   
-<aside class="callout warn"><b class="ct">Please read first</b><div><p>This is <b>unofficial concept work</b>. It is not endorsed by or affiliated with the Presidency's Digital Services Unit, the Department of Communications and Digital Technologies, or any organ of the South African state. Tokens marked <b>EXISTING</b> were read from the live mymzansi.gov.za stylesheet; everything else is a proposal for discussion.</p></div></aside>
+<aside class="callout warn"><b class="ct">Please read first</b><div><p>This is <b>unofficial concept work</b>. It is not endorsed by or affiliated with the Presidency's Digital Services Unit, the Department of Communications and Digital Technologies, or any organ of the South African state. Tokens marked <b>EXISTING</b> were read from the live <a href="https://www.mymzansi.gov.za/" target="_blank" rel="noopener noreferrer">mymzansi.gov.za <span aria-hidden="true">↗</span></a> stylesheet; everything else is a proposal for discussion.</p></div></aside>
+
+<div style="display:flex;justify-content:center;padding:var(--s-md) 0 var(--s-lg)"><svg class="mzmark" width="132" height="132" viewBox="0 0 132 132" role="img" aria-label="The MyMzansi design system mark"><circle cx="66" cy="66" r="20.42" fill="none" stroke="var(--accent)" stroke-width="4.4" stroke-linecap="round" stroke-dasharray="10.63 7.70" transform="rotate(0 66 66)"/><circle cx="66" cy="66" r="28.35" fill="none" stroke="var(--warm)" stroke-width="4.4" stroke-linecap="round" stroke-dasharray="12.91 9.35" transform="rotate(47 66 66)"/><circle cx="66" cy="66" r="36.28" fill="none" stroke="var(--anchor)" stroke-width="4.4" stroke-linecap="round" stroke-dasharray="18.89 13.68" transform="rotate(94 66 66)"/><circle cx="66" cy="66" r="44.20" fill="none" stroke="var(--accent)" stroke-width="4.4" stroke-linecap="round" stroke-dasharray="20.14 14.58" transform="rotate(141 66 66)"/><circle cx="66" cy="66" r="52.13" fill="none" stroke="var(--warm)" stroke-width="4.4" stroke-linecap="round" stroke-dasharray="27.14 19.65" transform="rotate(188 66 66)"/><circle cx="66" cy="66" r="60.06" fill="none" stroke="var(--anchor)" stroke-width="4.4" stroke-linecap="round" stroke-dasharray="27.36 19.81" transform="rotate(235 66 66)"/></svg></div>
 
 <h2 id="what">What this is</h2>
 <p>A single source of truth — <code>tokens.json</code>, in the W3C Design Tokens format — plus the rules that govern how those tokens may be used, and the evidence behind each rule. Every page on this site is generated from that file, so the documentation cannot drift from the system.</p>
@@ -67,6 +73,12 @@
       <span class="card-eyebrow">Guideline</span>
       <h3>Colour</h3>
       <p>Palette, themes, semantic meaning, and the contrast rules that govern them.</p>
+      <span class="card-go">Read →</span>
+    </a>
+    <a class="card" href="guidelines/identity-mark/">
+      <span class="card-eyebrow">Guideline</span>
+      <h3>Identity mark</h3>
+      <p>A proposed mark, and what it takes — and deliberately does not take — from the official MyMzansi logo.</p>
       <span class="card-go">Read →</span>
     </a>
     <a class="card" href="guidelines/typography/">
@@ -112,6 +124,10 @@
       <span class="card-go">Read →</span>
     </a></div>
 
+<h2 id="programme">Built for a specific programme</h2>
+<p>This is not a generic design system — it exists to serve <a href="programme/">MyMzansi</a>, South Africa's national digital government initiative. Its mission, principles and roadmap come from the Presidency's Digital Services Unit, not from here. See how this system's rules trace back to their own stated principles, in their own words.</p>
+<p><a href="programme/"><b>Read the strategic context →</b></a> · <a href="https://www.mymzansi.gov.za/" target="_blank" rel="noopener noreferrer">Visit mymzansi.gov.za <span aria-hidden="true">↗</span></a></p>
+
 <h2 id="next">What is coming</h2>
 <p>The system today is foundations only — tokens, rules and evidence. Components, templates, an icon and Figma library, illustration guidance, machine-readable AI documentation and an adoption awards programme are all still ahead.</p>
 <p><a href="roadmap/"><b>See the roadmap →</b></a></p>
@@ -131,16 +147,17 @@
   <div class="foot-in">
     <div>
       <h4>Status</h4>
-      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live mymzansi.gov.za stylesheet; everything else is proposed.</p>
-      <p>Version 1.0.0 · every page generated from <code>tokens.json</code>.</p>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live <a href="https://www.mymzansi.gov.za/" target="_blank" rel="noopener noreferrer">mymzansi.gov.za <span aria-hidden="true">↗</span></a> stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code> · see how it maps to the <a href="./programme/">official programme</a>.</p>
     </div>
     <div>
       <h4>Guidelines</h4>
-      <ul><li><a href="./guidelines/colour/">Colour</a></li><li><a href="./guidelines/typography/">Typography</a></li><li><a href="./guidelines/language/">Language</a></li><li><a href="./guidelines/space/">Space &amp; layout</a></li><li><a href="./guidelines/iconography/">Iconography</a></li><li><a href="./guidelines/motion/">Motion</a></li><li><a href="./guidelines/accessibility/">Accessibility</a></li><li><a href="./guidelines/content/">Content &amp; tone</a></li></ul>
+      <ul><li><a href="./guidelines/colour/">Colour</a></li><li><a href="./guidelines/identity-mark/">Identity mark</a></li><li><a href="./guidelines/typography/">Typography</a></li><li><a href="./guidelines/language/">Language</a></li><li><a href="./guidelines/space/">Space &amp; layout</a></li><li><a href="./guidelines/iconography/">Iconography</a></li><li><a href="./guidelines/motion/">Motion</a></li><li><a href="./guidelines/accessibility/">Accessibility</a></li><li><a href="./guidelines/content/">Content &amp; tone</a></li></ul>
     </div>
     <div>
       <h4>Reference</h4>
       <ul>
+        <li><a href="./programme/">The MyMzansi programme</a></li>
         <li><a href="./roadmap/">Roadmap</a></li>
         <li><a href="./tokens/">All tokens</a></li>
         <li><a href="./about/">About &amp; status</a></li>

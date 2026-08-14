@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The MyMzansi programme — MyMzansi Design System</title>
+<meta name="description" content="This design system exists to serve a specific national programme. Its purpose, principles and roadmap are set by the Presidency's Digital Services Unit, not by this repository — here is what they say, and where this system tries to hold up its end.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMCIgZmlsbD0iIzFCMkE0QSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjkuOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNS4xNSAzLjczIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDMyIDMyKSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjE5LjUxIiBmaWxsPSJub25lIiBzdHJva2U9IiNGQkM1NDkiIHN0cm9rZS13aWR0aD0iMi4xMzMzMzMzMzMzMzMzMzMzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjguODkgNi40NCIgdHJhbnNmb3JtPSJyb3RhdGUoNDcgMzIgMzIpIi8+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjkuMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuMTYgMTAuOTgiIHRyYW5zZm9ybT0icm90YXRlKDk0IDMyIDMyKSIvPjwvc3ZnPg==">
+<link rel="stylesheet" href="../assets/site.css?v=bc022ec7">
+<script>
+/* Applied before first paint so an explicit choice never flashes the wrong theme.
+   No stored value means "follow the system", which is the default state. */
+(function(){try{var t=localStorage.getItem('mz-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../">
+      <svg class="mzmark-mono" width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="4.42" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2.30 1.67" transform="rotate(0 15 15)"/><circle cx="15" cy="15" r="8.71" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="3.97 2.87" transform="rotate(47 15 15)"/><circle cx="15" cy="15" r="13.00" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="6.77 4.90" transform="rotate(94 15 15)"/></svg>
+      <span class="b-text">
+        <span class="b1">Design system</span>
+        <span class="b2">MyMzansi</span>
+      </span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../guidelines/">Guidelines</a><a href="../programme/" aria-current="true">Programme</a><a href="../roadmap/">Roadmap</a><a href="../tokens/">Tokens</a><a href="../about/">About</a></nav>
+    <button class="tt" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme">
+      <span class="tt-label" aria-hidden="true">Dark</span>
+      <span class="tt-track" aria-hidden="true"><span class="tt-knob"></span></span>
+    </button>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell with-side">
+<aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../guidelines/colour/">Colour</a></li><li><a href="../guidelines/identity-mark/">Identity mark</a></li><li><a href="../guidelines/typography/">Typography</a></li><li><a href="../guidelines/language/">Language</a></li><li><a href="../guidelines/space/">Space &amp; layout</a></li><li><a href="../guidelines/iconography/">Iconography</a></li><li><a href="../guidelines/motion/">Motion</a></li><li><a href="../guidelines/accessibility/">Accessibility</a></li><li><a href="../guidelines/content/">Content &amp; tone</a></li></ul>
+      <p class="sect">Reference</p>
+      <ul>
+        <li><a href="../programme/" aria-current="page">The programme</a></li>
+        <li><a href="../roadmap/">Roadmap</a></li>
+        <li><a href="../tokens/">All tokens</a></li>
+        <li><a href="../about/">About &amp; status</a></li>
+      </ul></aside>
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Strategic context</p>
+    <h1>The MyMzansi programme</h1>
+    <p class="lede">This design system exists to serve a specific national programme. Its purpose, principles and roadmap are set by the Presidency's Digital Services Unit, not by this repository — here is what they say, and where this system tries to hold up its end.</p>
+  </div>
+  
+<aside class="callout note"><b class="ct">Source</b><div><p>Everything on this page is <b>quoted or closely paraphrased from the live site</b> at <a href="https://www.mymzansi.gov.za/" target="_blank" rel="noopener noreferrer">mymzansi.gov.za <span aria-hidden="true">↗</span></a>, current as of this writing. It can change without notice — this page is not authoritative; theirs is. Where wording is condensed, the source page is linked so it can be checked directly.</p></div></aside>
+
+<h2 id="purpose">Purpose, vision, mission</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th></th><th>What they say</th><th>Source</th></tr></thead>
+    <tbody><tr><td>Purpose</td><td>"South Africa is at a pivotal moment in its digital transformation journey... This roadmap sets out steps to deliver on the change wanted by people in South Africa."</td><td><a href="https://www.mymzansi.gov.za/roadmap/purpose" target="_blank" rel="noopener noreferrer">Purpose <span aria-hidden="true">↗</span></a></td></tr><tr><td>Vision</td><td>"To deliver a safe and inclusive future by changing how government services are designed and accessed."</td><td><a href="https://www.mymzansi.gov.za/roadmap/vision" target="_blank" rel="noopener noreferrer">Vision <span aria-hidden="true">↗</span></a></td></tr><tr><td>Mission</td><td>"To simplify and improve how residents, businesses, and government interact by using shared technology, modern design, and collaborative delivery models."</td><td><a href="https://www.mymzansi.gov.za/roadmap/mission" target="_blank" rel="noopener noreferrer">Mission <span aria-hidden="true">↗</span></a></td></tr></tbody>
+  </table></div>
+
+<h2 id="principles">Principles</h2>
+<p>The roadmap names three tiers of principle. The first is not a technology framework — it predates this programme by three decades.</p>
+
+<h3>Batho Pele</h3>
+<p>South Africa's public-service doctrine since 1997 — "People First." The roadmap states plainly that these values are "the foundation for this roadmap": <b>Accessibility</b>, <b>Upholding Responsiveness</b>, <b>Promoting Accountability</b>.</p>
+
+<h3>Service principles</h3>
+<p>How Digital Public Infrastructure is meant to behave in practice: <b>Interoperability</b> (open standards, no vendor lock-in), <b>Decentralised Delivery and Design</b>, <b>Privacy and Security by Design</b>, <b>Simplicity</b>, <b>Scalability and Modularity</b>, <b>Agile. Incremental. Iterative.</b>, <b>Agency. Empowering.</b>, <b>Reusability</b>.</p>
+
+<h3>Universal principles</h3>
+<p>Openness, inclusivity, security and interoperability "for all users" — plus explicit adoption of the <b>DPI Safeguards</b> framework. Full text: <a href="https://www.mymzansi.gov.za/roadmap/principles" target="_blank" rel="noopener noreferrer">Principles <span aria-hidden="true">↗</span></a>.</p>
+
+<aside class="callout note"><b class="ct">The bar, in their own words</b><div><p>One line from the Assumptions page is worth quoting directly, because it states an inclusion bar most technology programmes never write down: interfaces should suit <b>"users with varying levels of digital literacy, including accessible, intuitive interfaces suitable for all, such as 'granny operations.'"</b> Source: <a href="https://www.mymzansi.gov.za/roadmap/assumptions" target="_blank" rel="noopener noreferrer">Assumptions <span aria-hidden="true">↗</span></a>.</p></div></aside>
+
+<h2 id="dpi">Digital Public Infrastructure</h2>
+<p>"DPI refers to foundational technology building blocks — such as identity, data exchange, payments, and trusted digital channels — that enable secure, inclusive, and scalable government services." The roadmap names its influences directly: <b>India, Brazil, and Estonia</b> — the same three precedents this system's earlier research drew on independently.</p>
+
+<h2 id="phases">Phases</h2>
+<div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Phase</th><th>Focus</th></tr></thead>
+    <tbody><tr><td>Phase 1 · 2025–2027</td><td>Social protection, digital identity, unified digital channels. Pilot the Digital ID, Data Exchange, and first government payment integrations.</td></tr><tr><td>Phase 2 · 2028–2030</td><td>Scale Phase 1 technologies across healthcare, education, business services, and beyond.</td></tr></tbody>
+  </table></div>
+<p>Four initiatives carry Phase 1: <b>Digital Identity</b>, <b>Data Exchange</b>, <b>Digital Payments</b>, <b>Trusted Digital Channels</b>. Full breakdown: <a href="https://www.mymzansi.gov.za/roadmap/phases" target="_blank" rel="noopener noreferrer">Phases <span aria-hidden="true">↗</span></a> · <a href="https://www.mymzansi.gov.za/roadmap/initiatives" target="_blank" rel="noopener noreferrer">Initiatives <span aria-hidden="true">↗</span></a>.</p>
+
+<h2 id="mapping">Where this system tries to hold up its end</h2>
+<p>Naming a principle is not the same as satisfying it. This table is this system's own claim, checked against something concrete rather than left as a slogan — follow the links and judge for yourself.</p>
+<div class="tw"><table style="min-width:900px">
+    <thead><tr><th>Their principle</th><th>Tier</th><th>What it means</th><th>What holds up this end of it</th></tr></thead>
+    <tbody><tr><td><b>Accessibility</b></td><td>Batho Pele</td><td>Services must be easy to access and understand, especially for vulnerable populations.</td><td>The WCAG 2.1 AA audit — 106 automated checks, six failures found and corrected, all published. <a href="../guidelines/accessibility/">→</a></td></tr><tr><td><b>Upholding Responsiveness</b></td><td>Batho Pele</td><td>A government that listens to and promptly addresses public needs.</td><td>"The system failed, not the person" — error copy that names the system as the point of failure, never the citizen. <a href="../guidelines/content/#errors">→</a></td></tr><tr><td><b>Interoperability</b></td><td>Service principle</td><td>Open standards, integration across platforms, open-source to prevent vendor lock-in.</td><td>Tokens published in the open W3C DTCG format, with zero dependencies and no vendor lock-in by design. <a href="../about/#build">→</a></td></tr><tr><td><b>Privacy and Security by Design</b></td><td>Service principle</td><td>Privacy protections embedded from the outset, not added later.</td><td>Consent surfaces state what will <i>not</i> be shared, not only what will — an explicit requirement, not a default. <a href="../guidelines/content/#consent">→</a></td></tr><tr><td><b>Simplicity</b></td><td>Service principle</td><td>Reducing complexity, enhancing usability, streamlining process.</td><td>Body text set at 16px rather than the 14px most mobile systems default to, and a reading age kept deliberately low. <a href="../guidelines/typography/#minimums">→</a></td></tr><tr><td><b>Scalability and Modularity</b></td><td>Service principle</td><td>Modular, reusable components that support growth without disrupting what exists.</td><td>The three-layer token architecture — palette → theme/semantic → component — so one edit updates every platform. <a href="../tokens/">→</a></td></tr><tr><td><b>Agile. Incremental. Iterative.</b></td><td>Service principle</td><td>Continuous improvement delivered in small, adaptive cycles.</td><td>A validator that runs on every change and flags anything passing within 10% of its threshold, before it becomes a defect. <a href="../guidelines/accessibility/#enforced">→</a></td></tr><tr><td><b>Reusability</b></td><td>Service principle</td><td>Designing components that can be leveraged across multiple contexts.</td><td>One <code>tokens.json</code> generates CSS, React Native, Tailwind, Swift, Kotlin and Dart from a single edit. <a href="../#using">→</a></td></tr><tr><td><b>&quot;Granny operations&quot;</b></td><td>People assumption</td><td>Interfaces accessible and intuitive for users with varying digital literacy.</td><td>Tiered assurance that downgrades capability rather than blocking someone outright when a fingerprint will not read. <a href="../guidelines/colour/#maize">→</a></td></tr></tbody>
+  </table></div>
+
+<h2 id="governance">Governance</h2>
+<p>MyMzansi is a project under <b>Operation Vulindlela</b>, led by the Presidency and coordinated with the Department of Communications and Digital Technologies (DCDT) and National Treasury. An inter-ministerial committee and an inter-departmental working group oversee it. None of that governance extends to this repository — see <a href="../about/">About &amp; status</a>.</p>
+
+<div style="text-align:center;padding:var(--s-lg) 0">
+  <a class="card" href="https://www.mymzansi.gov.za/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;max-width:360px">
+    <span class="card-eyebrow">Official programme</span>
+    <h3>mymzansi.gov.za</h3>
+    <p>Purpose, roadmap, phases, initiatives, and how to get involved — from the source.</p>
+    <span class="card-go">Visit ↗</span>
+  </a>
+</div>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live <a href="https://www.mymzansi.gov.za/" target="_blank" rel="noopener noreferrer">mymzansi.gov.za <span aria-hidden="true">↗</span></a> stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code> · see how it maps to the <a href="../programme/">official programme</a>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../guidelines/colour/">Colour</a></li><li><a href="../guidelines/identity-mark/">Identity mark</a></li><li><a href="../guidelines/typography/">Typography</a></li><li><a href="../guidelines/language/">Language</a></li><li><a href="../guidelines/space/">Space &amp; layout</a></li><li><a href="../guidelines/iconography/">Iconography</a></li><li><a href="../guidelines/motion/">Motion</a></li><li><a href="../guidelines/accessibility/">Accessibility</a></li><li><a href="../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../programme/">The MyMzansi programme</a></li>
+        <li><a href="../roadmap/">Roadmap</a></li>
+        <li><a href="../tokens/">All tokens</a></li>
+        <li><a href="../about/">About &amp; status</a></li>
+        <li><a href="../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeToggle');
+  var mq=window.matchMedia('(prefers-color-scheme: dark)');
+  function isDark(){var t=root.getAttribute('data-theme');return t==='dark'||(t!=='light'&&mq.matches);}
+  function sync(){btn.setAttribute('aria-checked',String(isDark()));}
+  btn.addEventListener('click',function(){
+    var next=isDark()?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('mz-theme',next);}catch(e){}
+    sync();
+  });
+  // Follow the system while no explicit choice has been stored.
+  mq.addEventListener('change',function(){if(!root.getAttribute('data-theme'))sync();});
+  sync();
+})();
+</script>
+</body>
+</html>
