@@ -1,0 +1,5 @@
+node_modules/
+.DS_Store
+
+# dist/ is committed deliberately: designers, other agents and non-JS
+# platforms need the outputs without running a toolchain.

@@ -1,0 +1,31 @@
+{
+  "name": "mymzansi-brand",
+  "type": "module",
+  "description": "MyMzansi design tokens (tokens.json), generated platform outputs (dist/), and WCAG 2.1 validation.",
+  "scripts": {
+    "build": "node scripts/build-tokens.mjs",
+    "docs": "node scripts/build-docs.mjs",
+    "validate": "node scripts/validate-tokens.mjs",
+    "check": "npm run build && npm run docs && npm run validate"
+  },
+  "version": "1.0.0",
+  "main": "./dist/js/tokens.js",
+  "types": "./dist/js/tokens.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/js/tokens.d.ts",
+      "default": "./dist/js/tokens.js"
+    },
+    "./tokens.json": "./tokens.json",
+    "./css": "./dist/css/tokens.css",
+    "./tailwind": "./dist/tailwind/tailwind.config.js"
+  },
+  "files": [
+    "dist",
+    "tokens.json",
+    "BRAND.md",
+    "REQUIREMENTS.md",
+    "README.md"
+  ],
+  "sideEffects": false
+}

@@ -1,0 +1,241 @@
+/* GENERATED FILE. Do not hand-edit — edit tokens.json and run `node scripts/build-tokens.mjs`. */
+
+:root {
+  /* color.palette — theme-invariant primitives. Do not use directly in components; see --theme-* / --semantic-*. */
+  --color-ink: #16191A;
+  --color-ink-2: #4A5450;
+  --color-ink-3: #646D68;
+  --color-bone: #F5F3ED;
+  --color-bone-2: #EAE6DC;
+  --color-white: #FFFFFF;
+  --color-indigo: #1B2A4A;
+  --color-indigo-2: #2C3F66;
+  --color-indigo-lt: #93A9D6;
+  --color-aloe: #2F6B3A;
+  --color-aloe-lt: #3A7D44;
+  --color-aloe-br: #58B06A;
+  --color-maize: #FBC549;
+  --color-ochre: #A8542E;
+  --color-ochre-br: #DE8A5E;
+  --color-crit: #B3271E;
+  --color-crit-br: #E4756A;
+  --color-caution: #8F5E0A;
+  --color-caution-br: #E9BC55;
+  --color-info: #2C5D8A;
+  --color-info-br: #7FAAD4;
+  --color-night: #12161F;
+  --color-night-2: #1A2030;
+  --color-night-3: #3A4557;
+  --color-chalk: #ECEAE4;
+  --color-chalk-2: #A8AFB8;
+  --color-chalk-3: #8A929B;
+  --color-rule: #E4DFD4;
+
+  /* font.family */
+  --font-sans: Montserrat, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  /* font.weight */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 800;
+
+  /* dimension.space */
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 60px;
+
+  /* dimension.radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 999px;
+
+  /* dimension.touch */
+  --touch-min: 44px;
+  --touch-min-spaced: 48px;
+
+  /* dimension.icon */
+  --icon-size-sm: 18px;
+  --icon-size-md: 20px;
+  --icon-size-lg: 24px;
+  --icon-size-xl: 28px;
+
+  /* dimension.rail */
+  --rail-status: 4px;
+
+  /* dimension.border */
+  --border-hairline: 1px;
+  --border-focus: 2px;
+
+  /* motion.duration */
+  --duration-instant: 100ms;
+  --duration-quick: 180ms;
+  --duration-base: 280ms;
+  --duration-slow: 380ms;
+  --duration-deliberate: 1100ms;
+
+  /* motion.easing */
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.3, 1);
+  --ease-overshoot: cubic-bezier(0.2, 1.5, 0.4, 1);
+  --ease-exit: cubic-bezier(0.4, 0, 1, 1);
+
+  /* motion.stagger */
+  --stagger-interval: 45ms;
+  --stagger-maxTotal: 300ms;
+
+  /* elevation — offset-x offset-y blur spread color */
+  --elevation-none: 0 0 0 0 #00000000;
+  --elevation-card: 0 1px 3px 0 #0000001F;
+  --elevation-lift: 0 8px 24px 0 #00000024;
+
+  /* color.semantic — meaning-carrying. Switches automatically with theme where a -dark variant exists. */
+  --semantic-success: #2F6B3A;
+  --semantic-critical: #B3271E;
+  --semantic-info: #2C5D8A;
+  --semantic-caution-text: #8F5E0A;
+  --semantic-caution-fill: #FBC549;
+  --semantic-restricted: #A8542E;
+
+  /* color.theme — light (default) */
+  --theme-bg: #F5F3ED;
+  --theme-surface: #FFFFFF;
+  --theme-surface-sunk: #EAE6DC;
+  --theme-surface-invert: #1B2A4A;
+  --theme-text: #16191A;
+  --theme-text-2: #4A5450;
+  --theme-text-3: #646D68;
+  --theme-text-invert: #FFFFFF;
+  --theme-border: #E4DFD4;
+  --theme-accent: #2F6B3A;
+  --theme-accent-warm: #A8542E;
+  --theme-anchor: #1B2A4A;
+  --theme-anchor-fill: #1B2A4A;
+  --theme-on-anchor: #FFFFFF;
+}
+
+/* Dark theme: follows system preference unless overridden by [data-theme]. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --theme-bg: #12161F;
+    --theme-surface: #1A2030;
+    --theme-surface-sunk: #12161F;
+    --theme-surface-invert: #ECEAE4;
+    --theme-text: #ECEAE4;
+    --theme-text-2: #A8AFB8;
+    --theme-text-3: #8A929B;
+    --theme-text-invert: #12161F;
+    --theme-border: #3A4557;
+    --theme-accent: #58B06A;
+    --theme-accent-warm: #DE8A5E;
+    --theme-anchor: #93A9D6;
+    --theme-anchor-fill: #1B2A4A;
+    --theme-on-anchor: #ECEAE4;
+    --semantic-success: #58B06A;
+    --semantic-critical: #E4756A;
+    --semantic-info: #7FAAD4;
+  }
+}
+
+:root[data-theme="dark"] {
+  --theme-bg: #12161F;
+  --theme-surface: #1A2030;
+  --theme-surface-sunk: #12161F;
+  --theme-surface-invert: #ECEAE4;
+  --theme-text: #ECEAE4;
+  --theme-text-2: #A8AFB8;
+  --theme-text-3: #8A929B;
+  --theme-text-invert: #12161F;
+  --theme-border: #3A4557;
+  --theme-accent: #58B06A;
+  --theme-accent-warm: #DE8A5E;
+  --theme-anchor: #93A9D6;
+  --theme-anchor-fill: #1B2A4A;
+  --theme-on-anchor: #ECEAE4;
+  --semantic-success: #58B06A;
+  --semantic-critical: #E4756A;
+  --semantic-info: #7FAAD4;
+}
+
+/* typography — composite type styles. Font sizes are in rem so they scale with OS/browser text-size settings. */
+.text-display {
+  font-family: var(--font-sans);
+  font-size: 2.125rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.text-title-1 {
+  font-family: var(--font-sans);
+  font-size: 1.625rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.text-title-2 {
+  font-family: var(--font-sans);
+  font-size: 1.3125rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+.text-title-3 {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.text-body-lg {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+.text-body {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+.text-body-emph {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+.text-body-sm {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.text-caption {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.45;
+}
+.text-label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.text-numeric {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
