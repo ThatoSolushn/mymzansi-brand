@@ -65,8 +65,19 @@ export function stylesheet() {
   --dur:${t('motion.duration.base')};
   --ease:cubic-bezier(${t('motion.easing.standard').join(',')});
 
-  --font:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --font:"Montserrat",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+
+/* Brand face, self-hosted (same-origin, R6-clean). One variable file covers
+   every weight the site uses. font-display swap so text paints immediately in
+   the system fallback and re-renders — never a blank flash on a slow link. */
+@font-face{
+  font-family:"Montserrat";
+  src:url("montserrat-var.woff2") format("woff2");
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:${t('color.theme.dark.bg')};
@@ -110,8 +121,13 @@ a[target="_blank"] span[aria-hidden]{opacity:.7}
 .band i:nth-child(2){flex:2;background:var(--warm)}
 .band i:nth-child(3){flex:1;background:var(--accent)}
 
-/* masthead */
+/* masthead. Sticky ONLY where the nav sits on one row (≥760px) so navigation
+   stays reachable on long pages; below that the nav wraps tall, so it scrolls
+   away normally rather than eating a phone's viewport. The 6px identity band
+   scrolls under it; a crisp 1px edge (not a blurred shadow — budget) separates
+   the bar from content once stuck. */
 .masthead{background:var(--anchor);color:var(--onAnchor)}
+@media(min-width:760px){.masthead{position:sticky;top:0;z-index:50;box-shadow:0 1px 0 rgba(0,0,0,.22)}}
 .mast-in{max-width:1180px;margin:0 auto;padding:var(--s-sm) var(--s-md);display:flex;align-items:center;gap:var(--s-md);flex-wrap:wrap}
 .brand{display:flex;flex-direction:row;align-items:center;gap:10px;text-decoration:none;color:inherit}
 .brand .mzmark-mono{flex:none}
@@ -127,7 +143,7 @@ a[target="_blank"] span[aria-hidden]{opacity:.7}
 @media(min-width:960px){.shell.with-side{grid-template-columns:232px minmax(0,1fr);gap:var(--s-xl)}}
 aside.side{display:none}
 @media(min-width:960px){
-  aside.side{display:block;position:sticky;top:var(--s-md);align-self:start;padding-top:var(--s-xl)}
+  aside.side{display:block;position:sticky;top:calc(var(--s-2xl) + var(--s-md));align-self:start;padding-top:var(--s-xl)}
   aside.side .sect{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin:0 0 var(--s-xs)}
   aside.side ul{list-style:none;margin:0 0 var(--s-md);padding:0;display:flex;flex-direction:column;gap:1px}
   aside.side a{display:block;padding:7px 10px;border-radius:var(--r-sm);text-decoration:none;color:var(--ink2);font-size:.88rem;border-left:2px solid transparent}
@@ -140,7 +156,7 @@ main{min-width:0;padding-top:var(--s-xl)}
 .ph{border-bottom:2px solid var(--ink);padding-bottom:var(--s-md);margin-bottom:var(--s-lg)}
 .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--warm);margin:0 0 10px;font-weight:600}
 h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.028em;line-height:1.05;margin:0 0 var(--s-sm);max-width:20ch}
-h2{font-size:clamp(1.35rem,3vw,1.7rem);font-weight:800;letter-spacing:-.02em;margin:var(--s-xl) 0 var(--s-xs);scroll-margin-top:var(--s-md)}
+h2{font-size:clamp(1.35rem,3vw,1.7rem);font-weight:800;letter-spacing:-.02em;margin:var(--s-xl) 0 var(--s-xs);scroll-margin-top:calc(var(--s-2xl) + var(--s-md))}
 h3{font-size:1.03rem;font-weight:700;margin:var(--s-lg) 0 var(--s-xs)}
 p,ul,ol{max-width:70ch}
 p{margin:0 0 var(--s-sm)}
@@ -188,6 +204,12 @@ td:first-child{color:var(--ink)}
 .plat dd{margin:0;min-width:0;overflow-wrap:anywhere}
 .ratios{display:flex;gap:12px;margin-top:8px;font-size:11px;color:var(--ink3);font-family:var(--mono)}
 .ratios b{color:var(--ink2)}
+
+/* brand moment — the identity mark as a composed, captioned element rather
+   than a graphic floating in dead space. */
+.brand-moment{display:flex;flex-direction:column;align-items:center;gap:var(--s-sm);margin:var(--s-lg) 0;padding:var(--s-lg) 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.brand-moment figcaption{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--ink3);text-align:center}
+.brand-moment figcaption a{font-weight:600}
 
 /* cards */
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--s-sm);margin:var(--s-md) 0}
@@ -382,14 +404,14 @@ td:first-child{color:var(--ink)}
 .cref{display:grid;grid-template-columns:1fr;gap:var(--s-lg)}
 @media(min-width:900px){.cref{grid-template-columns:180px minmax(0,1fr);gap:var(--s-xl)}}
 .cref-nav{position:static}
-@media(min-width:900px){.cref-nav{position:sticky;top:var(--s-md);align-self:start;max-height:calc(100vh - var(--s-lg));overflow:auto}}
+@media(min-width:900px){.cref-nav{position:sticky;top:calc(var(--s-2xl) + var(--s-md));align-self:start;max-height:calc(100vh - var(--s-lg));overflow:auto}}
 .cref-nav p.sect{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin:0 0 var(--s-xs)}
 .cref-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1px}
 .cref-nav a{display:block;padding:7px 10px;border-radius:var(--r-sm);text-decoration:none;color:var(--ink2);font-size:.88rem;border-left:2px solid transparent}
 .cref-nav a:hover{background:var(--surface);color:var(--ink)}
 .cref-nav a.on{border-left-color:var(--accent);color:var(--ink);font-weight:700;background:var(--surface)}
 .cref-main{min-width:0}
-.cref-sec{padding-top:var(--s-md);margin-bottom:var(--s-xl);scroll-margin-top:var(--s-md)}
+.cref-sec{padding-top:var(--s-md);margin-bottom:var(--s-xl);scroll-margin-top:calc(var(--s-2xl) + var(--s-md))}
 .cref-sec h2{margin-top:0}
 .cref-head{display:flex;align-items:center;gap:var(--s-sm);flex-wrap:wrap;margin:var(--s-xl) 0 var(--s-xs)}
 .cref-head h2{margin:0}

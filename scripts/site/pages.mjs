@@ -35,7 +35,10 @@ function home() {
     body: `
 ${callout(`<p>This is <b>unofficial concept work</b>. It is not endorsed by or affiliated with the Presidency's Digital Services Unit, the Department of Communications and Digital Technologies, or any organ of the South African state. Tokens marked <b>EXISTING</b> were read from the live ${extLink(MZ + '/', 'mymzansi.gov.za')} stylesheet; everything else is a proposal for discussion.</p>`, { tone: 'warn', title: 'Please read first' })}
 
-<div style="display:flex;justify-content:center;padding:var(--s-md) 0 var(--s-lg)">${markTri({ size: 132, count: 6 })}</div>
+<figure class="brand-moment">
+  ${markTri({ size: 120, count: 6 })}
+  <figcaption>The identity mark — method, not motif. <a href="guidelines/identity-mark/">How it is built →</a></figcaption>
+</figure>
 
 <h2 id="what">What this is</h2>
 <p>A single source of truth — <code>tokens.json</code>, in the W3C Design Tokens format — plus the rules that govern how those tokens may be used, and the evidence behind each rule. Every page on this site is generated from that file, so the documentation cannot drift from the system.</p>
@@ -800,14 +803,12 @@ ${table(
 <h2 id="governance">Governance</h2>
 <p>MyMzansi is a project under <b>Operation Vulindlela</b>, led by the Presidency and coordinated with the Department of Communications and Digital Technologies (DCDT) and National Treasury. An inter-ministerial committee and an inter-departmental working group oversee it. None of that governance extends to this repository — see <a href="../about/">About &amp; status</a>.</p>
 
-<div style="text-align:center;padding:var(--s-lg) 0">
-  <a class="card" href="${MZ}/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;max-width:360px">
+<a class="card" href="${MZ}/" target="_blank" rel="noopener noreferrer" style="max-width:340px;margin-top:var(--s-sm)">
     <span class="card-eyebrow">Official programme</span>
     <h3>mymzansi.gov.za</h3>
     <p>Purpose, roadmap, phases, initiatives, and how to get involved — from the source.</p>
     <span class="card-go">Visit ↗</span>
   </a>
-</div>
 `,
   });
 }
