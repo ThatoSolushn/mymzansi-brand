@@ -160,8 +160,11 @@ Colour reinforces, never informs alone (R3): the label text always carries the
 meaning.
 
 **Tones:** `neutral` · `good` · `limit`. The `limit` tone uses maize as a bright
-ground with dark ink on top (R2), pinned to dark ink in **both** themes so it
-never becomes a pale-on-yellow pairing (8.9:1).
+ground (R2) with the `on-caution-fill` token (ink) on top — the only permitted
+foreground on the joy colour, held in **both** themes so it never becomes a
+pale-on-yellow pairing (11.10:1). The ink is a named semantic token, not an ad
+hoc colour: a component naming `sem.onCautionFill` cannot drift from the ground
+it is paired with.
 
 ```tsx
 <Badge tone="good">Visa approved</Badge>   // web
@@ -308,6 +311,27 @@ state that only says "nothing here" leaves the person stuck.
 
 RN takes the same shape; `icon` is a MaterialCommunityIcons name and `action`
 carries an `onPress`.
+
+## Entrance & stagger
+
+Not a visible component — the shared choreography for content arriving on a
+screen, so rule 3's stagger cap has one place it is spent rather than being
+re-typed per screen. A list or a stack of cards rises 14px and fades on the
+`base` duration with the `standard` easing; each item's delay is
+`index × stagger.interval`, capped at `stagger.maxTotal` (300 ms) so item 8 and
+item 20 start together instead of trailing forever. A single celebratory element
+(a "verified" mark) scales 0.9 → 1 on a soft spring — never from 0, because
+nothing in the real world appears from nothing. Both collapse to an instant,
+in-place appearance under reduced motion (R9).
+
+```tsx
+// React Native (components/motion) — one item per staggered child
+<Appear index={i}><Card>{/* … */}</Card></Appear>
+<Pop><VerifiedMark /></Pop>
+```
+
+The delays and curves come entirely from the `motion` tokens; a screen never
+names a millisecond value.
 
 ---
 

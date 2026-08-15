@@ -205,6 +205,8 @@ Maize **cannot be corrected by darkening**. To reach 3:1 on a light ground it mu
 
 > **RULE (R2).** In light theme, maize is a **ground, never a mark**. It carries ink text on top of it, and it sits against indigo. It is never text, never an icon, never a border, and never the sole indicator of state. In dark theme it is unrestricted.
 
+The one permitted foreground on maize — ink, at 11.10:1 — is the named semantic token **`on-caution-fill`**. A component tinting a maize caution ground (e.g. the `limit` Badge) references `semantic.on-caution-fill` for its text and icons rather than reaching for a raw ink colour, so the pairing in this table is the one the code actually uses and cannot silently drift.
+
 **Worked example — the assurance meter.** A maize segment against a light track is 1.20:1: the filled state is effectively invisible, a direct §1.4.11 failure. Two fixes, apply both:
 
 1. Put the meter on an **indigo** track (8.93:1).
