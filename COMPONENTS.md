@@ -19,10 +19,10 @@ carries the same primitives and variant vocabulary.
 
 | Platform | Stack | Icons | Location | Browse |
 |---|---|---|---|---|
-| Web | React + Tailwind v4 + Radix | Fluent (`@fluentui/react-icons`) | `packages/web/src/components/ui` | Storybook |
-| React Native | Expo (SDK 54) + Reanimated | MaterialCommunityIcons (Fluent pending) | `mymzansi-app/components` | `/dev-components` route |
+| Web | React + Tailwind v4 + Radix | Fluent via `@fluentui/react-icons` | `packages/web/src/components/ui` | Storybook |
+| React Native | Expo (SDK 54) + Reanimated | Fluent via `react-native-svg` | `mymzansi-app/components` | `/dev-components` route |
 
-Icons are referenced by a MyMzansi name (see [the Icons page](https://thatosolushn.github.io/mymzansi-brand/icons/)); on web an `Icon` wrapper maps that name to the Fluent component, so components never name a raw glyph.
+Both platforms reference an icon by its MyMzansi name (see [the Icons page](https://thatosolushn.github.io/mymzansi-brand/icons/)) through an `Icon` wrapper — web maps the name to a Fluent React component, React Native renders the same curated SVG registry via `react-native-svg`. Components never name a raw glyph. Third-party brand marks (Apple/Google Wallet) are the one documented exception and stay on the platform icon font.
 
 The two libraries deliberately share one variant vocabulary, so a design
 reviewed on one platform reads the same on the other. Where an API differs,
