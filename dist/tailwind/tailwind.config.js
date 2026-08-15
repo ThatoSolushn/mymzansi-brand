@@ -40,6 +40,7 @@ export default {
           info: 'var(--semantic-info)',
           cautionText: 'var(--semantic-caution-text)',
           cautionFill: 'var(--semantic-caution-fill)',
+          onCautionFill: 'var(--semantic-on-caution-fill)',
           restricted: 'var(--semantic-restricted)',
         },
         theme: {

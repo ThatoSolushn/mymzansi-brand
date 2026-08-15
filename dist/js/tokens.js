@@ -76,6 +76,7 @@ export const semantic = {
   "successDark": "#58B06A",
   "cautionText": "#8F5E0A",
   "cautionFill": "#FBC549",
+  "onCautionFill": "#16191A",
   "cautionDark": "#E9BC55",
   "critical": "#B3271E",
   "criticalDark": "#E4756A",

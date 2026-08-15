@@ -2,7 +2,7 @@
 
 # MyMzansi Style Dictionary
 
-**Version** 1.0.0 · **Status** proposal · **Tokens** 134 · **Generated** 2026-08-15
+**Version** 1.0.0 · **Status** proposal · **Tokens** 135 · **Generated** 2026-08-15
 
 > Unofficial concept work. Not endorsed by the Presidency Digital Services Unit.
 
@@ -97,7 +97,8 @@ Every token, its value, and what it is called on each platform. Source of truth:
 | `success` | `#2F6B3A` | `color.palette.aloe` |  |
 | `success-dark` | `#58B06A` | `color.palette.aloe-br` |  |
 | `caution-text` | `#8F5E0A` | `color.palette.caution` |  |
-| `caution-fill` | `#FBC549` | `color.palette.maize` | Fill only. Pair with color.palette.ink on top (11.10:1). |
+| `caution-fill` | `#FBC549` | `color.palette.maize` | Fill only. Pair with on-caution-fill on top (11.10:1). |
+| `on-caution-fill` | `#16191A` | `color.palette.ink` | The ink for text/icons on caution-fill (maize). 11.10:1 — the only permitted foreground on the joy colour, which is a ground, never a text colour. |
 | `caution-dark` | `#E9BC55` | `color.palette.caution-br` |  |
 | `critical` | `#B3271E` | `color.palette.crit` |  |
 | `critical-dark` | `#E4756A` | `color.palette.crit-br` |  |

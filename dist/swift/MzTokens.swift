@@ -42,6 +42,7 @@ enum MzSemanticColor {
   static let infoDark = Color(red: 0.498, green: 0.6667, blue: 0.8314)
   static let cautionText = Color(red: 0.5608, green: 0.3686, blue: 0.0392)
   static let cautionFill = Color(red: 0.9843, green: 0.7725, blue: 0.2863)
+  static let onCautionFill = Color(red: 0.0863, green: 0.098, blue: 0.102)
   static let restricted = Color(red: 0.6588, green: 0.3294, blue: 0.1804)
 
   static func resolved(_ colorScheme: ColorScheme) -> Resolved { colorScheme == .dark ? dark : light }

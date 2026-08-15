@@ -2,7 +2,7 @@
 
 export type ThemeMode = "light" | "dark";
 export type ThemeColor = "bg" | "surface" | "surfaceSunk" | "surfaceInvert" | "text" | "text2" | "text3" | "textInvert" | "border" | "accent" | "accentWarm" | "anchor" | "anchorFill" | "onAnchor";
-export type SemanticColor = "success" | "successDark" | "cautionText" | "cautionFill" | "cautionDark" | "critical" | "criticalDark" | "info" | "infoDark" | "restricted";
+export type SemanticColor = "success" | "successDark" | "cautionText" | "cautionFill" | "onCautionFill" | "cautionDark" | "critical" | "criticalDark" | "info" | "infoDark" | "restricted";
 export type PaletteColor = "ink" | "ink2" | "ink3" | "bone" | "bone2" | "white" | "indigo" | "indigo2" | "indigoLt" | "aloe" | "aloeLt" | "aloeBr" | "maize" | "ochre" | "ochreBr" | "crit" | "critBr" | "caution" | "cautionBr" | "info" | "infoBr" | "night" | "night2" | "night3" | "chalk" | "chalk2" | "chalk3" | "rule";
 export type SpaceKey = "xxxs" | "xxs" | "xs" | "sm" | "md" | "lg" | "xl" | "xxl";
 export type RadiusKey = "sm" | "md" | "lg" | "full";

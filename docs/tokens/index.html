@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>All tokens — MyMzansi Design System</title>
-<meta name="description" content="The complete dictionary — 134 tokens, each with its value, its alias, and the identifier it becomes on every platform.">
+<meta name="description" content="The complete dictionary — 135 tokens, each with its value, its alias, and the identifier it becomes on every platform.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMCIgZmlsbD0iIzFCMkE0QSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjkuOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNS4xNSAzLjczIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDMyIDMyKSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjE5LjUxIiBmaWxsPSJub25lIiBzdHJva2U9IiNGQkM1NDkiIHN0cm9rZS13aWR0aD0iMi4xMzMzMzMzMzMzMzMzMzMzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjguODkgNi40NCIgdHJhbnNmb3JtPSJyb3RhdGUoNDcgMzIgMzIpIi8+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjkuMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuMTYgMTAuOTgiIHRyYW5zZm9ybT0icm90YXRlKDk0IDMyIDMyKSIvPjwvc3ZnPg==">
 <link rel="stylesheet" href="../assets/site.css?v=886e1f48">
@@ -49,14 +49,14 @@
   <div class="ph">
     <p class="eyebrow">Reference</p>
     <h1>All tokens</h1>
-    <p class="lede">The complete dictionary — 134 tokens, each with its value, its alias, and the identifier it becomes on every platform.</p>
+    <p class="lede">The complete dictionary — 135 tokens, each with its value, its alias, and the identifier it becomes on every platform.</p>
   </div>
   
 <p>Source of truth: <code>tokens.json</code>. Everything else is generated. The same catalogue is available as <a href="../TOKENS.md">Markdown</a> so token changes appear as readable diffs in review.</p>
 
 <label for="q" class="count">Filter by name, value or description</label><br>
 <input id="q" class="filter" type="search" placeholder="e.g. aloe, motion, 44px, maize" autocomplete="off">
-<p class="count" id="n">134 tokens</p>
+<p class="count" id="n">135 tokens</p>
 
 <div class="tw"><table style="min-width:900px" id="tt">
   <thead><tr><th>Token</th><th>Value</th><th>Alias</th><th>CSS</th><th>JS</th><th>Notes</th></tr></thead>
@@ -473,13 +473,20 @@
       <td><code>--color-semantic-caution-text</code></td>
       <td><code>color.semantic.cautionText</code></td>
       <td></td>
-    </tr><tr data-k="color.semantic.caution-fill #fbc549 fill only. pair with color.palette.ink on top (11.10:1).">
+    </tr><tr data-k="color.semantic.caution-fill #fbc549 fill only. pair with on-caution-fill on top (11.10:1).">
       <td><code>color.semantic.caution-fill</code></td>
       <td><span class="dot" style="background:#FBC549"></span><code>#FBC549</code></td>
       <td><code>color.palette.maize</code></td>
       <td><code>--color-semantic-caution-fill</code></td>
       <td><code>color.semantic.cautionFill</code></td>
-      <td>Fill only. Pair with color.palette.ink on top (11.10:1).</td>
+      <td>Fill only. Pair with on-caution-fill on top (11.10:1).</td>
+    </tr><tr data-k="color.semantic.on-caution-fill #16191a the ink for text/icons on caution-fill (maize). 11.10:1 — the only permitted foreground on the joy colour, which is a ground, never a text colour.">
+      <td><code>color.semantic.on-caution-fill</code></td>
+      <td><span class="dot" style="background:#16191A"></span><code>#16191A</code></td>
+      <td><code>color.palette.ink</code></td>
+      <td><code>--color-semantic-on-caution-fill</code></td>
+      <td><code>color.semantic.onCautionFill</code></td>
+      <td>The ink for text/icons on caution-fill (maize). 11.10:1 — the only permitted foreground on the joy colour, which is a ground, never a text colour.</td>
     </tr><tr data-k="color.semantic.caution-dark #e9bc55 ">
       <td><code>color.semantic.caution-dark</code></td>
       <td><span class="dot" style="background:#E9BC55"></span><code>#E9BC55</code></td>

@@ -44,6 +44,7 @@ class MzSemanticColor {
   static const infoDark = Color(0xFF7FAAD4);
   static const cautionText = Color(0xFF8F5E0A);
   static const cautionFill = Color(0xFFFBC549);
+  static const onCautionFill = Color(0xFF16191A);
   static const restricted = Color(0xFFA8542E);
 
   static const light = MzSemanticColorResolved(success: successLight, critical: criticalLight, info: infoLight);

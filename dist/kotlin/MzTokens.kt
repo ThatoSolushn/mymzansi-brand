@@ -51,6 +51,7 @@ object MzSemanticColor {
   val infoDark = Color(0xFF7FAAD4)
   val cautionText = Color(0xFF8F5E0A)
   val cautionFill = Color(0xFFFBC549)
+  val onCautionFill = Color(0xFF16191A)
   val restricted = Color(0xFFA8542E)
 
   data class Resolved(
