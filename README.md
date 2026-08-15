@@ -28,6 +28,8 @@ npm run check      # build + validate. No dependencies, no install step.
 tokens.json                    ← SINGLE SOURCE OF TRUTH. Edit only this.
 BRAND.md                       ← Design rules, agent directives, full WCAG audit
 REQUIREMENTS.md                ← What must exist: 137 requirements with acceptance criteria
+COMPONENTS.md                  ← Component contract: variants, states, a11y, per-platform code
+packages/web/                  ← Web component library (React + Tailwind + Radix). Its own deps.
 scripts/build-tokens.mjs       ← Platform generator. Zero dependencies.
 scripts/build-docs.mjs         ← Markdown catalogue generator. Zero dependencies.
 scripts/build-site.mjs         ← Website generator. Zero dependencies.

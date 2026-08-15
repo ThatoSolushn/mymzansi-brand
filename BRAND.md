@@ -454,6 +454,11 @@ The verification ring sweep animates `stroke-dashoffset`, which is not a composi
 
 ## 9. Component and pattern guidance
 
+> These are the rules a component must obey. The components themselves —
+> anatomy, states, accessibility contract, and working code per platform —
+> are documented in **[COMPONENTS.md](COMPONENTS.md)**, which is the source of
+> truth for the library. This section is the rationale that library implements.
+
 ### 9.1 Surfaces
 
 Cards lift off a **bone** ground as **white** surfaces. Hierarchy comes from the surface change, not from shadows the cheap phone has to paint. Prefer a **left status rail** (`dimension.rail.status`, 4px) over icon circles in lists.
@@ -466,8 +471,9 @@ Cards lift off a **bone** ground as **white** surfaces. Hierarchy comes from the
 | Secondary | transparent, accent border | accent | Alternatives |
 | Plain | surface, border | `text-2` | Dismiss, "not now" |
 | Destructive | `critical` | white | Irreversible only |
+| Destructive-outline | transparent, `critical` border | `critical` | Leads somewhere consequential, but is not the commit action — e.g. "Sign out", "Report a lost phone". Reserves the solid `Destructive` fill for the actual "stop it now" action. |
 
-Buttons size to content (R4). A button label is never truncated.
+Buttons size to content (R4). A button label is never truncated. Destructive variants (both) get the larger `touch.min-spaced` target.
 
 ### 9.3 Consent surfaces
 
@@ -649,10 +655,10 @@ For a government project this is close to a requirement rather than a preference
 |---|---|
 | Colour-vision deficiency simulation | **NOT DONE** — aloe vs ochre most at risk |
 | Sunlight legibility on low-cost LCD | **NOT DONE** |
-| Typeface tested against all twelve languages incl. click letters | **NOT DONE** — Montserrat is interim |
+| Typeface tested against all twelve languages incl. click letters | **DONE** — Montserrat's glyph coverage was checked directly (its `cmap` table via fontTools) against the click consonants `ǀ ǁ ǂ ǃ` (4/4 present) and real diacritic strings across the languages (Tshivenda `ṱ`, Sepedi `š`, etc. — all covered). Both skill-recommended "premium" alternatives (Plus Jakarta Sans, Outfit) failed the clicks 0/4. Montserrat is confirmed as the face — no longer interim. The x-height check (§5.4 pt 3) remains a visual judgement, but coverage — the constitutional requirement — is met. |
 | All copy reviewed by native speakers | **NOT DONE** — all strings indicative |
 | SASL video pattern | **NOT DESIGNED** |
-| Component inventory | **NOT STARTED** |
+| Component inventory | **IN PROGRESS** — 14 primitives shipped for web (`packages/web`, React + Tailwind + Radix), documented in [COMPONENTS.md](COMPONENTS.md); the React Native set (`mymzansi-app`) has the same primitives with Reanimated motion. Templates and the Figma library are the tiers above. |
 
 ---
 
