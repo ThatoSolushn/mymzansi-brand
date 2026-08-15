@@ -139,23 +139,23 @@ enum MzIconSize {
   static let xl: CGFloat = 28
 }
 
-/// Material Symbols Outlined glyph names (see BRAND.md icon standardisation). Render via a bundled Material Symbols font/asset.
+/// Fluent UI System Icons glyph names (see BRAND.md §6). Render the matching SVG asset.
 enum MzIcon {
-  static let verified = "verified"
-  static let partial = "shield_with_heart"
-  static let failed = "error"
-  static let restricted = "lock"
+  static let verified = "checkmark_circle"
+  static let partial = "shield"
+  static let failed = "error_circle"
+  static let restricted = "lock_closed"
   static let consent = "handshake"
   static let audit = "history"
-  static let revoke = "block"
+  static let revoke = "prohibited"
   static let dispute = "flag"
-  static let delegate = "supervisor_account"
-  static let document = "badge"
-  static let payment = "payments"
+  static let delegate = "people_swap"
+  static let document = "document"
+  static let payment = "payment"
   static let language = "translate"
-  static let signLanguage = "sign_language"
-  static let assist = "support_agent"
-  static let location = "location_on"
+  static let signLanguage = "hand_wave"
+  static let assist = "person_support"
+  static let location = "location"
   static let offline = "cloud_off"
 }
 

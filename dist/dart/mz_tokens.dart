@@ -141,24 +141,24 @@ class MzIconSize {
   static const xl = 28.0;
 }
 
-/// Material Symbols Outlined glyph names (see BRAND.md icon standardisation).
+/// Fluent UI System Icons glyph names (see BRAND.md §6).
 class MzIcon {
   MzIcon._();
-  static const verified = 'verified';
-  static const partial = 'shield_with_heart';
-  static const failed = 'error';
-  static const restricted = 'lock';
+  static const verified = 'checkmark_circle';
+  static const partial = 'shield';
+  static const failed = 'error_circle';
+  static const restricted = 'lock_closed';
   static const consent = 'handshake';
   static const audit = 'history';
-  static const revoke = 'block';
+  static const revoke = 'prohibited';
   static const dispute = 'flag';
-  static const delegate = 'supervisor_account';
-  static const document = 'badge';
-  static const payment = 'payments';
+  static const delegate = 'people_swap';
+  static const document = 'document';
+  static const payment = 'payment';
   static const language = 'translate';
-  static const signLanguage = 'sign_language';
-  static const assist = 'support_agent';
-  static const location = 'location_on';
+  static const signLanguage = 'hand_wave';
+  static const assist = 'person_support';
+  static const location = 'location';
   static const offline = 'cloud_off';
 }
 

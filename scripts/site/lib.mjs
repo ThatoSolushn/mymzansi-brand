@@ -12,6 +12,12 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '
 export const tokens = JSON.parse(readFileSync(path.join(ROOT, 'tokens.json'), 'utf8'));
 export const meta = tokens.$extensions?.['org.mymzansi.meta'] ?? {};
 
+/** The curated MyMzansi icon set (Fluent UI System Icons, MIT), with each SVG
+ *  normalised to currentColor. Committed asset — see scripts/site/icons.json. */
+export const icons = JSON.parse(
+  readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'icons.json'), 'utf8'),
+);
+
 /* ------------------------------------------------------------- flattening */
 
 const raw = new Map();

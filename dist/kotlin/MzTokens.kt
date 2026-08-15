@@ -139,23 +139,23 @@ object MzIconSize {
   val xl = 28.dp
 }
 
-/** Material Symbols Outlined glyph names (see BRAND.md icon standardisation). */
+/** Fluent UI System Icons glyph names (see BRAND.md §6). */
 object MzIcon {
-  const val verified = "verified"
-  const val partial = "shield_with_heart"
-  const val failed = "error"
-  const val restricted = "lock"
+  const val verified = "checkmark_circle"
+  const val partial = "shield"
+  const val failed = "error_circle"
+  const val restricted = "lock_closed"
   const val consent = "handshake"
   const val audit = "history"
-  const val revoke = "block"
+  const val revoke = "prohibited"
   const val dispute = "flag"
-  const val delegate = "supervisor_account"
-  const val document = "badge"
-  const val payment = "payments"
+  const val delegate = "people_swap"
+  const val document = "document"
+  const val payment = "payment"
   const val language = "translate"
-  const val signLanguage = "sign_language"
-  const val assist = "support_agent"
-  const val location = "location_on"
+  const val signLanguage = "hand_wave"
+  const val assist = "person_support"
+  const val location = "location"
   const val offline = "cloud_off"
 }
 

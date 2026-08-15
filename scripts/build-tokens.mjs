@@ -449,7 +449,7 @@ function buildSwift() {
   for (const [name, v] of iconSize) lines.push(`  static let ${ident(name)}: CGFloat = ${parseFloat(v)}`);
   lines.push("}", "");
 
-  lines.push("/// Material Symbols Outlined glyph names (see BRAND.md icon standardisation). Render via a bundled Material Symbols font/asset.");
+  lines.push("/// Fluent UI System Icons glyph names (see BRAND.md §6). Render the matching SVG asset.");
   lines.push("enum MzIcon {");
   for (const [name, v] of iconSemantic) lines.push(`  static let ${ident(name)} = "${v}"`);
   lines.push("}", "");
@@ -581,7 +581,7 @@ function buildKotlin() {
   for (const [name, v] of iconSize) lines.push(`  val ${ident(name)} = ${parseFloat(v)}.dp`);
   lines.push("}", "");
 
-  lines.push("/** Material Symbols Outlined glyph names (see BRAND.md icon standardisation). */");
+  lines.push("/** Fluent UI System Icons glyph names (see BRAND.md §6). */");
   lines.push("object MzIcon {");
   for (const [name, v] of iconSemantic) lines.push(`  const val ${ident(name)} = "${v}"`);
   lines.push("}", "");
@@ -730,7 +730,7 @@ function buildDart() {
   for (const [name, v] of iconSize) lines.push(`  static const ${ident(name)} = ${parseFloat(v)}.0;`);
   lines.push("}", "");
 
-  lines.push("/// Material Symbols Outlined glyph names (see BRAND.md icon standardisation).");
+  lines.push("/// Fluent UI System Icons glyph names (see BRAND.md §6).");
   lines.push("class MzIcon {");
   lines.push("  MzIcon._();");
   for (const [name, v] of iconSemantic) lines.push(`  static const ${ident(name)} = '${v}';`);

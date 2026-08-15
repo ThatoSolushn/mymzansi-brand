@@ -173,21 +173,21 @@ Reference `icon.semantic.*`, never a raw glyph name.
 
 | Token | Glyph | Notes |
 |---|---|---|
-| `verified` | `verified` | Identity confirmed at full assurance. |
-| `partial` | `shield_with_heart` | Stepped-down assurance level. |
-| `failed` | `error` | System could not complete. NEVER phrase as user error. |
-| `restricted` | `lock` | Not yet available at this assurance level. |
+| `verified` | `checkmark_circle` | Identity confirmed at full assurance. |
+| `partial` | `shield` | Stepped-down assurance level. |
+| `failed` | `error_circle` | System could not complete. NEVER phrase as user error. |
+| `restricted` | `lock_closed` | Not yet available at this assurance level. |
 | `consent` | `handshake` |  |
 | `audit` | `history` |  |
-| `revoke` | `block` |  |
+| `revoke` | `prohibited` |  |
 | `dispute` | `flag` |  |
-| `delegate` | `supervisor_account` |  |
-| `document` | `badge` |  |
-| `payment` | `payments` |  |
+| `delegate` | `people_swap` |  |
+| `document` | `document` |  |
+| `payment` | `payment` |  |
 | `language` | `translate` |  |
-| `signLanguage` | `sign_language` |  |
-| `assist` | `support_agent` |  |
-| `location` | `location_on` |  |
+| `signLanguage` | `hand_wave` |  |
+| `assist` | `person_support` |  |
+| `location` | `location` |  |
 | `offline` | `cloud_off` |  |
 
 ---

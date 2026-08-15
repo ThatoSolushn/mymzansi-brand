@@ -257,6 +257,25 @@ td:first-child{color:var(--ink)}
 .filter{width:100%;max-width:420px;padding:11px 13px;min-height:var(--touch);border:1px solid var(--rule);border-radius:var(--r-sm);background:var(--surface);color:var(--ink);font:inherit;font-size:.95rem;margin:var(--s-sm) 0}
 .count{font-family:var(--mono);font-size:11.5px;color:var(--ink3)}
 
+/* icon catalogue */
+.icon-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:var(--s-sm);margin:var(--s-md) 0}
+.icon-cell{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+  background:var(--surface);border:1px solid var(--rule);border-radius:var(--r-md);padding:var(--s-md) var(--s-sm);
+  cursor:pointer;color:var(--ink);transition:border-color var(--dur) var(--ease),transform var(--dur) var(--ease)}
+.icon-cell:hover{border-color:var(--accent);transform:translateY(-2px)}
+.icon-cell:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.icon-cell svg{width:28px;height:28px;display:block;color:var(--ink)}
+.icon-cell .in{font-weight:700;font-size:.86rem;line-height:1.2;overflow-wrap:anywhere}
+.icon-cell .if{font-family:var(--mono);font-size:10px;color:var(--ink3);overflow-wrap:anywhere}
+.icon-cell.copied{border-color:var(--ok)}
+.icon-cell.copied .in{color:var(--ok)}
+.icon-none{color:var(--ink3);font-size:.9rem;margin:var(--s-md) 0}
+/* an icon rendered inline in a table cell */
+.ticon{display:inline-flex;width:24px;height:24px;color:var(--ink)}
+.ticon svg{width:100%;height:100%}
+/* semantic cells carry the meaning line too */
+.icon-cell .im{font-size:11px;color:var(--ink2);line-height:1.35;overflow-wrap:anywhere}
+
 /* component gallery + live demos.
    These are the real components' rules, re-expressed in the site's own token
    vars — the page is an instance of the system, so a Button demoed here is

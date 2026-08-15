@@ -7,7 +7,7 @@
  */
 import {
   entries, group, token, val, leaf, names, ratio, grade, isHex, esc, fmt, code, dot,
-  gradeChip, swatches, cards, table, callout, extLink, LIGHT_BG, LIGHT_SURF, DARK_BG, DARK_SURF, meta,
+  gradeChip, swatches, cards, table, callout, extLink, LIGHT_BG, LIGHT_SURF, DARK_BG, DARK_SURF, meta, icons,
 } from './lib.mjs';
 import { page, NAV } from './layout.mjs';
 import { markTri } from './mark.mjs';
@@ -345,12 +345,12 @@ function iconography() {
     lead: 'One icon set, referenced by meaning rather than by glyph, so changing the set means changing one file.',
     body: `
 <h2 id="set">The set</h2>
-<p><b>Material Symbols Outlined</b> — Apache-2.0, and already loading on the live MyMzansi site. Standardising on it adds no new dependency and aligns with the digital-public-goods posture.</p>
+<p><b>${extLink('https://github.com/microsoft/fluentui-system-icons', 'Fluent UI System Icons')}</b> (MIT) — ~19,000 glyphs delivered as true SVG, with matched regular and filled cuts. The system commits a curated subset, each normalised to <code>currentColor</code> so it inherits the colour around it and works in both themes. Browse the set on the <a href="../../icons/">Icons page</a>. (This supersedes the earlier Material Symbols proposal — both open; Fluent was chosen for true-SVG delivery, matched cuts, and size-specific hinting.)</p>
 ${table(
   ['Setting', 'Value'],
-  [['Style', 'Outlined'], ['Optical size', '24'], ['Weight / Grade', '400 / 0'], ['Fill', '0']],
+  [['Style', 'Regular'], ['Size', '24 (default)'], ['Licence', 'MIT']],
 )}
-<p>Use one style throughout. Do not mix outlined and filled to signal state — use the status rail plus a text label.</p>
+<p>Use the regular cut throughout. Do not mix regular and filled to signal state — use the status rail plus a text label.</p>
 
 <h2 id="rules">Rules</h2>
 ${table(
@@ -371,10 +371,15 @@ ${table(
 )}
 
 <h2 id="semantic">Semantic names</h2>
-<p>Reference <code>icon.semantic.*</code> — never a raw glyph name.</p>
+<p>Reference <code>icon.semantic.*</code> — never a raw glyph name. The whole catalogue, searchable, is on the <a href="../../icons/">Icons page</a>.</p>
 ${table(
-  ['Token', 'Glyph', 'Notes'],
-  group('icon.semantic').map((e) => [code(leaf(e)), code(e.value), esc(e.description ?? '')]),
+  ['', 'Token', 'Fluent glyph', 'Notes'],
+  group('icon.semantic').map((e) => {
+    const ic = icons[leaf(e)];
+    const rendered = ic ? `<span class="ticon">${ic.svg}</span>` : '';
+    return [rendered, code(`icon.semantic.${leaf(e)}`), code(e.value), esc(e.description ?? '')];
+  }),
+  { min: 620 },
 )}
 `,
   });
@@ -619,7 +624,7 @@ ${table(
   [
     [code('aloe-lt') + ' ' + code('maize'), '<b>EXISTING</b>', 'Read from the live mymzansi.gov.za stylesheet.'],
     ['Spacing, radius, icon sizes', '<b>EXISTING</b>', 'Kept; spacing extended with the intermediate steps it lacked.'],
-    ['Material Symbols Outlined', '<b>EXISTING</b>', 'Observed loading on the live site.'],
+    ['Fluent UI System Icons', '<b>PROPOSED</b>', 'MIT. Supersedes the earlier Material Symbols proposal — see Iconography.'],
     ['Montserrat', '<b>EXISTING</b>', 'Interim — must be re-tested for language coverage.'],
     [code('indigo') + ' ' + code('ochre') + ' ' + code('bone'), '<b>PROPOSED</b>', 'New.'],
     ['All corrected accents', '<b>PROPOSED</b>', 'Result of the WCAG audit.'],
@@ -825,7 +830,7 @@ const COMPONENTS = [
   { name: 'Section', web: 'ship', rn: 'ship', what: 'A page-section heading — deliberately not uppercase.', a11y: 'Sentence case: uppercase harms dyslexic and lower-literacy readers.' },
   { name: 'Sheet', web: 'ship', rn: 'wip', what: 'The one bottom-sheet idiom, factored out of the two menus that each hand-rolled it.', a11y: 'Focus trap, Escape to close, scroll lock; scrim tuned per theme.' },
   { name: 'Switch', web: 'ship', rn: 'wip', what: 'A real toggle for Settings, which until now showed inert static rows.', a11y: 'Built on Radix — role="switch", keyboard, focus, checked state.' },
-  { name: 'Checkbox', web: 'ship', rn: 'wip', what: 'A single opt-in — e.g. "share these details this once".', a11y: 'Radix primitive; indicator is a Material Symbol, not colour alone.' },
+  { name: 'Checkbox', web: 'ship', rn: 'wip', what: 'A single opt-in — e.g. "share these details this once".', a11y: 'Radix primitive; indicator is a checkmark glyph, not colour alone.' },
   { name: 'RadioGroup', web: 'ship', rn: 'wip', what: 'Formalizes the manual selectable-list pattern used for visa reason.', a11y: 'Visible label beside each item carries meaning; ring reinforces.' },
   { name: 'Divider', web: 'ship', rn: 'wip', what: 'One hairline rule, factored out of the components that each drew their own.', a11y: 'Native separator semantics.' },
   { name: 'Avatar', web: 'ship', rn: 'ship', what: 'Initials-first, not photo-first — a name is more reliably present than a picture.', a11y: 'Initials are real text; decorative when a name label sits beside it.' },
@@ -953,7 +958,7 @@ const CMP_DETAIL = {
   },
   Checkbox: {
     demo: `<div class="cx"><span class="mzcheck">✓</span><span class="mzcheck off">✓</span></div>`,
-    desc: 'A single opt-in — for example, "share these details this once". A Radix primitive; the checked indicator is a Material Symbol tick, so the state is carried by a shape, not colour alone.',
+    desc: 'A single opt-in — for example, "share these details this once". A Radix primitive; the checked indicator is a checkmark glyph, so the state is carried by a shape, not colour alone.',
     code: `<Checkbox checked={agreed} onCheckedChange={setAgreed} />`,
   },
   RadioGroup: {
@@ -1079,6 +1084,87 @@ ${callout(`<p>These are <b>real components</b>, not mockups — the web set is b
   });
 }
 
+/* ==================================================================== icons */
+
+function iconCell(name, data) {
+  const search = `${name} ${data.label} ${data.fluent}`.toLowerCase();
+  const meaning = data.group === 'semantic' ? `<span class="im">${esc(data.label)}</span>` : '';
+  return `<button type="button" class="icon-cell" data-search="${esc(search)}" data-copy="${esc(name)}" title="Copy “${esc(name)}”">
+    ${data.svg}
+    <span class="in">${esc(name)}</span>
+    ${meaning}
+    <span class="if">${esc(data.fluent)}</span>
+  </button>`;
+}
+
+function iconsPage() {
+  const iconNames = Object.keys(icons);
+  const semantic = iconNames.filter((n) => icons[n].group === 'semantic');
+  const ui = iconNames.filter((n) => icons[n].group === 'ui');
+
+  const grid = (list) => `<div class="icon-grid">${list.map((n) => iconCell(n, icons[n])).join('')}</div>`;
+
+  return page({
+    title: 'Icons',
+    eyebrow: 'Foundations',
+    depth: 1,
+    active: 'icons/',
+    side: false,
+    lead: `${iconNames.length} icons from Fluent UI System Icons — the set this system uses. Search, and click any icon to copy its name.`,
+    body: `
+${callout(`<p>The icon family is <b>${extLink('https://github.com/microsoft/fluentui-system-icons', 'Fluent UI System Icons')}</b> (MIT). This page is the curated set the design system actually uses — not all 19,000 upstream icons. Each is stored as an SVG normalised to <code>currentColor</code>, so it takes the colour of the text around it and works in both themes.</p>`, { title: 'The icon set' })}
+
+${callout(`<p>Reference a semantic icon by its <b>meaning</b> (<code>icon.semantic.verified</code>), not the glyph name. The Fluent glyph is shown only so it can be found and swapped; the semantic layer means the whole set can be replaced without touching a screen. An icon never carries state on its own — see <a href="../guidelines/iconography/">Iconography</a>.</p>`, { tone: 'warn', title: 'How to use these' })}
+
+<input type="search" class="filter" id="iconFilter" placeholder="Search ${iconNames.length} icons — name, meaning, or Fluent glyph" aria-label="Search icons">
+<p class="count" id="iconCount"></p>
+
+<h2 id="semantic">Semantic icons</h2>
+<p>The ${semantic.length} meanings the system reserves. These are referenced by name (<code>icon.semantic.*</code>), so the glyph behind a meaning can change in one place.</p>
+${grid(semantic)}
+
+<h2 id="interface">Interface icons</h2>
+<p>The ${ui.length} common controls the components and app screens use — menus, actions, navigation, and empty-state glyphs.</p>
+${grid(ui)}
+
+<p class="icon-none" id="iconNone" hidden>No icons match that search.</p>
+
+<script>
+(function(){
+  var input=document.getElementById('iconFilter');
+  var count=document.getElementById('iconCount');
+  var none=document.getElementById('iconNone');
+  var cells=[].slice.call(document.querySelectorAll('.icon-cell'));
+  var total=cells.length;
+  function apply(){
+    var q=input.value.trim().toLowerCase();
+    var shown=0;
+    cells.forEach(function(c){
+      var hit=!q||c.getAttribute('data-search').indexOf(q)!==-1;
+      c.hidden=!hit; if(hit)shown++;
+    });
+    count.textContent=shown+' of '+total+' icons';
+    none.hidden=shown!==0;
+    // hide a section heading + intro when it has no visible cells
+    document.querySelectorAll('.icon-grid').forEach(function(g){
+      var any=[].slice.call(g.querySelectorAll('.icon-cell')).some(function(c){return !c.hidden;});
+      g.hidden=!any;
+    });
+  }
+  input.addEventListener('input',apply); apply();
+  cells.forEach(function(c){
+    c.addEventListener('click',function(){
+      var name=c.getAttribute('data-copy');
+      var done=function(){var i=c.querySelector('.in');var t=i.textContent;c.classList.add('copied');i.textContent='Copied';setTimeout(function(){c.classList.remove('copied');i.textContent=t;},900);};
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(name).then(done,done);}else{done();}
+    });
+  });
+})();
+</script>
+`,
+  });
+}
+
 /* ================================================================== roadmap */
 
 const ROADMAP = [
@@ -1112,10 +1198,10 @@ const ROADMAP = [
   {
     n: '04',
     title: 'Icon library',
-    status: 'planned',
-    what: 'A browsable, searchable set with the semantic mapping made concrete — every icon rendered, named, downloadable, and tied to the meaning it is allowed to carry.',
-    detail: 'The semantic layer already exists in tokens.json: sixteen names such as <code>icon.semantic.verified</code> and <code>icon.semantic.restricted</code> that point at Material Symbols glyphs. The library turns that into something a designer can search, and enforces the rule that consumers reference the meaning rather than the glyph — so the set can be replaced without touching a single screen. It should also flag which icons are safe to use unaccompanied, which in practice is very few.',
-    needs: 'Nothing blocking. Mostly rendering and packaging work.',
+    status: 'shipping',
+    what: 'A browsable, searchable set with the semantic mapping made concrete — every icon rendered, named, and tied to the meaning it is allowed to carry. See the <a href="../icons/">Icons page</a>.',
+    detail: 'Shipped. The family is Fluent UI System Icons (MIT), and the curated set is rendered on the Icons page — searchable, each glyph shown, click-to-copy, grouped into the sixteen reserved semantic meanings (<code>icon.semantic.verified</code>, <code>icon.semantic.restricted</code>, …) and the common interface glyphs. Each SVG is normalised to <code>currentColor</code> so it themes for free, and the semantic layer means the whole set can be replaced without touching a single screen. Still ahead: flagging which icons are safe to use unaccompanied (in practice very few), and wiring the runtime component libraries onto the same set.',
+    needs: 'Nothing blocking. Runtime wiring of the component libraries onto Fluent is the remaining work.',
     unblocks: 'The Figma library, and consistent icon use across departments.',
   },
   {
@@ -1252,6 +1338,7 @@ export const pages = [
   { path: 'guidelines/content/index.html', html: content() },
   { path: 'guidelines/identity-mark/index.html', html: identityMark() },
   { path: 'components/index.html', html: components() },
+  { path: 'icons/index.html', html: iconsPage() },
   { path: 'programme/index.html', html: programme() },
   { path: 'roadmap/index.html', html: roadmap() },
   { path: 'tokens/index.html', html: tokensPage() },

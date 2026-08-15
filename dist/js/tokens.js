@@ -157,21 +157,21 @@ export const motion = {
 };
 
 export const icons = {
-  "verified": "verified",
-  "partial": "shield_with_heart",
-  "failed": "error",
-  "restricted": "lock",
+  "verified": "checkmark_circle",
+  "partial": "shield",
+  "failed": "error_circle",
+  "restricted": "lock_closed",
   "consent": "handshake",
   "audit": "history",
-  "revoke": "block",
+  "revoke": "prohibited",
   "dispute": "flag",
-  "delegate": "supervisor_account",
-  "document": "badge",
-  "payment": "payments",
+  "delegate": "people_swap",
+  "document": "document",
+  "payment": "payment",
   "language": "translate",
-  "signLanguage": "sign_language",
-  "assist": "support_agent",
-  "location": "location_on",
+  "signLanguage": "hand_wave",
+  "assist": "person_support",
+  "location": "location",
   "offline": "cloud_off",
 };
 

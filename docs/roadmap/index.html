@@ -7,7 +7,7 @@
 <meta name="description" content="Eight things above the token foundation, grouped by how ready they are. The first — a component library — is now shipping; the rest is a statement of intent, with dependencies stated so the sequencing is arguable.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMCIgZmlsbD0iIzFCMkE0QSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjkuOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNS4xNSAzLjczIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDMyIDMyKSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjE5LjUxIiBmaWxsPSJub25lIiBzdHJva2U9IiNGQkM1NDkiIHN0cm9rZS13aWR0aD0iMi4xMzMzMzMzMzMzMzMzMzMzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjguODkgNi40NCIgdHJhbnNmb3JtPSJyb3RhdGUoNDcgMzIgMzIpIi8+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjkuMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuMTYgMTAuOTgiIHRyYW5zZm9ybT0icm90YXRlKDk0IDMyIDMyKSIvPjwvc3ZnPg==">
-<link rel="stylesheet" href="../assets/site.css?v=f75bc526">
+<link rel="stylesheet" href="../assets/site.css?v=886e1f48">
 <script>
 /* Applied before first paint so an explicit choice never flashes the wrong theme.
    No stored value means "follow the system", which is the default state. */
@@ -25,7 +25,7 @@
         <span class="b2">MyMzansi</span>
       </span>
     </a>
-    <nav class="mast-nav" aria-label="Main"><a href="../guidelines/">Guidelines</a><a href="../components/">Components</a><a href="../programme/">Programme</a><a href="../roadmap/" aria-current="true">Roadmap</a><a href="../tokens/">Tokens</a><a href="../about/">About</a></nav>
+    <nav class="mast-nav" aria-label="Main"><a href="../guidelines/">Guidelines</a><a href="../components/">Components</a><a href="../icons/">Icons</a><a href="../programme/">Programme</a><a href="../roadmap/" aria-current="true">Roadmap</a><a href="../tokens/">Tokens</a><a href="../about/">About</a></nav>
     <button class="tt" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme">
       <span class="tt-label" aria-hidden="true">Dark</span>
       <span class="tt-track" aria-hidden="true"><span class="tt-knob"></span></span>
@@ -39,6 +39,7 @@
       <p class="sect">Reference</p>
       <ul>
         <li><a href="../components/">Components</a></li>
+        <li><a href="../icons/">Icons</a></li>
         <li><a href="../programme/">The programme</a></li>
         <li><a href="../roadmap/" aria-current="page">Roadmap</a></li>
         <li><a href="../tokens/">All tokens</a></li>
@@ -56,7 +57,7 @@
 <div class="rm-legend">
     <div class="rm-leg">
       <span class="chip shipping">Now shipping</span>
-      <span class="n">1</span>
+      <span class="n">2</span>
       <span class="d">Delivered, or actively landing.</span>
     </div>
     <div class="rm-leg">
@@ -66,7 +67,7 @@
     </div>
     <div class="rm-leg">
       <span class="chip planned">Planned</span>
-      <span class="n">3</span>
+      <span class="n">2</span>
       <span class="d">Wanted, but each depends on earlier work landing first.</span>
     </div>
     <div class="rm-leg">
@@ -82,7 +83,7 @@
 <section class="rm-phase">
       <div class="rm-phase-head">
         <h2 id="shipping">Now shipping</h2>
-        <span class="chip shipping">1 item</span>
+        <span class="chip shipping">2 items</span>
       </div>
       <p class="rm-phase-note">Delivered, or actively landing. Building on the token foundation rather than waiting behind it.</p>
       <div class="rm-grid"><article class="rm-card shipping">
@@ -99,6 +100,22 @@
       <dl class="rm-meta">
         <div><dt>Needs</dt><dd>Nothing blocking web. React Native parity and a shared motion layer are the remaining work.</dd></div>
         <div><dt>Unblocks</dt><dd>Templates, the Figma library, and any meaningful conformity assessment.</dd></div>
+      </dl>
+    </details>
+  </article><article class="rm-card shipping">
+    <div class="rm-top">
+      <span class="rm-num">04</span>
+      <span class="chip shipping">Now shipping</span>
+    </div>
+    <h3>Icon library</h3>
+    <p class="rm-what">A browsable, searchable set with the semantic mapping made concrete — every icon rendered, named, and tied to the meaning it is allowed to carry. See the <a href="../icons/">Icons page</a>.</p>
+    <details>
+      <summary>Why, and what it needs</summary>
+      <p>Shipped. The family is Fluent UI System Icons (MIT), and the curated set is rendered on the Icons page — searchable, each glyph shown, click-to-copy, grouped into the sixteen reserved semantic meanings (<code>icon.semantic.verified</code>, <code>icon.semantic.restricted</code>, …) and the common interface glyphs. Each SVG is normalised to <code>currentColor</code> so it themes for free, and the semantic layer means the whole set can be replaced without touching a single screen. Still ahead: flagging which icons are safe to use unaccompanied (in practice very few), and wiring the runtime component libraries onto the same set.</p>
+      
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>Nothing blocking. Runtime wiring of the component libraries onto Fluent is the remaining work.</dd></div>
+        <div><dt>Unblocks</dt><dd>The Figma library, and consistent icon use across departments.</dd></div>
       </dl>
     </details>
   </article></div>
@@ -128,7 +145,7 @@
     </section><section class="rm-phase">
       <div class="rm-phase-head">
         <h2 id="planned">Planned</h2>
-        <span class="chip planned">3 items</span>
+        <span class="chip planned">2 items</span>
       </div>
       <p class="rm-phase-note">Wanted, but each depends on earlier work landing first.</p>
       <div class="rm-grid"><article class="rm-card planned">
@@ -145,22 +162,6 @@
       <dl class="rm-meta">
         <div><dt>Needs</dt><dd>Components.</dd></div>
         <div><dt>Unblocks</dt><dd>Faster adoption, and a common baseline for the awards assessment.</dd></div>
-      </dl>
-    </details>
-  </article><article class="rm-card planned">
-    <div class="rm-top">
-      <span class="rm-num">04</span>
-      <span class="chip planned">Planned</span>
-    </div>
-    <h3>Icon library</h3>
-    <p class="rm-what">A browsable, searchable set with the semantic mapping made concrete — every icon rendered, named, downloadable, and tied to the meaning it is allowed to carry.</p>
-    <details>
-      <summary>Why, and what it needs</summary>
-      <p>The semantic layer already exists in tokens.json: sixteen names such as <code>icon.semantic.verified</code> and <code>icon.semantic.restricted</code> that point at Material Symbols glyphs. The library turns that into something a designer can search, and enforces the rule that consumers reference the meaning rather than the glyph — so the set can be replaced without touching a single screen. It should also flag which icons are safe to use unaccompanied, which in practice is very few.</p>
-      
-      <dl class="rm-meta">
-        <div><dt>Needs</dt><dd>Nothing blocking. Mostly rendering and packaging work.</dd></div>
-        <div><dt>Unblocks</dt><dd>The Figma library, and consistent icon use across departments.</dd></div>
       </dl>
     </details>
   </article><article class="rm-card planned">

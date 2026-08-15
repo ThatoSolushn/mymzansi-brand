@@ -64,8 +64,8 @@ In priority order, highest first:
 | Spacing scale (xs/sm/md/lg/xl) | **EXISTING** | Extended with intermediate steps. |
 | Radius `4px` / `12px` | **EXISTING** | Kept. |
 | Icon sizes 18/20/24/28 | **EXISTING** | Kept. |
-| Material Symbols Outlined | **EXISTING** | Observed loading on the live site. Standardised on. |
-| Montserrat | **EXISTING** | Interim. Must be re-tested — see §5.4. |
+| Fluent UI System Icons | **PROPOSED** | MIT. Chosen for the icon family; supersedes the Material Symbols proposal — see §6. |
+| Montserrat | **EXISTING** | Confirmed — coverage tested against §5.4 (clicks + diacritics). |
 | `indigo`, `ochre`, `bone` | **PROPOSED** | New. |
 | All corrected accents | **PROPOSED** | Result of the WCAG audit in §4.6. |
 
@@ -356,20 +356,20 @@ No other government product does this. It is constitutionally grounded and would
 
 ### 6.1 Set
 
-**Material Symbols Outlined** — Apache-2.0, already loading on the live MyMzansi site. Standardising on it adds no new dependency and aligns with the digital-public-goods posture.
+**[Fluent UI System Icons](https://github.com/microsoft/fluentui-system-icons)** — MIT, ~19,000 glyphs with matched regular and filled cuts, delivered as true SVG rather than an icon font. The system commits a **curated subset** (the semantic set plus the common interface glyphs), each normalised to `currentColor` so it takes the colour of the text around it and works in both themes with no per-theme variant. The browsable set is the [Icons page](https://thatosolushn.github.io/mymzansi-brand/icons/); the contract is in [COMPONENTS.md](COMPONENTS.md).
+
+> This supersedes the earlier Material Symbols Outlined proposal. Both are open (MIT vs Apache-2.0); Fluent was chosen for its true-SVG delivery (no icon-font FOUT, trivial to inline and theme), its matched regular/filled cuts, and its size-specific hinting.
 
 | Setting | Value |
 |---|---|
-| Style | Outlined |
-| Optical size | 24 |
-| Weight / Grade | 400 / 0 |
-| Fill | 0 |
+| Style | Regular |
+| Size | 24 (default) |
 
-**Use one style throughout.** Do not mix outlined and filled to signal state — use the status rail plus a text label.
+**Use the regular cut throughout.** Do not mix regular and filled to signal state — use the status rail plus a text label.
 
 ### 6.2 Sizes
 
-`sm` 18 · `md` 20 · `lg` 24 (default) · `xl` 28. All EXISTING tokens.
+`sm` 18 · `md` 20 · `lg` 24 (default) · `xl` 28. All EXISTING tokens. Fluent ships size-specific cuts at 16/20/24/28; render the SVG at the token size.
 
 ### 6.3 Rules
 
@@ -700,5 +700,5 @@ Both scripts are plain Node with **no dependencies** — no `npm install`, no lo
 - WCAG 2.1 (W3C Recommendation)
 - Constitution Eighteenth Amendment Act, 2023 — South African Sign Language
 - UNDP DPI Safeguards — adopted by the MyMzansi roadmap
-- Material Symbols (Apache-2.0)
+- Fluent UI System Icons (MIT) — github.com/microsoft/fluentui-system-icons
 - W3C Design Tokens Community Group format specification
