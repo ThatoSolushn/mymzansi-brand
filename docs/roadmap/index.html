@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Roadmap — MyMzansi Design System</title>
-<meta name="description" content="Eight things this system does not have yet, grouped by how ready they are. Nothing here is committed work — it is a statement of intent, with dependencies stated so the sequencing is arguable.">
+<meta name="description" content="Eight things above the token foundation, grouped by how ready they are. The first — a component library — is now shipping; the rest is a statement of intent, with dependencies stated so the sequencing is arguable.">
 <meta name="color-scheme" content="light dark">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMCIgZmlsbD0iIzFCMkE0QSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjkuOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNS4xNSAzLjczIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDMyIDMyKSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjE5LjUxIiBmaWxsPSJub25lIiBzdHJva2U9IiNGQkM1NDkiIHN0cm9rZS13aWR0aD0iMi4xMzMzMzMzMzMzMzMzMzMzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjguODkgNi40NCIgdHJhbnNmb3JtPSJyb3RhdGUoNDcgMzIgMzIpIi8+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjkuMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuMTYgMTAuOTgiIHRyYW5zZm9ybT0icm90YXRlKDk0IDMyIDMyKSIvPjwvc3ZnPg==">
-<link rel="stylesheet" href="../assets/site.css?v=bc022ec7">
+<link rel="stylesheet" href="../assets/site.css?v=2b889c19">
 <script>
 /* Applied before first paint so an explicit choice never flashes the wrong theme.
    No stored value means "follow the system", which is the default state. */
@@ -25,7 +25,7 @@
         <span class="b2">MyMzansi</span>
       </span>
     </a>
-    <nav class="mast-nav" aria-label="Main"><a href="../guidelines/">Guidelines</a><a href="../programme/">Programme</a><a href="../roadmap/" aria-current="true">Roadmap</a><a href="../tokens/">Tokens</a><a href="../about/">About</a></nav>
+    <nav class="mast-nav" aria-label="Main"><a href="../guidelines/">Guidelines</a><a href="../components/">Components</a><a href="../programme/">Programme</a><a href="../roadmap/" aria-current="true">Roadmap</a><a href="../tokens/">Tokens</a><a href="../about/">About</a></nav>
     <button class="tt" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme">
       <span class="tt-label" aria-hidden="true">Dark</span>
       <span class="tt-track" aria-hidden="true"><span class="tt-knob"></span></span>
@@ -38,6 +38,7 @@
 <aside class="side"><p class="sect">Guidelines</p><ul><li><a href="../guidelines/colour/">Colour</a></li><li><a href="../guidelines/identity-mark/">Identity mark</a></li><li><a href="../guidelines/typography/">Typography</a></li><li><a href="../guidelines/language/">Language</a></li><li><a href="../guidelines/space/">Space &amp; layout</a></li><li><a href="../guidelines/iconography/">Iconography</a></li><li><a href="../guidelines/motion/">Motion</a></li><li><a href="../guidelines/accessibility/">Accessibility</a></li><li><a href="../guidelines/content/">Content &amp; tone</a></li></ul>
       <p class="sect">Reference</p>
       <ul>
+        <li><a href="../components/">Components</a></li>
         <li><a href="../programme/">The programme</a></li>
         <li><a href="../roadmap/" aria-current="page">Roadmap</a></li>
         <li><a href="../tokens/">All tokens</a></li>
@@ -47,15 +48,20 @@
   <div class="ph">
     <p class="eyebrow">What is coming</p>
     <h1>Roadmap</h1>
-    <p class="lede">Eight things this system does not have yet, grouped by how ready they are. Nothing here is committed work — it is a statement of intent, with dependencies stated so the sequencing is arguable.</p>
+    <p class="lede">Eight things above the token foundation, grouped by how ready they are. The first — a component library — is now shipping; the rest is a statement of intent, with dependencies stated so the sequencing is arguable.</p>
   </div>
   
-<aside class="callout note"><b class="ct">Where this stands</b><div><p>The system today is <b>foundations only</b>: tokens, rules, and the evidence behind them. Everything on this page sits above that layer. Where an item is blocked, it says so and by what — an honest roadmap is more useful than an ambitious one.</p></div></aside>
+<aside class="callout note"><b class="ct">Where this stands</b><div><p>The foundation — tokens, rules, and the evidence behind them — is in place, and the <a href="../components/">component library</a> is now building on top of it. Everything else on this page sits above that layer. Where an item is blocked, it says so and by what — an honest roadmap is more useful than an ambitious one.</p></div></aside>
 
 <div class="rm-legend">
     <div class="rm-leg">
+      <span class="chip shipping">Now shipping</span>
+      <span class="n">1</span>
+      <span class="d">Delivered, or actively landing.</span>
+    </div>
+    <div class="rm-leg">
       <span class="chip next">Next up</span>
-      <span class="n">2</span>
+      <span class="n">1</span>
       <span class="d">Ready to start.</span>
     </div>
     <div class="rm-leg">
@@ -75,8 +81,31 @@
     </div></div>
 <section class="rm-phase">
       <div class="rm-phase-head">
+        <h2 id="shipping">Now shipping</h2>
+        <span class="chip shipping">1 item</span>
+      </div>
+      <p class="rm-phase-note">Delivered, or actively landing. Building on the token foundation rather than waiting behind it.</p>
+      <div class="rm-grid"><article class="rm-card shipping">
+    <div class="rm-top">
+      <span class="rm-num">02</span>
+      <span class="chip shipping">Now shipping</span>
+    </div>
+    <h3>Components with code references</h3>
+    <p class="rm-what">The tier this system most obviously lacked. Fourteen primitives now shipped for web — each documented with its variants, its states, and the accessibility contract that travels with it. See the <a href="../components/">Components</a> page.</p>
+    <details>
+      <summary>Why, and what it needs</summary>
+      <p>Phase 1 is delivered on web: Button, Card, Input, Badge, StatusRow, Section, Sheet, Switch, Checkbox, RadioGroup, Divider, Avatar, Skeleton and EmptyState, built with React, Tailwind and Radix in <code>packages/web</code> and documented in Storybook. The canonical framework decision was made — the web set targets Tailwind + shadcn/Radix, the app set React Native — and the two share one variant vocabulary so a design reviewed on one platform reads the same on the other. The React Native set is next: the existing primitives are being reconciled to the same contract, with six genuinely new ones (Switch, Checkbox, Divider, Avatar, Skeleton, EmptyState) added.</p>
+      
+      <dl class="rm-meta">
+        <div><dt>Needs</dt><dd>Nothing blocking web. React Native parity and a shared motion layer are the remaining work.</dd></div>
+        <div><dt>Unblocks</dt><dd>Templates, the Figma library, and any meaningful conformity assessment.</dd></div>
+      </dl>
+    </details>
+  </article></div>
+    </section><section class="rm-phase">
+      <div class="rm-phase-head">
         <h2 id="next">Next up</h2>
-        <span class="chip next">2 items</span>
+        <span class="chip next">1 item</span>
       </div>
       <p class="rm-phase-note">Ready to start. Nothing blocks these, and between them they unblock most of the rest.</p>
       <div class="rm-grid"><article class="rm-card next">
@@ -93,22 +122,6 @@
       <dl class="rm-meta">
         <div><dt>Needs</dt><dd>A decision on whether a wordmark exists at all, and who owns it.</dd></div>
         <div><dt>Unblocks</dt><dd>Templates, illustration guidelines, and anything a department would produce independently.</dd></div>
-      </dl>
-    </details>
-  </article><article class="rm-card next">
-    <div class="rm-top">
-      <span class="rm-num">02</span>
-      <span class="chip next">Next up</span>
-    </div>
-    <h3>Components with code references</h3>
-    <p class="rm-what">The tier this system most obviously lacks. Each component documented with its anatomy, its states, its accessibility contract, and working code for every supported platform.</p>
-    <details>
-      <summary>Why, and what it needs</summary>
-      <p>The pattern is already proven in the reference app: Button, Card, StatusRow, Section and the identity band are built entirely from tokens. What is needed is to lift them into documented components with live examples, prop tables, and the code shown inline per platform. Every component carries its own accessibility contract — minimum target size, required accessible name, what must never be conveyed by colour alone — so the rules travel with the thing rather than living in a separate document nobody opens.</p>
-      
-      <dl class="rm-meta">
-        <div><dt>Needs</dt><dd>A component inventory, and a decision on which framework the canonical implementation targets.</dd></div>
-        <div><dt>Unblocks</dt><dd>Templates, the Figma library, and any meaningful conformity assessment.</dd></div>
       </dl>
     </details>
   </article></div>
@@ -232,12 +245,12 @@
     </section>
 
 <h2 id="sequencing">Why this order</h2>
-<p><b>Components come first</b> because almost everything else depends on them: templates are assembled from components, the Figma library mirrors them, and a conformity assessment needs something concrete to assess. Brand guidelines sit alongside because they are largely written already, and they gate anything a department would produce on its own.</p>
+<p><b>Components came first</b> because almost everything else depends on them: templates are assembled from components, the Figma library mirrors them, and a conformity assessment needs something concrete to assess. That is why they are the first thing shipping. Brand guidelines sit alongside because they are largely written already, and they gate anything a department would produce on its own.</p>
 <p><b>The awards programme is last</b> not because it matters least — it may be the item with the most leverage over adoption — but because it is the only one that cannot be built. It needs an institution willing to stand behind it.</p>
 
 <div class="tw"><table style="min-width:720px">
     <thead><tr><th>This</th><th>Depends on</th><th>And unblocks</th></tr></thead>
-    <tbody><tr><td><code>01</code> Brand guidelines</td><td>A decision on whether a wordmark exists at all, and who owns it.</td><td>Templates, illustration guidelines, and anything a department would produce independently.</td></tr><tr><td><code>02</code> Components with code references</td><td>A component inventory, and a decision on which framework the canonical implementation targets.</td><td>Templates, the Figma library, and any meaningful conformity assessment.</td></tr><tr><td><code>03</code> Templates</td><td>Components.</td><td>Faster adoption, and a common baseline for the awards assessment.</td></tr><tr><td><code>04</code> Icon library</td><td>Nothing blocking.</td><td>The Figma library, and consistent icon use across departments.</td></tr><tr><td><code>05</code> Figma library</td><td>Tokens Studio wired to the repository; agreement on who owns the file.</td><td>Designers working in the system without reading a token file.</td></tr><tr><td><code>06</code> Illustration guidelines</td><td>A commissioned illustrator, and research with the people depicted.</td><td>Templates that need imagery; empty and error states.</td></tr><tr><td><code>07</code> AI documentation</td><td>Nothing blocking.</td><td>Reliable AI-assisted implementation, and automated conformity checking.</td></tr><tr><td><code>08</code> Adoption awards</td><td>Institutional authority this concept does not have.</td><td>A reason for departments to conform when nobody is compelling them to.</td></tr></tbody>
+    <tbody><tr><td><code>01</code> Brand guidelines</td><td>A decision on whether a wordmark exists at all, and who owns it.</td><td>Templates, illustration guidelines, and anything a department would produce independently.</td></tr><tr><td><code>02</code> Components with code references</td><td>Nothing blocking web.</td><td>Templates, the Figma library, and any meaningful conformity assessment.</td></tr><tr><td><code>03</code> Templates</td><td>Components.</td><td>Faster adoption, and a common baseline for the awards assessment.</td></tr><tr><td><code>04</code> Icon library</td><td>Nothing blocking.</td><td>The Figma library, and consistent icon use across departments.</td></tr><tr><td><code>05</code> Figma library</td><td>Tokens Studio wired to the repository; agreement on who owns the file.</td><td>Designers working in the system without reading a token file.</td></tr><tr><td><code>06</code> Illustration guidelines</td><td>A commissioned illustrator, and research with the people depicted.</td><td>Templates that need imagery; empty and error states.</td></tr><tr><td><code>07</code> AI documentation</td><td>Nothing blocking.</td><td>Reliable AI-assisted implementation, and automated conformity checking.</td></tr><tr><td><code>08</code> Adoption awards</td><td>Institutional authority this concept does not have.</td><td>A reason for departments to conform when nobody is compelling them to.</td></tr></tbody>
   </table></div>
 
 <aside class="callout warn"><b class="ct">To be clear</b><div><p>This is unofficial concept work. Nothing on this page is a commitment by any organ of the South African state, and no timeline is implied.</p></div></aside>

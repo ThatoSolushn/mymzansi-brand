@@ -64,8 +64,12 @@ ${cards(guideCards)}
 <p>This is not a generic design system — it exists to serve <a href="programme/">MyMzansi</a>, South Africa's national digital government initiative. Its mission, principles and roadmap come from the Presidency's Digital Services Unit, not from here. See how this system's rules trace back to their own stated principles, in their own words.</p>
 <p><a href="programme/"><b>Read the strategic context →</b></a> · ${extLink(MZ + '/', 'Visit mymzansi.gov.za')}</p>
 
+<h2 id="components">Components, built on the tokens</h2>
+<p>The first component library is here: fourteen primitives — Button, Card, Input, Badge, StatusRow, Sheet, Switch and more — shipped for web, built with React, Tailwind and Radix directly on these tokens, and documented with their variants, states and accessibility contracts. The React Native set is following.</p>
+<p><a href="components/"><b>See the components →</b></a></p>
+
 <h2 id="next">What is coming</h2>
-<p>The system today is foundations only — tokens, rules and evidence. Components, templates, an icon and Figma library, illustration guidance, machine-readable AI documentation and an adoption awards programme are all still ahead.</p>
+<p>With components now shipping, the tiers above them come into view — templates, an icon and Figma library, illustration guidance, machine-readable AI documentation and an adoption awards programme.</p>
 <p><a href="roadmap/"><b>See the roadmap →</b></a></p>
 
 <h2 id="using">Using the system</h2>
@@ -808,6 +812,272 @@ ${table(
   });
 }
 
+/* =============================================================== components */
+
+/** The Phase 1 inventory. `web`/`rn` = shipped | wip. */
+const COMPONENTS = [
+  { name: 'Button', web: 'ship', rn: 'ship', what: 'Five variants (primary, secondary, plain, destructive, destructive-outline). Depth from colour, never a shadow.', a11y: '≥44px target (48px destructive); label wraps, never truncates; visible focus ring.' },
+  { name: 'Card', web: 'ship', rn: 'ship', what: 'A surface that lifts off the ground by a border and a surface change, not a shadow the cheap phone must paint.', a11y: 'Heading + description are real text; nothing conveyed by fill alone.' },
+  { name: 'Input', web: 'ship', rn: 'wip', what: 'Label above, sunk fill, hairline border — with an error state linked and announced.', a11y: 'Label tied to field; error uses role="alert" and aria-describedby.' },
+  { name: 'Badge', web: 'ship', rn: 'ship', what: 'A small pill whose text always carries the meaning; colour only reinforces (R3).', a11y: 'Maize "limit" tone keeps dark ink on top in both themes (R2, 8.9:1).' },
+  { name: 'StatusRow', web: 'ship', rn: 'ship', what: 'A left status rail instead of an icon circle — faster to scan, no cross-cultural ambiguity, cheap to render.', a11y: 'State named in words; restricted rows always state their reason.' },
+  { name: 'Section', web: 'ship', rn: 'ship', what: 'A page-section heading — deliberately not uppercase.', a11y: 'Sentence case: uppercase harms dyslexic and lower-literacy readers.' },
+  { name: 'Sheet', web: 'ship', rn: 'wip', what: 'The one bottom-sheet idiom, factored out of the two menus that each hand-rolled it.', a11y: 'Focus trap, Escape to close, scroll lock; scrim tuned per theme.' },
+  { name: 'Switch', web: 'ship', rn: 'wip', what: 'A real toggle for Settings, which until now showed inert static rows.', a11y: 'Built on Radix — role="switch", keyboard, focus, checked state.' },
+  { name: 'Checkbox', web: 'ship', rn: 'wip', what: 'A single opt-in — e.g. "share these details this once".', a11y: 'Radix primitive; indicator is a Material Symbol, not colour alone.' },
+  { name: 'RadioGroup', web: 'ship', rn: 'wip', what: 'Formalizes the manual selectable-list pattern used for visa reason.', a11y: 'Visible label beside each item carries meaning; ring reinforces.' },
+  { name: 'Divider', web: 'ship', rn: 'wip', what: 'One hairline rule, factored out of the components that each drew their own.', a11y: 'Native separator semantics.' },
+  { name: 'Avatar', web: 'ship', rn: 'ship', what: 'Initials-first, not photo-first — a name is more reliably present than a picture.', a11y: 'Initials are real text; decorative when a name label sits beside it.' },
+  { name: 'Skeleton', web: 'ship', rn: 'wip', what: 'A loading placeholder shaped like the content it stands in for — not a spinner.', a11y: 'role="status"; shimmer is opacity-only and stops under reduced motion.' },
+  { name: 'EmptyState', web: 'ship', rn: 'wip', what: 'A composed empty view with a concrete next action — never a dead end (R11).', a11y: 'Icon is decorative; the action is a real, labelled control.' },
+];
+
+/**
+ * Per-component detail: a rendered visual, a description that folds in the
+ * accessibility contract, and a real code example. `demo` reuses the site's
+ * own token vars, so a Button shown here is painted by exactly the tokens
+ * the shipped Button reads.
+ */
+const CMP_DETAIL = {
+  Button: {
+    demo: `<div class="cx">
+      <button class="btn btn-primary" type="button">Continue</button>
+      <button class="btn btn-secondary" type="button">Change details</button>
+      <button class="btn btn-plain" type="button">Not now</button>
+      <button class="btn btn-destructive" type="button">Delete account</button>
+      <button class="btn btn-destructive-outline" type="button">Sign out <span class="btn-ico" aria-hidden="true">→</span></button>
+    </div>`,
+    desc: 'BRAND.md §9.2 — five variants, one filled primary per screen and a destructive treatment held for irreversible actions. Depth is carried by colour, and the press response animates <code>transform</code> and <code>opacity</code> only, so it holds the frame budget on a four-year-old handset. Every target is at least 44px (48px destructive), the label wraps rather than truncates, and focus is always visible. The trailing icon, where present, sits in its own nested chip — craft carried over from the "high-end agency" comparison, kept only where it reads as considered.',
+    code: `<Button variant="primary">Continue</Button>
+<Button variant="secondary">Change details</Button>
+<Button variant="plain">Not now</Button>
+<Button variant="destructive">Delete account</Button>
+<Button variant="destructive-outline" trailingIcon="logout">
+  Sign out
+</Button>`,
+  },
+  Card: {
+    demo: `<div class="cx">
+      <div class="mzcard">
+        <span class="eb">Waiting for you</span>
+        <h4>ABC Bank wants to check your details</h4>
+        <p class="ds">To open a cheque account</p>
+        <span class="mt">Asked 4 minutes ago</span>
+        <div class="mzcard-foot"><button class="btn btn-primary" type="button">Look at this request <span class="btn-ico" aria-hidden="true">→</span></button></div>
+      </div>
+    </div>`,
+    desc: 'BRAND.md §9.1 — a card lifts off the ground by a surface change and a hairline border, not a drop shadow the cheap phone must paint. This is the canonical "a request came to you" surface. The heading and description are real text; nothing is conveyed by fill alone. Any organisation named in an example is invented, never a real institution.',
+    code: `<Card>
+  <CardEyebrow>Waiting for you</CardEyebrow>
+  <CardTitle>ABC Bank wants to check your details</CardTitle>
+  <CardDescription>To open a cheque account</CardDescription>
+  <CardMeta>Asked 4 minutes ago</CardMeta>
+  <CardFooter>
+    <Button variant="primary" trailingIcon="arrow_forward">
+      Look at this request
+    </Button>
+  </CardFooter>
+</Card>`,
+  },
+  Input: {
+    demo: `<div class="cx">
+      <div class="mzfield"><label>ID number</label><div class="inp">13 digits</div></div>
+      <div class="mzfield err"><label>Passport number</label><div class="inp"></div><span class="er">This field is required</span></div>
+    </div>`,
+    desc: 'Label above the field, sunk fill, hairline border — never a placeholder standing in for a label. The error sits below the field, tied to it with <code>aria-describedby</code> and announced via <code>role="alert"</code>, and the border turns critical to reinforce it without relying on colour alone.',
+    code: `<Input label="ID number" placeholder="13 digits" />
+<Input
+  label="Passport number"
+  error="This field is required"
+/>`,
+  },
+  Badge: {
+    demo: `<div class="cx">
+      <span class="badge badge-neutral">Level 1 of 3</span>
+      <span class="badge badge-good">Visa approved</span>
+      <span class="badge badge-limit">Application refused</span>
+    </div>`,
+    desc: 'R3 — colour reinforces, never informs alone: the label text always carries the meaning. The "limit" tone uses maize as a bright ground with dark ink on top (R2), pinned to a dark foreground in both themes so it never becomes an illegible pale-on-yellow pairing (8.9:1).',
+    code: `<Badge tone="neutral">Level 1 of 3</Badge>
+<Badge tone="good">Visa approved</Badge>
+<Badge tone="limit">Application refused</Badge>`,
+  },
+  StatusRow: {
+    demo: `<div class="cx col">
+      <div class="srlist">
+        <div class="srow allowed"><span class="srail"></span><div><div class="st">Check your grant payment</div></div></div>
+        <div class="srow allowed"><span class="srail"></span><div><div class="st">See your ID and licence</div></div></div>
+        <div class="srow restricted"><span class="srail"></span><div><div class="st">Share your ID with a bank</div><div class="sd">Because money can be moved with it</div></div></div>
+        <div class="srow restricted"><span class="srail"></span><div><div class="st">Change your address</div><div class="sd">Because it changes your official record</div></div></div>
+      </div>
+    </div>`,
+    desc: 'BRAND.md §9.1 — a coloured left rail replaces the icon circle in lists: faster to scan, no icon that means different things across twelve language communities, and far cheaper to render down a long list. The state is always named in words, and a restricted row always states its reason (FR-F3-07).',
+    code: `<StatusRow title="Check your grant payment" state="allowed" />
+<StatusRow
+  title="Share your ID with a bank"
+  detail="Because money can be moved with it"
+  state="restricted"
+/>`,
+  },
+  Section: {
+    demo: `<div class="cx col">
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:3px;background:var(--ok)"></span><span style="font-size:1.03rem;font-weight:700;color:var(--ink)">You can do these now</span></div>
+    </div>`,
+    desc: 'A page-section heading, deliberately not uppercase — uppercase text is measurably harder for dyslexic and lower-literacy readers, because word-shape recognition breaks when every letter is the same height. Hierarchy comes from size. An optional tone shows as a small dot beside the heading, never by recolouring the whole line.',
+    code: `<Section label="You can do these now" tone="good">
+  {/* rows */}
+</Section>`,
+  },
+  Sheet: {
+    demo: `<div class="cx">
+      <div class="mzsheet"><div class="grab"><i></i></div><div class="body"><strong>Menu</strong><span>Profile, settings and sign out, from one place.</span></div></div>
+    </div>`,
+    desc: 'The one bottom-sheet idiom, factored out of the two menus that each hand-rolled it. Built on Radix Dialog for the focus trap, Escape-to-close and scroll lock; the entrance uses the <code>slow</code> motion token and the scrim darkens per theme. On React Native the same contract comes from the platform Modal plus Reanimated.',
+    code: `<Sheet>
+  <SheetTrigger asChild>
+    <Button variant="secondary">Open menu</Button>
+  </SheetTrigger>
+  <SheetContent>
+    <SheetTitle>Menu</SheetTitle>
+    <SheetDescription>
+      Profile, settings and sign out, from one place.
+    </SheetDescription>
+  </SheetContent>
+</Sheet>`,
+  },
+  Switch: {
+    demo: `<div class="cx"><span class="mzswitch" role="img" aria-label="On"><i></i></span><span class="mzswitch off" role="img" aria-label="Off"><i></i></span></div>`,
+    desc: 'A real toggle for Settings, which until now showed inert static rows. Built on Radix, so <code>role="switch"</code>, keyboard operation, focus and checked state all come for free. The thumb moves on <code>transform</code> only.',
+    code: `<Switch checked={on} onCheckedChange={setOn} />`,
+  },
+  Checkbox: {
+    demo: `<div class="cx"><span class="mzcheck">✓</span><span class="mzcheck off">✓</span></div>`,
+    desc: 'A single opt-in — for example, "share these details this once". A Radix primitive; the checked indicator is a Material Symbol tick, so the state is carried by a shape, not colour alone.',
+    code: `<Checkbox checked={agreed} onCheckedChange={setAgreed} />`,
+  },
+  RadioGroup: {
+    demo: `<div class="cx col">
+      <div class="mzopt"><span class="mzradio"><i></i></span> Tourism</div>
+      <div class="mzopt"><span class="mzradio off"><i></i></span> Business</div>
+    </div>`,
+    desc: 'Formalizes the manual selectable-list pattern the visa-reason picker already hand-rolls. The visible label beside each item carries the meaning; the ring only reinforces the selection.',
+    code: `<RadioGroup defaultValue="tourism">
+  <label><RadioGroupItem value="tourism" /> Tourism</label>
+  <label><RadioGroupItem value="business" /> Business</label>
+</RadioGroup>`,
+  },
+  Divider: {
+    demo: `<div class="cx col"><div style="color:var(--ink2);font-size:.9rem">Above</div><hr style="width:100%;margin:2px 0"><div style="color:var(--ink2);font-size:.9rem">Below</div></div>`,
+    desc: 'One hairline rule, factored out of the components that each drew their own <code>border-b</code>. A native separator, so its meaning reaches assistive technology without extra markup.',
+    code: `<Divider />`,
+  },
+  Avatar: {
+    demo: `<div class="cx">
+      <span class="mzava" style="width:32px;height:32px;font-size:.8rem">TK</span>
+      <span class="mzava">TK</span>
+      <span class="mzava" style="width:56px;height:56px;font-size:1.1rem">TK</span>
+    </div>`,
+    desc: 'Initials-first, not photo-first — a name is more reliably present than a picture, and the whole content model here is text-first. The initials are real text; when a name label sits beside it, the avatar is marked decorative so it is not announced twice.',
+    code: `<Avatar initials="TK" size="sm" />
+<Avatar initials="TK" size="md" />
+<Avatar initials="TK" size="lg" />`,
+  },
+  Skeleton: {
+    demo: `<div class="cx col"><span class="mzskel" style="width:60%"></span><span class="mzskel" style="width:85%"></span><span class="mzskel" style="width:45%"></span></div>`,
+    desc: 'A loading placeholder shaped like the content it stands in for, not a spinner. It carries <code>role="status"</code>, and its shimmer is an opacity pulse (R5) that stops entirely under reduced motion, collapsing to a still, legible fill rather than skipping the state.',
+    code: `<Skeleton className="h-4 w-3/4" />`,
+  },
+  EmptyState: {
+    demo: `<div class="cx">
+      <div class="mzempty"><span class="ei" aria-hidden="true">▣</span><h4>No documents yet</h4><p>Documents you're issued will show up here.</p><button class="btn btn-secondary" type="button">Learn how to get your first ID <span class="btn-ico" aria-hidden="true">→</span></button></div>
+    </div>`,
+    desc: 'A composed empty view with a concrete next action — never a dead end (R11). The icon is decorative; the action is a real, labelled control, because an empty state that only says "no data" leaves the person stuck.',
+    code: `<EmptyState
+  icon="inbox"
+  title="No documents yet"
+  description="Documents you're issued will show up here."
+  action={{ label: 'Learn how to get your first ID' }}
+/>`,
+  },
+};
+
+const availWeb = (s) =>
+  s === 'ship' ? `<span class="avail ship">Web ✓</span>` : `<span class="avail wip">Web — in progress</span>`;
+const availApp = (s) =>
+  s === 'ship' ? `<span class="avail ship">App ✓</span>` : `<span class="avail wip">App — in progress</span>`;
+
+function codeBlock(src) {
+  return `<div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>${esc(src)}</pre></div>`;
+}
+
+function componentSection(c) {
+  const id = c.name.toLowerCase();
+  const d = CMP_DETAIL[c.name];
+  return `<section class="cref-sec" id="${id}">
+    <div class="cref-head"><h2>${esc(c.name)}</h2>${availWeb(c.web)}${availApp(c.rn)}</div>
+    ${d.demo}
+    <p>${d.desc}</p>
+    ${codeBlock(d.code)}
+  </section>`;
+}
+
+function components() {
+  const shipped = COMPONENTS.filter((c) => c.web === 'ship').length;
+
+  const index = `<nav class="cref-nav" aria-label="Component index">
+    <p class="sect">${COMPONENTS.length} components</p>
+    <ul>${COMPONENTS.map((c) => `<li><a href="#${c.name.toLowerCase()}">${esc(c.name)}</a></li>`).join('')}</ul>
+  </nav>`;
+
+  const sections = COMPONENTS.map(componentSection).join('');
+
+  return page({
+    title: 'Components',
+    eyebrow: 'Foundations',
+    depth: 1,
+    active: 'components/',
+    side: false,
+    lead: `The first component library, built directly on the tokens — ${shipped} primitives shipped for web, with the React Native set following. Each is shown with its live example, a description, and the code to use it.`,
+    body: `
+${callout(`<p>These are <b>real components</b>, not mockups — the web set is built with React, Tailwind and Radix in <code>packages/web</code>, and documented in Storybook. Every example below is painted by the same tokens the shipped component reads, so what you see is what it renders. Use the <b>Dark</b> toggle in the header to check both themes.</p>`, { title: 'What this page is' })}
+
+<div class="cref">
+  ${index}
+  <div class="cref-main">
+    ${sections}
+
+    <section class="cref-sec" id="using">
+      <div class="cref-head"><h2>Where the code lives</h2></div>
+      <p>The web library is a self-contained package that consumes the generated token outputs — the zero-dependency token core is untouched. Components read the theme and semantic tokens through Tailwind classes, so one source renders correctly in light and dark with no per-theme variants to maintain.</p>
+      ${table(
+        ['Platform', 'Location', 'Documentation'],
+        [
+          ['Web (React + Tailwind + Radix)', code('packages/web/src/components/ui'), 'Storybook — every variant, state and theme'],
+          ['React Native (Expo)', code('mymzansi-app/components/ui.tsx'), 'React Native Storybook (in progress)'],
+        ],
+      )}
+      ${callout(`<p>Reference <b>theme</b> and <b>semantic</b> tokens from a component — never <code>color.palette.*</code> directly. A green button and a green success message must stay separable, or the user cannot learn what green means.</p>`, { title: 'The rule every component obeys' })}
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.cref-nav a'));
+  if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(l){l.classList.remove('on');});var a=map[e.target.id];if(a)a.classList.add('on');}
+    });
+  },{rootMargin:'0px 0px -72% 0px'});
+  document.querySelectorAll('.cref-sec').forEach(function(s){obs.observe(s);});
+})();
+</script>
+`,
+  });
+}
+
 /* ================================================================== roadmap */
 
 const ROADMAP = [
@@ -823,10 +1093,10 @@ const ROADMAP = [
   {
     n: '02',
     title: 'Components with code references',
-    status: 'next',
-    what: 'The tier this system most obviously lacks. Each component documented with its anatomy, its states, its accessibility contract, and working code for every supported platform.',
-    detail: 'The pattern is already proven in the reference app: Button, Card, StatusRow, Section and the identity band are built entirely from tokens. What is needed is to lift them into documented components with live examples, prop tables, and the code shown inline per platform. Every component carries its own accessibility contract — minimum target size, required accessible name, what must never be conveyed by colour alone — so the rules travel with the thing rather than living in a separate document nobody opens.',
-    needs: 'A component inventory, and a decision on which framework the canonical implementation targets.',
+    status: 'shipping',
+    what: 'The tier this system most obviously lacked. Fourteen primitives now shipped for web — each documented with its variants, its states, and the accessibility contract that travels with it. See the ' + '<a href="../components/">Components</a>' + ' page.',
+    detail: 'Phase 1 is delivered on web: Button, Card, Input, Badge, StatusRow, Section, Sheet, Switch, Checkbox, RadioGroup, Divider, Avatar, Skeleton and EmptyState, built with React, Tailwind and Radix in <code>packages/web</code> and documented in Storybook. The canonical framework decision was made — the web set targets Tailwind + shadcn/Radix, the app set React Native — and the two share one variant vocabulary so a design reviewed on one platform reads the same on the other. The React Native set is next: the existing primitives are being reconciled to the same contract, with six genuinely new ones (Switch, Checkbox, Divider, Avatar, Skeleton, EmptyState) added.',
+    needs: 'Nothing blocking web. React Native parity and a shared motion layer are the remaining work.',
     unblocks: 'Templates, the Figma library, and any meaningful conformity assessment.',
   },
   {
@@ -888,6 +1158,7 @@ const ROADMAP = [
 ];
 
 const PHASES = [
+  { key: 'shipping', label: 'Now shipping', note: 'Delivered, or actively landing. Building on the token foundation rather than waiting behind it.' },
   { key: 'next', label: 'Next up', note: 'Ready to start. Nothing blocks these, and between them they unblock most of the rest.' },
   { key: 'planned', label: 'Planned', note: 'Wanted, but each depends on earlier work landing first.' },
   { key: 'exploring', label: 'Exploring', note: 'The shape is not settled. These need research or a commission before they can be scoped.' },
@@ -943,15 +1214,15 @@ function roadmap() {
     eyebrow: 'What is coming',
     depth: 1,
     active: 'roadmap/',
-    lead: 'Eight things this system does not have yet, grouped by how ready they are. Nothing here is committed work — it is a statement of intent, with dependencies stated so the sequencing is arguable.',
+    lead: 'Eight things above the token foundation, grouped by how ready they are. The first — a component library — is now shipping; the rest is a statement of intent, with dependencies stated so the sequencing is arguable.',
     body: `
-${callout(`<p>The system today is <b>foundations only</b>: tokens, rules, and the evidence behind them. Everything on this page sits above that layer. Where an item is blocked, it says so and by what — an honest roadmap is more useful than an ambitious one.</p>`, { title: 'Where this stands' })}
+${callout(`<p>The foundation — tokens, rules, and the evidence behind them — is in place, and the <a href="../components/">component library</a> is now building on top of it. Everything else on this page sits above that layer. Where an item is blocked, it says so and by what — an honest roadmap is more useful than an ambitious one.</p>`, { title: 'Where this stands' })}
 
 ${legend}
 ${phases}
 
 <h2 id="sequencing">Why this order</h2>
-<p><b>Components come first</b> because almost everything else depends on them: templates are assembled from components, the Figma library mirrors them, and a conformity assessment needs something concrete to assess. Brand guidelines sit alongside because they are largely written already, and they gate anything a department would produce on its own.</p>
+<p><b>Components came first</b> because almost everything else depends on them: templates are assembled from components, the Figma library mirrors them, and a conformity assessment needs something concrete to assess. That is why they are the first thing shipping. Brand guidelines sit alongside because they are largely written already, and they gate anything a department would produce on its own.</p>
 <p><b>The awards programme is last</b> not because it matters least — it may be the item with the most leverage over adoption — but because it is the only one that cannot be built. It needs an institution willing to stand behind it.</p>
 
 ${table(
@@ -979,6 +1250,7 @@ export const pages = [
   { path: 'guidelines/accessibility/index.html', html: accessibility() },
   { path: 'guidelines/content/index.html', html: content() },
   { path: 'guidelines/identity-mark/index.html', html: identityMark() },
+  { path: 'components/index.html', html: components() },
   { path: 'programme/index.html', html: programme() },
   { path: 'roadmap/index.html', html: roadmap() },
   { path: 'tokens/index.html', html: tokensPage() },

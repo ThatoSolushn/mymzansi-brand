@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Components — MyMzansi Design System</title>
+<meta name="description" content="The first component library, built directly on the tokens — 14 primitives shipped for web, with the React Native set following. Each is shown with its live example, a description, and the code to use it.">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMCIgZmlsbD0iIzFCMkE0QSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjkuOTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iNS4xNSAzLjczIiB0cmFuc2Zvcm09InJvdGF0ZSgwIDMyIDMyKSIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjE5LjUxIiBmaWxsPSJub25lIiBzdHJva2U9IiNGQkM1NDkiIHN0cm9rZS13aWR0aD0iMi4xMzMzMzMzMzMzMzMzMzMzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1kYXNoYXJyYXk9IjguODkgNi40NCIgdHJhbnNmb3JtPSJyb3RhdGUoNDcgMzIgMzIpIi8+PGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMjkuMTIiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0ZCQzU0OSIgc3Ryb2tlLXdpZHRoPSIyLjEzMzMzMzMzMzMzMzMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuMTYgMTAuOTgiIHRyYW5zZm9ybT0icm90YXRlKDk0IDMyIDMyKSIvPjwvc3ZnPg==">
+<link rel="stylesheet" href="../assets/site.css?v=2b889c19">
+<script>
+/* Applied before first paint so an explicit choice never flashes the wrong theme.
+   No stored value means "follow the system", which is the default state. */
+(function(){try{var t=localStorage.getItem('mz-theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="mast-in">
+    <a class="brand" href="../">
+      <svg class="mzmark-mono" width="30" height="30" viewBox="0 0 30 30" aria-hidden="true" focusable="false"><circle cx="15" cy="15" r="4.42" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2.30 1.67" transform="rotate(0 15 15)"/><circle cx="15" cy="15" r="8.71" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="3.97 2.87" transform="rotate(47 15 15)"/><circle cx="15" cy="15" r="13.00" fill="none" stroke="var(--maize)" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="6.77 4.90" transform="rotate(94 15 15)"/></svg>
+      <span class="b-text">
+        <span class="b1">Design system</span>
+        <span class="b2">MyMzansi</span>
+      </span>
+    </a>
+    <nav class="mast-nav" aria-label="Main"><a href="../guidelines/">Guidelines</a><a href="../components/" aria-current="true">Components</a><a href="../programme/">Programme</a><a href="../roadmap/">Roadmap</a><a href="../tokens/">Tokens</a><a href="../about/">About</a></nav>
+    <button class="tt" id="themeToggle" type="button" role="switch" aria-checked="false" aria-label="Dark theme">
+      <span class="tt-label" aria-hidden="true">Dark</span>
+      <span class="tt-track" aria-hidden="true"><span class="tt-knob"></span></span>
+    </button>
+  </div>
+</header>
+<div class="band" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<div class="shell">
+
+<main id="main">
+  <div class="ph">
+    <p class="eyebrow">Foundations</p>
+    <h1>Components</h1>
+    <p class="lede">The first component library, built directly on the tokens — 14 primitives shipped for web, with the React Native set following. Each is shown with its live example, a description, and the code to use it.</p>
+  </div>
+  
+<aside class="callout note"><b class="ct">What this page is</b><div><p>These are <b>real components</b>, not mockups — the web set is built with React, Tailwind and Radix in <code>packages/web</code>, and documented in Storybook. Every example below is painted by the same tokens the shipped component reads, so what you see is what it renders. Use the <b>Dark</b> toggle in the header to check both themes.</p></div></aside>
+
+<div class="cref">
+  <nav class="cref-nav" aria-label="Component index">
+    <p class="sect">14 components</p>
+    <ul><li><a href="#button">Button</a></li><li><a href="#card">Card</a></li><li><a href="#input">Input</a></li><li><a href="#badge">Badge</a></li><li><a href="#statusrow">StatusRow</a></li><li><a href="#section">Section</a></li><li><a href="#sheet">Sheet</a></li><li><a href="#switch">Switch</a></li><li><a href="#checkbox">Checkbox</a></li><li><a href="#radiogroup">RadioGroup</a></li><li><a href="#divider">Divider</a></li><li><a href="#avatar">Avatar</a></li><li><a href="#skeleton">Skeleton</a></li><li><a href="#emptystate">EmptyState</a></li></ul>
+  </nav>
+  <div class="cref-main">
+    <section class="cref-sec" id="button">
+    <div class="cref-head"><h2>Button</h2><span class="avail ship">Web ✓</span><span class="avail ship">App ✓</span></div>
+    <div class="cx">
+      <button class="btn btn-primary" type="button">Continue</button>
+      <button class="btn btn-secondary" type="button">Change details</button>
+      <button class="btn btn-plain" type="button">Not now</button>
+      <button class="btn btn-destructive" type="button">Delete account</button>
+      <button class="btn btn-destructive-outline" type="button">Sign out <span class="btn-ico" aria-hidden="true">→</span></button>
+    </div>
+    <p>BRAND.md §9.2 — five variants, one filled primary per screen and a destructive treatment held for irreversible actions. Depth is carried by colour, and the press response animates <code>transform</code> and <code>opacity</code> only, so it holds the frame budget on a four-year-old handset. Every target is at least 44px (48px destructive), the label wraps rather than truncates, and focus is always visible. The trailing icon, where present, sits in its own nested chip — craft carried over from the "high-end agency" comparison, kept only where it reads as considered.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Button variant=&quot;primary&quot;&gt;Continue&lt;/Button&gt;
+&lt;Button variant=&quot;secondary&quot;&gt;Change details&lt;/Button&gt;
+&lt;Button variant=&quot;plain&quot;&gt;Not now&lt;/Button&gt;
+&lt;Button variant=&quot;destructive&quot;&gt;Delete account&lt;/Button&gt;
+&lt;Button variant=&quot;destructive-outline&quot; trailingIcon=&quot;logout&quot;&gt;
+  Sign out
+&lt;/Button&gt;</pre></div>
+  </section><section class="cref-sec" id="card">
+    <div class="cref-head"><h2>Card</h2><span class="avail ship">Web ✓</span><span class="avail ship">App ✓</span></div>
+    <div class="cx">
+      <div class="mzcard">
+        <span class="eb">Waiting for you</span>
+        <h4>ABC Bank wants to check your details</h4>
+        <p class="ds">To open a cheque account</p>
+        <span class="mt">Asked 4 minutes ago</span>
+        <div class="mzcard-foot"><button class="btn btn-primary" type="button">Look at this request <span class="btn-ico" aria-hidden="true">→</span></button></div>
+      </div>
+    </div>
+    <p>BRAND.md §9.1 — a card lifts off the ground by a surface change and a hairline border, not a drop shadow the cheap phone must paint. This is the canonical "a request came to you" surface. The heading and description are real text; nothing is conveyed by fill alone. Any organisation named in an example is invented, never a real institution.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Card&gt;
+  &lt;CardEyebrow&gt;Waiting for you&lt;/CardEyebrow&gt;
+  &lt;CardTitle&gt;ABC Bank wants to check your details&lt;/CardTitle&gt;
+  &lt;CardDescription&gt;To open a cheque account&lt;/CardDescription&gt;
+  &lt;CardMeta&gt;Asked 4 minutes ago&lt;/CardMeta&gt;
+  &lt;CardFooter&gt;
+    &lt;Button variant=&quot;primary&quot; trailingIcon=&quot;arrow_forward&quot;&gt;
+      Look at this request
+    &lt;/Button&gt;
+  &lt;/CardFooter&gt;
+&lt;/Card&gt;</pre></div>
+  </section><section class="cref-sec" id="input">
+    <div class="cref-head"><h2>Input</h2><span class="avail ship">Web ✓</span><span class="avail wip">App — in progress</span></div>
+    <div class="cx">
+      <div class="mzfield"><label>ID number</label><div class="inp">13 digits</div></div>
+      <div class="mzfield err"><label>Passport number</label><div class="inp"></div><span class="er">This field is required</span></div>
+    </div>
+    <p>Label above the field, sunk fill, hairline border — never a placeholder standing in for a label. The error sits below the field, tied to it with <code>aria-describedby</code> and announced via <code>role="alert"</code>, and the border turns critical to reinforce it without relying on colour alone.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Input label=&quot;ID number&quot; placeholder=&quot;13 digits&quot; /&gt;
+&lt;Input
+  label=&quot;Passport number&quot;
+  error=&quot;This field is required&quot;
+/&gt;</pre></div>
+  </section><section class="cref-sec" id="badge">
+    <div class="cref-head"><h2>Badge</h2><span class="avail ship">Web ✓</span><span class="avail ship">App ✓</span></div>
+    <div class="cx">
+      <span class="badge badge-neutral">Level 1 of 3</span>
+      <span class="badge badge-good">Visa approved</span>
+      <span class="badge badge-limit">Application refused</span>
+    </div>
+    <p>R3 — colour reinforces, never informs alone: the label text always carries the meaning. The "limit" tone uses maize as a bright ground with dark ink on top (R2), pinned to a dark foreground in both themes so it never becomes an illegible pale-on-yellow pairing (8.9:1).</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Badge tone=&quot;neutral&quot;&gt;Level 1 of 3&lt;/Badge&gt;
+&lt;Badge tone=&quot;good&quot;&gt;Visa approved&lt;/Badge&gt;
+&lt;Badge tone=&quot;limit&quot;&gt;Application refused&lt;/Badge&gt;</pre></div>
+  </section><section class="cref-sec" id="statusrow">
+    <div class="cref-head"><h2>StatusRow</h2><span class="avail ship">Web ✓</span><span class="avail ship">App ✓</span></div>
+    <div class="cx col">
+      <div class="srlist">
+        <div class="srow allowed"><span class="srail"></span><div><div class="st">Check your grant payment</div></div></div>
+        <div class="srow allowed"><span class="srail"></span><div><div class="st">See your ID and licence</div></div></div>
+        <div class="srow restricted"><span class="srail"></span><div><div class="st">Share your ID with a bank</div><div class="sd">Because money can be moved with it</div></div></div>
+        <div class="srow restricted"><span class="srail"></span><div><div class="st">Change your address</div><div class="sd">Because it changes your official record</div></div></div>
+      </div>
+    </div>
+    <p>BRAND.md §9.1 — a coloured left rail replaces the icon circle in lists: faster to scan, no icon that means different things across twelve language communities, and far cheaper to render down a long list. The state is always named in words, and a restricted row always states its reason (FR-F3-07).</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;StatusRow title=&quot;Check your grant payment&quot; state=&quot;allowed&quot; /&gt;
+&lt;StatusRow
+  title=&quot;Share your ID with a bank&quot;
+  detail=&quot;Because money can be moved with it&quot;
+  state=&quot;restricted&quot;
+/&gt;</pre></div>
+  </section><section class="cref-sec" id="section">
+    <div class="cref-head"><h2>Section</h2><span class="avail ship">Web ✓</span><span class="avail ship">App ✓</span></div>
+    <div class="cx col">
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:3px;background:var(--ok)"></span><span style="font-size:1.03rem;font-weight:700;color:var(--ink)">You can do these now</span></div>
+    </div>
+    <p>A page-section heading, deliberately not uppercase — uppercase text is measurably harder for dyslexic and lower-literacy readers, because word-shape recognition breaks when every letter is the same height. Hierarchy comes from size. An optional tone shows as a small dot beside the heading, never by recolouring the whole line.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Section label=&quot;You can do these now&quot; tone=&quot;good&quot;&gt;
+  {/* rows */}
+&lt;/Section&gt;</pre></div>
+  </section><section class="cref-sec" id="sheet">
+    <div class="cref-head"><h2>Sheet</h2><span class="avail ship">Web ✓</span><span class="avail wip">App — in progress</span></div>
+    <div class="cx">
+      <div class="mzsheet"><div class="grab"><i></i></div><div class="body"><strong>Menu</strong><span>Profile, settings and sign out, from one place.</span></div></div>
+    </div>
+    <p>The one bottom-sheet idiom, factored out of the two menus that each hand-rolled it. Built on Radix Dialog for the focus trap, Escape-to-close and scroll lock; the entrance uses the <code>slow</code> motion token and the scrim darkens per theme. On React Native the same contract comes from the platform Modal plus Reanimated.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Sheet&gt;
+  &lt;SheetTrigger asChild&gt;
+    &lt;Button variant=&quot;secondary&quot;&gt;Open menu&lt;/Button&gt;
+  &lt;/SheetTrigger&gt;
+  &lt;SheetContent&gt;
+    &lt;SheetTitle&gt;Menu&lt;/SheetTitle&gt;
+    &lt;SheetDescription&gt;
+      Profile, settings and sign out, from one place.
+    &lt;/SheetDescription&gt;
+  &lt;/SheetContent&gt;
+&lt;/Sheet&gt;</pre></div>
+  </section><section class="cref-sec" id="switch">
+    <div class="cref-head"><h2>Switch</h2><span class="avail ship">Web ✓</span><span class="avail wip">App — in progress</span></div>
+    <div class="cx"><span class="mzswitch" role="img" aria-label="On"><i></i></span><span class="mzswitch off" role="img" aria-label="Off"><i></i></span></div>
+    <p>A real toggle for Settings, which until now showed inert static rows. Built on Radix, so <code>role="switch"</code>, keyboard operation, focus and checked state all come for free. The thumb moves on <code>transform</code> only.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Switch checked={on} onCheckedChange={setOn} /&gt;</pre></div>
+  </section><section class="cref-sec" id="checkbox">
+    <div class="cref-head"><h2>Checkbox</h2><span class="avail ship">Web ✓</span><span class="avail wip">App — in progress</span></div>
+    <div class="cx"><span class="mzcheck">✓</span><span class="mzcheck off">✓</span></div>
+    <p>A single opt-in — for example, "share these details this once". A Radix primitive; the checked indicator is a Material Symbol tick, so the state is carried by a shape, not colour alone.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Checkbox checked={agreed} onCheckedChange={setAgreed} /&gt;</pre></div>
+  </section><section class="cref-sec" id="radiogroup">
+    <div class="cref-head"><h2>RadioGroup</h2><span class="avail ship">Web ✓</span><span class="avail wip">App — in progress</span></div>
+    <div class="cx col">
+      <div class="mzopt"><span class="mzradio"><i></i></span> Tourism</div>
+      <div class="mzopt"><span class="mzradio off"><i></i></span> Business</div>
+    </div>
+    <p>Formalizes the manual selectable-list pattern the visa-reason picker already hand-rolls. The visible label beside each item carries the meaning; the ring only reinforces the selection.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;RadioGroup defaultValue=&quot;tourism&quot;&gt;
+  &lt;label&gt;&lt;RadioGroupItem value=&quot;tourism&quot; /&gt; Tourism&lt;/label&gt;
+  &lt;label&gt;&lt;RadioGroupItem value=&quot;business&quot; /&gt; Business&lt;/label&gt;
+&lt;/RadioGroup&gt;</pre></div>
+  </section><section class="cref-sec" id="divider">
+    <div class="cref-head"><h2>Divider</h2><span class="avail ship">Web ✓</span><span class="avail wip">App — in progress</span></div>
+    <div class="cx col"><div style="color:var(--ink2);font-size:.9rem">Above</div><hr style="width:100%;margin:2px 0"><div style="color:var(--ink2);font-size:.9rem">Below</div></div>
+    <p>One hairline rule, factored out of the components that each drew their own <code>border-b</code>. A native separator, so its meaning reaches assistive technology without extra markup.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Divider /&gt;</pre></div>
+  </section><section class="cref-sec" id="avatar">
+    <div class="cref-head"><h2>Avatar</h2><span class="avail ship">Web ✓</span><span class="avail ship">App ✓</span></div>
+    <div class="cx">
+      <span class="mzava" style="width:32px;height:32px;font-size:.8rem">TK</span>
+      <span class="mzava">TK</span>
+      <span class="mzava" style="width:56px;height:56px;font-size:1.1rem">TK</span>
+    </div>
+    <p>Initials-first, not photo-first — a name is more reliably present than a picture, and the whole content model here is text-first. The initials are real text; when a name label sits beside it, the avatar is marked decorative so it is not announced twice.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Avatar initials=&quot;TK&quot; size=&quot;sm&quot; /&gt;
+&lt;Avatar initials=&quot;TK&quot; size=&quot;md&quot; /&gt;
+&lt;Avatar initials=&quot;TK&quot; size=&quot;lg&quot; /&gt;</pre></div>
+  </section><section class="cref-sec" id="skeleton">
+    <div class="cref-head"><h2>Skeleton</h2><span class="avail ship">Web ✓</span><span class="avail wip">App — in progress</span></div>
+    <div class="cx col"><span class="mzskel" style="width:60%"></span><span class="mzskel" style="width:85%"></span><span class="mzskel" style="width:45%"></span></div>
+    <p>A loading placeholder shaped like the content it stands in for, not a spinner. It carries <code>role="status"</code>, and its shimmer is an opacity pulse (R5) that stops entirely under reduced motion, collapsing to a still, legible fill rather than skipping the state.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;Skeleton className=&quot;h-4 w-3/4&quot; /&gt;</pre></div>
+  </section><section class="cref-sec" id="emptystate">
+    <div class="cref-head"><h2>EmptyState</h2><span class="avail ship">Web ✓</span><span class="avail wip">App — in progress</span></div>
+    <div class="cx">
+      <div class="mzempty"><span class="ei" aria-hidden="true">▣</span><h4>No documents yet</h4><p>Documents you're issued will show up here.</p><button class="btn btn-secondary" type="button">Learn how to get your first ID <span class="btn-ico" aria-hidden="true">→</span></button></div>
+    </div>
+    <p>A composed empty view with a concrete next action — never a dead end (R11). The icon is decorative; the action is a real, labelled control, because an empty state that only says "no data" leaves the person stuck.</p>
+    <div class="codeblock"><div class="cb-head"><span class="cb-lang">tsx</span></div><pre>&lt;EmptyState
+  icon=&quot;inbox&quot;
+  title=&quot;No documents yet&quot;
+  description=&quot;Documents you're issued will show up here.&quot;
+  action={{ label: 'Learn how to get your first ID' }}
+/&gt;</pre></div>
+  </section>
+
+    <section class="cref-sec" id="using">
+      <div class="cref-head"><h2>Where the code lives</h2></div>
+      <p>The web library is a self-contained package that consumes the generated token outputs — the zero-dependency token core is untouched. Components read the theme and semantic tokens through Tailwind classes, so one source renders correctly in light and dark with no per-theme variants to maintain.</p>
+      <div class="tw"><table style="min-width:560px">
+    <thead><tr><th>Platform</th><th>Location</th><th>Documentation</th></tr></thead>
+    <tbody><tr><td>Web (React + Tailwind + Radix)</td><td><code>packages/web/src/components/ui</code></td><td>Storybook — every variant, state and theme</td></tr><tr><td>React Native (Expo)</td><td><code>mymzansi-app/components/ui.tsx</code></td><td>React Native Storybook (in progress)</td></tr></tbody>
+  </table></div>
+      <aside class="callout note"><b class="ct">The rule every component obeys</b><div><p>Reference <b>theme</b> and <b>semantic</b> tokens from a component — never <code>color.palette.*</code> directly. A green button and a green success message must stay separable, or the user cannot learn what green means.</p></div></aside>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.cref-nav a'));
+  if(!links.length||!('IntersectionObserver' in window))return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){links.forEach(function(l){l.classList.remove('on');});var a=map[e.target.id];if(a)a.classList.add('on');}
+    });
+  },{rootMargin:'0px 0px -72% 0px'});
+  document.querySelectorAll('.cref-sec').forEach(function(s){obs.observe(s);});
+})();
+</script>
+
+</main>
+</div>
+
+<footer class="site">
+  <div class="foot-in">
+    <div>
+      <h4>Status</h4>
+      <p><b>Unofficial concept work.</b> Unofficial concept work. Not endorsed by the Presidency Digital Services Unit. Tokens marked EXISTING were read from the live <a href="https://www.mymzansi.gov.za/" target="_blank" rel="noopener noreferrer">mymzansi.gov.za <span aria-hidden="true">↗</span></a> stylesheet; everything else is proposed.</p>
+      <p>Version 1.0.0 · every page generated from <code>tokens.json</code> · see how it maps to the <a href="../programme/">official programme</a>.</p>
+    </div>
+    <div>
+      <h4>Guidelines</h4>
+      <ul><li><a href="../guidelines/colour/">Colour</a></li><li><a href="../guidelines/identity-mark/">Identity mark</a></li><li><a href="../guidelines/typography/">Typography</a></li><li><a href="../guidelines/language/">Language</a></li><li><a href="../guidelines/space/">Space &amp; layout</a></li><li><a href="../guidelines/iconography/">Iconography</a></li><li><a href="../guidelines/motion/">Motion</a></li><li><a href="../guidelines/accessibility/">Accessibility</a></li><li><a href="../guidelines/content/">Content &amp; tone</a></li></ul>
+    </div>
+    <div>
+      <h4>Reference</h4>
+      <ul>
+        <li><a href="../programme/">The MyMzansi programme</a></li>
+        <li><a href="../roadmap/">Roadmap</a></li>
+        <li><a href="../tokens/">All tokens</a></li>
+        <li><a href="../about/">About &amp; status</a></li>
+        <li><a href="../TOKENS.md">Markdown catalogue</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+  var root=document.documentElement, btn=document.getElementById('themeToggle');
+  var mq=window.matchMedia('(prefers-color-scheme: dark)');
+  function isDark(){var t=root.getAttribute('data-theme');return t==='dark'||(t!=='light'&&mq.matches);}
+  function sync(){btn.setAttribute('aria-checked',String(isDark()));}
+  btn.addEventListener('click',function(){
+    var next=isDark()?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem('mz-theme',next);}catch(e){}
+    sync();
+  });
+  // Follow the system while no explicit choice has been stored.
+  mq.addEventListener('change',function(){if(!root.getAttribute('data-theme'))sync();});
+  sync();
+})();
+</script>
+</body>
+</html>
