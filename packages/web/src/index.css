@@ -11,11 +11,9 @@
 
 /* Self-hosted fonts — R6: no font CDN, no external network origin. */
 @import "@fontsource-variable/montserrat";
-/* BRAND.md §6: Material Symbols Outlined — the icon family this repo has
-   always specified, but which mymzansi-app (React Native) could only
-   approximate with @expo/vector-icons since it's a web-only family. This
-   is the first platform where the actual documented decision applies. */
-@import "material-symbols/outlined.css";
+/* Icons: BRAND.md §6 icon family is Fluent UI System Icons, rendered as
+   real React components via @fluentui/react-icons through the Icon wrapper
+   (src/components/ui/icon.tsx) — no icon-font import needed. */
 
 /* Radix enter/exit transitions (Dialog, Sheet, Popover…) — used only
    when motion is not reduced; see the reduced-motion override below. */

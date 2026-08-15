@@ -1200,8 +1200,8 @@ const ROADMAP = [
     title: 'Icon library',
     status: 'shipping',
     what: 'A browsable, searchable set with the semantic mapping made concrete — every icon rendered, named, and tied to the meaning it is allowed to carry. See the <a href="../icons/">Icons page</a>.',
-    detail: 'Shipped. The family is Fluent UI System Icons (MIT), and the curated set is rendered on the Icons page — searchable, each glyph shown, click-to-copy, grouped into the sixteen reserved semantic meanings (<code>icon.semantic.verified</code>, <code>icon.semantic.restricted</code>, …) and the common interface glyphs. Each SVG is normalised to <code>currentColor</code> so it themes for free, and the semantic layer means the whole set can be replaced without touching a single screen. Still ahead: flagging which icons are safe to use unaccompanied (in practice very few), and wiring the runtime component libraries onto the same set.',
-    needs: 'Nothing blocking. Runtime wiring of the component libraries onto Fluent is the remaining work.',
+    detail: 'Shipped. The family is Fluent UI System Icons (MIT), and the curated set is rendered on the Icons page — searchable, each glyph shown, click-to-copy, grouped into the sixteen reserved semantic meanings (<code>icon.semantic.verified</code>, <code>icon.semantic.restricted</code>, …) and the common interface glyphs. Each SVG is normalised to <code>currentColor</code> so it themes for free, and the semantic layer means the whole set can be replaced without touching a single screen. The <b>web</b> component library now renders these at runtime via <code>@fluentui/react-icons</code>, behind an <code>Icon</code> wrapper that maps the MyMzansi name to the Fluent component. Still ahead: the React Native library (which renders MaterialCommunityIcons today) onto the same set, and flagging which icons are safe to use unaccompanied (in practice very few).',
+    needs: 'Nothing blocking. React Native runtime wiring is the remaining piece.',
     unblocks: 'The Figma library, and consistent icon use across departments.',
   },
   {

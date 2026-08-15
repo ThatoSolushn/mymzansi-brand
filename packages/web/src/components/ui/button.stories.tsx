@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button } from './button'
+import { ICONS } from './icon'
 
 /**
  * BRAND.md §9.2. Five variants — the same set mymzansi-app's React Native
@@ -17,7 +18,7 @@ const meta = {
       control: 'select',
       options: ['primary', 'secondary', 'plain', 'destructive', 'destructive-outline'],
     },
-    trailingIcon: { control: 'text' },
+    trailingIcon: { control: 'select', options: [undefined, ...Object.keys(ICONS)] },
   },
   args: { children: 'Continue', variant: 'primary' },
 } satisfies Meta<typeof Button>
@@ -30,14 +31,14 @@ export const Secondary: Story = { args: { variant: 'secondary', children: 'Chang
 export const Plain: Story = { args: { variant: 'plain', children: 'Not now' } }
 export const Destructive: Story = { args: { variant: 'destructive', children: 'Delete account' } }
 export const DestructiveOutline: Story = {
-  args: { variant: 'destructive-outline', children: 'Sign out', trailingIcon: 'logout' },
+  args: { variant: 'destructive-outline', children: 'Sign out', trailingIcon: 'signOut' },
 }
 
 /** The button-in-button trailing icon — carried over from the "elite"
  * comparison direction: nested in its own chip, it reads as considered at
  * rest and slides on hover (transform only). */
 export const WithTrailingIcon: Story = {
-  args: { variant: 'primary', children: 'Look at this request', trailingIcon: 'arrow_forward' },
+  args: { variant: 'primary', children: 'Look at this request', trailingIcon: 'arrowRight' },
 }
 
 export const Disabled: Story = { args: { variant: 'primary', disabled: true } }
@@ -50,7 +51,7 @@ export const AllVariants: Story = {
       <Button variant="secondary">Change details</Button>
       <Button variant="plain">Not now</Button>
       <Button variant="destructive">Delete account</Button>
-      <Button variant="destructive-outline" trailingIcon="logout">
+      <Button variant="destructive-outline" trailingIcon="signOut">
         Sign out
       </Button>
     </div>

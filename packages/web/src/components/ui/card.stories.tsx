@@ -27,7 +27,7 @@ export const RequestCard: Story = {
       <CardDescription>To open a cheque account</CardDescription>
       <CardMeta>Asked 4 minutes ago</CardMeta>
       <CardFooter>
-        <Button variant="primary" trailingIcon="arrow_forward">
+        <Button variant="primary" trailingIcon="arrowRight">
           Look at this request
         </Button>
       </CardFooter>

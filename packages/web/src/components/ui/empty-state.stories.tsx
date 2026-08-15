@@ -22,7 +22,7 @@ export const NoDocuments: Story = {
         icon="inbox"
         title="No documents yet"
         description="Documents you're issued will show up here."
-        action={{ label: 'Learn how to get your first ID', trailingIcon: 'arrow_forward' }}
+        action={{ label: 'Learn how to get your first ID', trailingIcon: 'arrowRight' }}
       />
     </div>
   ),
@@ -31,7 +31,7 @@ export const NoDocuments: Story = {
 export const NoAction: Story = {
   render: () => (
     <div style={{ width: 420 }}>
-      <EmptyState icon="history" title="Nothing here yet" description="Anything you do will be listed here, newest first." />
+      <EmptyState icon="clock" title="Nothing here yet" description="Anything you do will be listed here, newest first." />
     </div>
   ),
 }

@@ -3,6 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { Slot } from 'radix-ui'
 
 import { cn } from '@/lib/utils'
+import { Icon, type IconName } from '@/components/ui/icon'
 
 /**
  * Button — BRAND.md §9.2. Five variants, not the generic
@@ -58,14 +59,14 @@ export type ButtonProps = React.ComponentProps<'button'> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
     /**
-     * Material Symbols ligature name for a trailing icon (e.g. "arrow_forward").
-     * Nested in its own rounded chip rather than sitting bare next to the
-     * label — the "button-in-button" treatment, carried over from the elite
-     * comparison direction because it reads as more considered at rest AND
-     * gives the icon a dedicated hit-target boundary, not because it's
-     * decorative.
+     * A MyMzansi icon name (e.g. "arrowRight") for a trailing icon, drawn from
+     * the curated Fluent set. Nested in its own rounded chip rather than
+     * sitting bare next to the label — the "button-in-button" treatment,
+     * carried over from the elite comparison direction because it reads as more
+     * considered at rest AND gives the icon a dedicated boundary, not because
+     * it is decorative.
      */
-    trailingIcon?: string
+    trailingIcon?: IconName
   }
 
 function Button({
@@ -93,12 +94,12 @@ function Button({
         <span
           aria-hidden="true"
           className={cn(
-            'material-symbols-outlined inline-flex size-6 shrink-0 items-center justify-center rounded-full text-[18px] leading-none',
+            'inline-flex size-6 shrink-0 items-center justify-center rounded-full',
             'transition-transform duration-quick ease-standard group-hover:translate-x-0.5',
             variant === 'primary' || variant === 'destructive' ? 'bg-black/10' : 'bg-current/10',
           )}
         >
-          {trailingIcon}
+          <Icon name={trailingIcon} size={18} />
         </span>
       ) : null}
     </Comp>

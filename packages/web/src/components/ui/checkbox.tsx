@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { Checkbox as CheckboxPrimitive } from 'radix-ui'
 import { cn } from '@/lib/utils'
+import { Icon } from '@/components/ui/icon'
 
 function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxPrimitive.Root>) {
   return (
@@ -17,9 +18,7 @@ function Checkbox({ className, ...props }: React.ComponentProps<typeof CheckboxP
       {...props}
     >
       <CheckboxPrimitive.Indicator className="flex items-center justify-center text-theme-textInvert">
-        <span aria-hidden="true" className="material-symbols-outlined text-[16px] leading-none">
-          check
-        </span>
+        <Icon name="check" size={14} aria-hidden="true" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   )

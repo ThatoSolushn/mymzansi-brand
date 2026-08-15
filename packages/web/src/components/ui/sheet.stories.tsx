@@ -35,7 +35,7 @@ export const AccountMenu: Story = {
           <StatusRow title="About this app" state="neutral" last />
         </div>
         <SheetClose asChild>
-          <Button variant="destructive-outline" trailingIcon="logout">
+          <Button variant="destructive-outline" trailingIcon="signOut">
             Sign out
           </Button>
         </SheetClose>

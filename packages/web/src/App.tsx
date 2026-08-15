@@ -34,7 +34,7 @@ function App() {
         <Button variant="secondary">Change details</Button>
         <Button variant="plain">Not now</Button>
         <Button variant="destructive">Delete account</Button>
-        <Button variant="destructive-outline" trailingIcon="logout">
+        <Button variant="destructive-outline" trailingIcon="signOut">
           Sign out
         </Button>
       </Row>
@@ -46,7 +46,7 @@ function App() {
           <CardDescription>To open a cheque account</CardDescription>
           <CardMeta>Asked 4 minutes ago</CardMeta>
           <CardFooter>
-            <Button variant="primary" trailingIcon="arrow_forward">
+            <Button variant="primary" trailingIcon="arrowRight">
               Look at this request
             </Button>
           </CardFooter>
@@ -95,7 +95,7 @@ function App() {
           icon="inbox"
           title="No documents yet"
           description="Documents you're issued will show up here."
-          action={{ label: 'Learn how to get your first ID', trailingIcon: 'arrow_forward' }}
+          action={{ label: 'Learn how to get your first ID', trailingIcon: 'arrowRight' }}
           className="w-full"
         />
       </Row>
