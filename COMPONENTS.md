@@ -324,14 +324,33 @@ item 20 start together instead of trailing forever. A single celebratory element
 nothing in the real world appears from nothing. Both collapse to an instant,
 in-place appearance under reduced motion (R9).
 
+A third choreography, `Seal`, is the **confirmation** case, and it is
+deliberately not the same as `Pop`. `Pop` is a spring — organic, elastic, the
+body's "it worked", and it belongs to the verification moment. `Seal` is a
+single decisive overshoot on the `easing.overshoot` curve at `duration.slow`,
+which BRAND.md §8.3 specs for exactly this ("Confirmation. One overshoot, never
+a loop"). It reads as a record being stamped rather than something bouncing,
+and it is reserved for the consent receipt — the point at which the state has
+done something irreversible with a person's data and owes them proof.
+
+Two moments, two curves, on purpose: §8.4.2 says to spend the motion budget
+where trust is decided, and those are the two places where it is.
+
 ```tsx
 // React Native (components/motion) — one item per staggered child
 <Appear index={i}><Card>{/* … */}</Card></Appear>
 <Pop><VerifiedMark /></Pop>
+<Seal delayMs={140}><ReferenceCard /></Seal>
 ```
 
 The delays and curves come entirely from the `motion` tokens; a screen never
 names a millisecond value.
+
+All three animate `transform` and `opacity` only, so **§8.2 remains at exactly
+one named exception** (the verification ring's `stroke-dashoffset`). A
+signature moment does not require a new exception, and adding one to get a
+nicer confirmation would have cost the rule its meaning. All three collapse to
+an instant, in-place appearance under reduced motion (R9).
 
 ---
 
