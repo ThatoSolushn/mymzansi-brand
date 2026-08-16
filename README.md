@@ -1,94 +1,131 @@
-# MyMzansi Design Tokens
+# MyMzansi — design system
 
-Design tokens for MyMzansi in **W3C Design Tokens Community Group (DTCG)** format, with a multi-platform build and enforceable WCAG 2.1 validation.
+The colours, type, spacing, icons and motion for a South African government
+services app — plus the reasoning for each decision, and automated checks that
+stop the system quietly breaking.
 
-> **Unofficial concept work.** Not endorsed by or affiliated with the Presidency's Digital Services Unit or any organ of the South African state. Tokens marked `EXISTING` in `BRAND.md` were read from the live `mymzansi.gov.za` stylesheet.
+📖 **[Read the documentation →](https://thatosolushn.github.io/mymzansi-brand/)**
+
+> **This is unofficial concept work.** It is not endorsed by, or connected to,
+> the Presidency's Digital Services Unit or any part of the South African
+> government. Values marked `EXISTING` in `BRAND.md` were read from the live
+> mymzansi.gov.za stylesheet; everything else is proposed.
 
 ---
 
-## Quick start
+## What is in here
+
+One file, `tokens.json`, holds every colour, size, spacing step, icon and
+animation timing. Everything else is generated from it.
+
+That matters because it means the documentation, the website, the app and the
+stylesheets cannot drift apart. Change a colour in one place and every output
+updates together. There is no second copy to forget.
+
+| File | What it is |
+|---|---|
+| `tokens.json` | **The source of truth.** Every value lives here. Edit only this. |
+| `BRAND.md` | How things should look and behave, and *why* — including the full contrast audit. |
+| `REQUIREMENTS.md` | What the product must do — 147 requirements, each with a testable description. |
+| `COMPONENTS.md` | Each component: its variants, its states, and working code. |
+| `docs/` | The generated documentation website. |
+| `dist/` | The generated files apps actually import. |
+
+`dist/` and `docs/` are committed on purpose, so a designer or another team can
+use them without installing anything.
+
+---
+
+## Running it
+
+You need [Node.js](https://nodejs.org). There is nothing to install — the
+scripts use no external packages at all.
 
 ```bash
-npm run check      # build + validate. No dependencies, no install step.
+npm run check
 ```
 
-| Script | Does |
+That rebuilds everything and runs all the checks. Use it before committing.
+
+| Command | What it does |
 |---|---|
-| `npm run build` | Generates all platform outputs into `dist/` |
-| `npm run docs` | Generates the Markdown token catalogue |
-| `npm run site` | Generates the documentation website into `docs/` |
-| `npm run validate` | Runs 106 WCAG 2.1 and integrity checks. Exits non-zero on failure |
-| `npm run check` | All of the above. **Use this in CI.** |
+| `npm run build` | Regenerates the files apps import, into `dist/` |
+| `npm run site` | Regenerates the documentation website, into `docs/` |
+| `npm run docs` | Regenerates the token list as Markdown |
+| `npm run validate` | Runs 107 automated checks. Fails loudly if anything breaks |
+| `npm run check` | All of the above |
 
 ---
 
-## Files
+## The documentation website
 
-```
-tokens.json                    ← SINGLE SOURCE OF TRUTH. Edit only this.
-BRAND.md                       ← Design rules, agent directives, full WCAG audit
-REQUIREMENTS.md                ← What must exist: 137 requirements with acceptance criteria
-COMPONENTS.md                  ← Component contract: variants, states, a11y, per-platform code
-packages/web/                  ← Web component library (React + Tailwind + Radix). Its own deps.
-scripts/build-tokens.mjs       ← Platform generator. Zero dependencies.
-scripts/build-docs.mjs         ← Markdown catalogue generator. Zero dependencies.
-scripts/build-site.mjs         ← Website generator. Zero dependencies.
-scripts/site/                  ← Site layout, shared helpers and page content
-scripts/validate-tokens.mjs    ← WCAG + integrity validator (CI gate). Zero dependencies.
-dist/                          ← GENERATED. Never edit by hand.
-  css/tokens.css
-  js/tokens.js + tokens.d.ts       (React Native / web)
-  tailwind/tailwind.config.js
-  swift/MzTokens.swift
-  kotlin/MzTokens.kt
-  dart/mz_tokens.dart
-docs/                          ← GENERATED. The documentation website.
-  index.html                       home
-  guidelines/<topic>/index.html    eight foundation guidelines
-  tokens/index.html                the full searchable dictionary
-  about/index.html                 status, provenance, confidence
-  assets/site.css                  generated FROM the tokens
-  TOKENS.md                        the catalogue as Markdown
-```
+**[thatosolushn.github.io/mymzansi-brand](https://thatosolushn.github.io/mymzansi-brand/)**
 
-## The website
+This is the thing to send someone. It covers colour, typography, language,
+spacing, icons, motion, accessibility and writing, plus a searchable list of
+every value in the system.
 
-`docs/` is a static, multi-page documentation site — the thing to hand a developer or designer. Twelve pages: eight guidelines (colour, typography, language, space, iconography, motion, accessibility, content), a searchable dictionary of all tokens, and a status page.
+Two things about it are deliberate:
 
-Every number on it is computed from `tokens.json` at build time, so the documentation cannot drift from the system. Its stylesheet is generated **from the tokens**, which makes the site an instance of the design system rather than a description of one.
+Every number on the site is calculated from `tokens.json` when it is built, so
+the documentation cannot describe a system that no longer exists.
 
-Zero dependencies, no build framework, no external network requests — the site holds to the same budget it asks of the product.
+Its own styling is generated from the same values, so the site is an example of
+the design system rather than a description of one.
 
-**To publish:** repository → Settings → Pages → *Deploy from a branch* → `main` / `/docs`.
+It also loads nothing from anywhere else — no fonts, no analytics, no tracking.
+It holds to the same budget it asks of the app.
 
-`docs/TOKENS.md` is the same catalogue in Markdown, so token changes show up as readable diffs in review.
-
-`dist/` is committed deliberately — designers, other agents, and non-JS platforms need the outputs without running a toolchain.
-
-**No dependencies.** Both scripts are plain Node with no packages, so there is no `npm install`, no lockfile to audit, and no supply chain. For a public-sector repo that is worth more than the convenience of a token framework.
+*Published from the `main` branch, `/docs` folder, via GitHub Pages.*
 
 ---
 
-## For AI agents
+## Changing something
 
-**Read `BRAND.md` §0 and `REQUIREMENTS.md` §0 before generating anything.**
-
-- `REQUIREMENTS.md` says **what must exist** — features, behaviour, acceptance criteria. Cite requirement IDs (`FR-F3-04`) in code and tests.
-- `BRAND.md` says **how it must look and behave** — tokens, contrast, motion, copy.
-
-Both apply. `BRAND.md` §0 contains twelve `MUST`/`MUST NOT` design rules. It contains twelve `MUST`/`MUST NOT` rules and a verification checklist. The three that are broken most often:
-
-- **R1** — never hardcode a colour, size, spacing value, radius or duration. Reference a token.
-- **R2** — maize (`#FBC549`) is a **ground, never a mark** on light backgrounds. It is 1.44:1 there. See `BRAND.md` §4.5.
-- **R4** — no fixed-width containers on translatable text. Nguni languages produce unbreakable tokens roughly 2× the English length. See `BRAND.md` §5.5.
-
-`tokens.json` itself is the machine-readable source — a DTCG tree of `$value` / `$type` / `$description`. Read it directly; do not parse the generated CSS.
+1. Edit `tokens.json`. Add a short note saying why.
+2. Run `npm run check`.
+3. Fix anything it flags before committing.
+4. Commit `tokens.json` **and** the regenerated `dist/` and `docs/`.
 
 ---
 
-## Consuming the tokens
+## What the checks catch
 
-### Web
+The 107 checks are mostly about **contrast** — whether text is actually legible
+against the background behind it. These are calculated, not eyeballed, because
+colours that look fine on a designer's monitor routinely fail on a cheap phone
+in daylight.
+
+They also catch: values that point at something that no longer exists, the same
+colour defined twice under different names, and combinations that pass but only
+just.
+
+**That last one matters more than it sounds.** The system flags any pairing
+within 10% of the limit. The reason is a real defect documented in `BRAND.md`
+§4.6.2: one green measured 5.00:1 on pure white and 4.36:1 on a slightly warm
+white. It looked fine, it passed, and it broke the moment the background
+changed. Anything sitting that close to the edge is one small decision away
+from failing.
+
+Three warnings are currently known and accepted — they are listed in the
+validator output with the reasoning.
+
+### What the checks cannot catch
+
+Worth being honest about, because these are still open:
+
+- **Colour blindness.** Green versus ochre is the pairing most at risk.
+- **Readability in direct sunlight** on an inexpensive screen.
+- **Whether the typeface covers all twelve official languages**, including the
+  click letters `ǀ ǁ ǂ ǃ` and Tshivenda's marked letters.
+- **Whether any of the writing is correct.** All non-English wording in the
+  prototype is placeholder and needs a native speaker.
+
+---
+
+## For developers using it
+
+Import the generated files rather than copying values out of them.
 
 ```html
 <link rel="stylesheet" href="dist/css/tokens.css">
@@ -101,114 +138,51 @@ Both apply. `BRAND.md` §0 contains twelve `MUST`/`MUST NOT` design rules. It co
   border-radius: var(--dimension-radius-lg);
   padding: var(--dimension-space-md);
 }
-.card__action {
-  background: var(--theme-accent);
-  color: var(--theme-text-invert);
-  min-height: var(--dimension-touch-min);
-  transition: transform var(--motion-duration-base) var(--motion-easing-standard);
-}
 ```
 
-Reference **theme** tokens (`--theme-text`, `--theme-surface`, `--theme-accent`) — not palette tokens (`--color-palette-ink`). Theme tokens resolve per theme automatically; palette tokens do not.
+Use the `--theme-*` names, not the raw palette names. Theme names automatically
+resolve to the right value in light and dark mode; raw palette names do not.
 
-Typography ships as both variables and utility classes:
+Light and dark work like this: by default the system follows the device
+setting. Setting `data-theme="light"` or `data-theme="dark"` on the page
+overrides it. Leaving it off is the normal case.
 
-```html
-<h1 class="type-title-1">Sawubona</h1>
-<p class="type-body">…</p>
-```
-
-### Theming
-
-The generated CSS implements the three-state contract from `BRAND.md` §3.3:
-
-| State | Selector |
-|---|---|
-| System/unset (**the default**) | `:root` + `@media (prefers-color-scheme: dark)` |
-| Explicit light | `:root[data-theme="light"]` beats the OS dark preference |
-| Explicit dark | `:root[data-theme="dark"]` beats the OS light preference |
-
-Set `data-theme` on `<html>` to override. Leave it off for system behaviour.
-
-### Other platforms
-
-```swift
-MzTokens.aloe               // dist/swift/MzTokens.swift
-```
-```kotlin
-MzTokens.aloe               // dist/kotlin/MzTokens.kt
-```
-```dart
-MzTokens.aloe               // dist/dart/mz_tokens.dart
-```
-```js
-// dist/tailwind/tailwind.config.js
-```
+The same values ship for other platforms too — Swift, Kotlin, Dart and a
+Tailwind config, all in `dist/`.
 
 ---
 
-## Adding or changing a token
+## For AI agents
 
-1. Edit **`tokens.json`** only. Add a `$description` explaining the choice.
-2. Run `npm run check`.
-3. Fix any failure before committing. Treat warnings as review items, not noise — see below.
-4. Commit `tokens.json` **and** the regenerated `dist/`.
+**Read `BRAND.md` §0 and `REQUIREMENTS.md` §0 before generating anything.**
 
-### About the marginal warnings
+`REQUIREMENTS.md` says what must exist. `BRAND.md` says how it must look and
+behave. Both apply, and `BRAND.md` §0 lists twelve rules phrased as MUST or
+MUST NOT. The three broken most often:
 
-The validator flags any pairing that passes but sits within 10% of its threshold. This is not pedantry — it is the exact shape of the `aloe-lt` defect documented in `BRAND.md` §4.6.2: `#3A7D44` is 5.00:1 on pure white and 4.36:1 on a warm tint. It looked fine, and it broke the moment the ground moved.
+- **R1** — never write a colour, size, spacing value or duration directly.
+  Reference a named value.
+- **R2** — maize (`#FBC549`) is a background only, never text, an icon or a
+  border on a light surface. It measures 1.44:1 there. See §4.5.
+- **R4** — never use fixed-width containers for text that gets translated.
+  Nguni languages routinely run about twice the length of English, in words
+  that cannot be broken. See §5.5.
 
-Current warnings are known and accepted:
-
-| Warning | Status |
-|---|---|
-| `light.text-3` 4.82:1 | Accepted — meta text, deliberately quiet |
-| `light.accent-warm` / `semantic.restricted` 4.76:1 | Accepted — ochre is at its usable ceiling before it stops reading as ochre |
-| `aloe-lt on bone` 4.51:1 | **Watch.** Existing MyMzansi token, only passes because bone was lightened for it. Do not darken bone. |
-
----
-
-## CI
-
-```yaml
-- run: npm run check     # no install step — zero dependencies
-```
-
-`scripts/validate-tokens.mjs` exits non-zero on any WCAG failure, unresolved alias, or token drift.
+Read `tokens.json` directly. Do not parse the generated CSS.
 
 ---
 
-## What the validator checks
+## Why it is built this way
 
-| # | Check |
-|---|---|
-| 1 | `tokens.json` parses; all 56 aliases resolve; no cycles |
-| 2 | §1.4.3 AA — every theme text token vs both its surfaces (4.5:1) |
-| 3 | §1.4.3 AA — inverted text on every filled accent (4.5:1) |
-| 4 | §1.4.3 AA — every semantic colour on both light surfaces |
-| 5 | R2 — confirms maize still fails as a mark, so the rule still stands; and that ink on maize holds |
-| 6 | Drift — duplicate hexes under different names |
-| 7 | Marginal-pass detection (within 10% of threshold) |
+Plain files in Git, rather than a hosted design-system product:
 
-**What it does not check** — and these remain open, see `BRAND.md` §15:
+- **Nothing is locked inside someone else's account.** A design system you
+  cannot export is a liability.
+- **It works in GitLab**, which the MyMzansi programme uses.
+- **AI agents can read it directly** — it is just text, with no login.
+- **It is free and anyone can audit it**, which matters for public money.
 
-- Colour-vision deficiency. Aloe vs ochre is most at risk.
-- Sunlight legibility on low-cost LCDs.
-- Typeface coverage across all twelve official languages, including the click letters `ǀ ǁ ǂ ǃ`.
-- Whether any copy is correct — all non-English strings are indicative and need native-speaker review.
-
----
-
-## Tooling rationale
-
-Git + DTCG + a plain-Node generator, rather than a hosted design-system platform:
-
-1. **No vendor lock-in.** A design system held hostage in a SaaS account is the credential-format lock-in argument at a smaller scale.
-2. **Works in GitLab**, which the MyMzansi resources page describes as the approved government codebase repository.
-3. **AI agents read plain text natively** — no API, no export, no auth.
-4. **Free and auditable**, which matters for public procurement.
-5. **Aligns with the digital-public-goods posture** — South Africa joined the DPGA, and the DSU already reuses GOV.UK Pay and Notify.
-
-The generator is ~30KB of plain Node rather than Style Dictionary. Style Dictionary is the right call once outputs multiply or the team grows; until then, zero dependencies is the stronger position for a public-sector repo.
-
-Add **Tokens Studio for Figma** so designers edit the same source. Add **Storybook** once a framework is chosen. Add a hosted docs layer only if non-technical sign-off demands it — and never let it own the tokens.
+The generator is about 30KB of plain Node with no dependencies. That means no
+install step, no lockfile, and nothing to audit for security. A larger team or
+more output formats would justify a proper tool like Style Dictionary; until
+then, depending on nothing is the stronger position for public-sector code.
