@@ -10,10 +10,34 @@ import { markMono, faviconHref } from './mark.mjs';
 
 const MYMZANSI_URL = 'https://www.mymzansi.gov.za/';
 
+/**
+ * Top navigation, in two groups.
+ *
+ * `use`  — what you need to design or build something: the rules, the parts,
+ *          the assets, then the values. It reads as a progression, and the
+ *          dictionary sits at the end of it because you look things up in a
+ *          dictionary, you do not start there.
+ * `meta` — what you need to judge the work: whose programme it is, what is
+ *          built, and how much of it is confirmed.
+ *
+ * The previous order was Guidelines, Components, Icons, Programme, Roadmap,
+ * Tokens, About — which stranded Tokens between two status pages and split the
+ * design resources in half. Grouping is declared here rather than implied by
+ * position, so the sidebar derives from it and the two lists cannot drift.
+ *
+ * Checked against the reference class rather than assumed. GOV.UK's Design
+ * System runs Get started · Styles · Components · Patterns · Community ·
+ * Accessibility; USWDS runs How to use · Design principles · Components ·
+ * Patterns · Design tokens · Utilities · Templates · About. Both lead with
+ * foundations, put Components early, keep the value dictionary inside the
+ * resources run rather than beside the status pages, and end on meta.
+ */
 export const NAV = [
   {
     title: 'Guidelines',
     href: 'guidelines/',
+    group: 'use',
+    /** Longer label for the sidebar, where there is room to be explicit. */
     children: [
       { title: 'Colour', href: 'guidelines/colour/', blurb: 'Palette, themes, semantic meaning, and the contrast rules that govern them.' },
       { title: 'Identity mark', href: 'guidelines/identity-mark/', blurb: 'A proposed mark, and what it takes — and deliberately does not take — from the official MyMzansi logo.' },
@@ -26,12 +50,12 @@ export const NAV = [
       { title: 'Content & tone', href: 'guidelines/content/', blurb: 'How the service speaks — especially when something has gone wrong.' },
     ],
   },
-  { title: 'Components', href: 'components/', children: [] },
-  { title: 'Icons', href: 'icons/', children: [] },
-  { title: 'Programme', href: 'programme/', children: [] },
-  { title: 'Roadmap', href: 'roadmap/', children: [] },
-  { title: 'Tokens', href: 'tokens/', children: [] },
-  { title: 'About', href: 'about/', children: [] },
+  { title: 'Components', href: 'components/', group: 'use', long: 'Components', children: [] },
+  { title: 'Icons', href: 'icons/', group: 'use', long: 'Icons', children: [] },
+  { title: 'Tokens', href: 'tokens/', group: 'use', long: 'All tokens', children: [] },
+  { title: 'Programme', href: 'programme/', group: 'meta', long: 'The programme', children: [] },
+  { title: 'Roadmap', href: 'roadmap/', group: 'meta', long: 'Roadmap', children: [] },
+  { title: 'About', href: 'about/', group: 'meta', long: 'About &amp; status', children: [] },
 ];
 
 /** Depth-aware relative prefix so the site works from any directory or subpath. */
@@ -463,8 +487,30 @@ footer.site{border-top:1px solid var(--rule);background:var(--sunk)}
  */
 const CSS_V = createHash('sha256').update(stylesheet()).digest('hex').slice(0, 8);
 
+/**
+ * One sidebar group, derived from NAV so it cannot drift out of order or out
+ * of sync with the masthead. Entries without their own sub-pages only; the
+ * Guidelines tree is rendered separately above, from its `children`.
+ */
+function sideGroup(heading, group, r, active) {
+  const items = NAV.filter((n) => n.group === group && !n.children?.length);
+  if (!items.length) return '';
+  const li = items
+    .map(
+      (n) =>
+        `<li><a href="${r}${n.href}"${active === n.href ? ' aria-current="page"' : ''}>${n.long ?? esc(n.title)}</a></li>`,
+    )
+    .join('');
+  return `<p class="sect">${esc(heading)}</p><ul>${li}</ul>`;
+}
+
 export function page({ title, eyebrow = '', depth = 0, active = '', body, side = true, lead = '' }) {
   const r = rel(depth);
+  // Order carries the grouping; there is deliberately no separator rule.
+  // GOV.UK's Design System and USWDS both run their primary nav ungrouped and
+  // let sequence do the work — foundations, then parts, then meta — and a
+  // hairline here would be motif rather than structure (BRAND.md §2.2). The
+  // sidebar states the groups explicitly, where headings are already the idiom.
   const nav = NAV.map((n) => {
     const on = active === n.href || (n.children ?? []).some((c) => c.href === active);
     return `<a href="${r}${n.href}"${on ? ' aria-current="true"' : ''}>${esc(n.title)}</a>`;
@@ -477,15 +523,8 @@ export function page({ title, eyebrow = '', depth = 0, active = '', body, side =
           .map((c) => `<li><a href="${r}${c.href}"${active === c.href ? ' aria-current="page"' : ''}>${esc(c.title)}</a></li>`)
           .join('')}</ul>`;
       }).join('')}
-      <p class="sect">Reference</p>
-      <ul>
-        <li><a href="${r}components/"${active === 'components/' ? ' aria-current="page"' : ''}>Components</a></li>
-        <li><a href="${r}icons/"${active === 'icons/' ? ' aria-current="page"' : ''}>Icons</a></li>
-        <li><a href="${r}programme/"${active === 'programme/' ? ' aria-current="page"' : ''}>The programme</a></li>
-        <li><a href="${r}roadmap/"${active === 'roadmap/' ? ' aria-current="page"' : ''}>Roadmap</a></li>
-        <li><a href="${r}tokens/"${active === 'tokens/' ? ' aria-current="page"' : ''}>All tokens</a></li>
-        <li><a href="${r}about/"${active === 'about/' ? ' aria-current="page"' : ''}>About &amp; status</a></li>
-      </ul></aside>`
+      ${sideGroup('Reference', 'use', r, active)}
+      ${sideGroup('About the work', 'meta', r, active)}</aside>`
     : '';
 
   return `<!doctype html>
