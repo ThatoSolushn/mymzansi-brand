@@ -57,6 +57,10 @@ class MzSemanticColorResolved {
   final Color success;
   final Color critical;
   final Color info;
+
+  /// Field-wise interpolation, so a light/dark swap can animate instead of jumping.
+  static MzSemanticColorResolved lerp(MzSemanticColorResolved a, MzSemanticColorResolved b, double t) =>
+      MzSemanticColorResolved(success: Color.lerp(a.success, b.success, t)!, critical: Color.lerp(a.critical, b.critical, t)!, info: Color.lerp(a.info, b.info, t)!);
 }
 
 /// Theme-resolved surface/text colours. Components MUST use `MzTheme.current()`, never MzColor directly.
@@ -81,14 +85,19 @@ class MzTheme {
   static const dark = MzTheme(bg: Color(0xFF12161F), surface: Color(0xFF1A2030), surfaceSunk: Color(0xFF12161F), surfaceInvert: Color(0xFFECEAE4), text: Color(0xFFECEAE4), text2: Color(0xFFA8AFB8), text3: Color(0xFF8A929B), textInvert: Color(0xFF12161F), border: Color(0xFF3A4557), accent: Color(0xFF58B06A), accentWarm: Color(0xFFDE8A5E), anchor: Color(0xFF93A9D6), anchorFill: Color(0xFF1B2A4A), onAnchor: Color(0xFFECEAE4));
 
   static MzTheme current(Brightness brightness) => brightness == Brightness.dark ? dark : light;
+
+  /// Field-wise interpolation, so a light/dark swap can animate instead of jumping.
+  static MzTheme lerp(MzTheme a, MzTheme b, double t) =>
+      MzTheme(bg: Color.lerp(a.bg, b.bg, t)!, surface: Color.lerp(a.surface, b.surface, t)!, surfaceSunk: Color.lerp(a.surfaceSunk, b.surfaceSunk, t)!, surfaceInvert: Color.lerp(a.surfaceInvert, b.surfaceInvert, t)!, text: Color.lerp(a.text, b.text, t)!, text2: Color.lerp(a.text2, b.text2, t)!, text3: Color.lerp(a.text3, b.text3, t)!, textInvert: Color.lerp(a.textInvert, b.textInvert, t)!, border: Color.lerp(a.border, b.border, t)!, accent: Color.lerp(a.accent, b.accent, t)!, accentWarm: Color.lerp(a.accentWarm, b.accentWarm, t)!, anchor: Color.lerp(a.anchor, b.anchor, t)!, anchorFill: Color.lerp(a.anchorFill, b.anchorFill, t)!, onAnchor: Color.lerp(a.onAnchor, b.onAnchor, t)!);
 }
 
+/// CSS generic families are stripped — Flutter resolves real family names only.
 class MzFontFamily {
   MzFontFamily._();
   static const sans = 'Montserrat';
-  static const sansFallback = ['system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'];
-  static const mono = 'ui-monospace';
-  static const monoFallback = ['SFMono-Regular', 'SF Mono', 'Menlo', 'Consolas', 'monospace'];
+  static const sansFallback = ['Segoe UI', 'Roboto'];
+  static const mono = 'SFMono-Regular';
+  static const monoFallback = ['SF Mono', 'Menlo', 'Consolas'];
 }
 
 /// Composite type styles. `height` is a unitless multiplier of fontSize, matching CSS line-height.
@@ -140,6 +149,18 @@ class MzIconSize {
   static const md = 20.0;
   static const lg = 24.0;
   static const xl = 28.0;
+}
+
+/// Left status rail widths (BRAND.md §9.1) — the rail replaces icon circles in lists.
+class MzRail {
+  MzRail._();
+  static const status = 4.0;
+}
+
+class MzBorder {
+  MzBorder._();
+  static const hairline = 1.0;
+  static const focus = 2.0;
 }
 
 /// Fluent UI System Icons glyph names (see BRAND.md §6).

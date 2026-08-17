@@ -629,6 +629,29 @@ function letterSpacingPx(letterSpacingEm, fontSizePx) {
   return Math.round(parseFloat(letterSpacingEm) * parseFloat(fontSizePx) * 1000) / 1000;
 }
 
+// CSS generic families ("system-ui", "sans-serif", "ui-monospace", …) are a browser concept.
+// Flutter's font resolver matches real family names only and silently drops the rest, so a stack
+// led by "ui-monospace" resolves to nothing. Strip them from the Dart stack, same as the
+// letter-spacing conversion above: the pipeline does the platform transform, not the consumer.
+const CSS_GENERIC_FAMILIES = new Set([
+  "system-ui",
+  "-apple-system",
+  "ui-monospace",
+  "ui-sans-serif",
+  "ui-serif",
+  "sans-serif",
+  "serif",
+  "monospace",
+  "cursive",
+  "fantasy",
+]);
+
+function dartFontStack(families) {
+  const out = families.filter((f) => !CSS_GENERIC_FAMILIES.has(f));
+  if (out.length === 0) throw new Error(`Font stack has no real family for Flutter: ${families.join(", ")}`);
+  return out;
+}
+
 function buildDart() {
   const lines = [];
   lines.push(`// ${GENERATED_NOTICE}`);
@@ -666,6 +689,16 @@ function buildDart() {
     `  const MzSemanticColorResolved({${semanticPairs.map(([n]) => `required this.${ident(n)}`).join(", ")}});`
   );
   for (const [name] of semanticPairs) lines.push(`  final Color ${ident(name)};`);
+  lines.push("");
+  lines.push("  /// Field-wise interpolation, so a light/dark swap can animate instead of jumping.");
+  lines.push(
+    "  static MzSemanticColorResolved lerp(MzSemanticColorResolved a, MzSemanticColorResolved b, double t) =>"
+  );
+  lines.push(
+    `      MzSemanticColorResolved(${semanticPairs
+      .map(([n]) => `${ident(n)}: Color.lerp(a.${ident(n)}, b.${ident(n)}, t)!`)
+      .join(", ")});`
+  );
   lines.push("}", "");
 
   lines.push("/// Theme-resolved surface/text colours. Components MUST use `MzTheme.current()`, never MzColor directly.");
@@ -681,13 +714,23 @@ function buildDart() {
   );
   lines.push("");
   lines.push("  static MzTheme current(Brightness brightness) => brightness == Brightness.dark ? dark : light;");
+  lines.push("");
+  lines.push("  /// Field-wise interpolation, so a light/dark swap can animate instead of jumping.");
+  lines.push("  static MzTheme lerp(MzTheme a, MzTheme b, double t) =>");
+  lines.push(
+    `      MzTheme(${themeLight
+      .map(([n]) => `${ident(n)}: Color.lerp(a.${ident(n)}, b.${ident(n)}, t)!`)
+      .join(", ")});`
+  );
   lines.push("}", "");
 
+  lines.push("/// CSS generic families are stripped — Flutter resolves real family names only.");
   lines.push("class MzFontFamily {");
   lines.push("  MzFontFamily._();");
   for (const [name, v] of fontFamily) {
-    lines.push(`  static const ${ident(name)} = '${v[0]}';`);
-    lines.push(`  static const ${ident(name)}Fallback = [${v.slice(1).map((f) => `'${f}'`).join(", ")}];`);
+    const stack = dartFontStack(v);
+    lines.push(`  static const ${ident(name)} = '${stack[0]}';`);
+    lines.push(`  static const ${ident(name)}Fallback = [${stack.slice(1).map((f) => `'${f}'`).join(", ")}];`);
   }
   lines.push("}", "");
 
@@ -730,6 +773,17 @@ function buildDart() {
   for (const [name, v] of iconSize) lines.push(`  static const ${ident(name)} = ${parseFloat(v)}.0;`);
   lines.push("}", "");
 
+  lines.push("/// Left status rail widths (BRAND.md §9.1) — the rail replaces icon circles in lists.");
+  lines.push("class MzRail {");
+  lines.push("  MzRail._();");
+  for (const [name, v] of rail) lines.push(`  static const ${ident(name)} = ${parseFloat(v)}.0;`);
+  lines.push("}", "");
+
+  lines.push("class MzBorder {");
+  lines.push("  MzBorder._();");
+  for (const [name, v] of border) lines.push(`  static const ${ident(name)} = ${parseFloat(v)}.0;`);
+  lines.push("}", "");
+
   lines.push("/// Fluent UI System Icons glyph names (see BRAND.md §6).");
   lines.push("class MzIcon {");
   lines.push("  MzIcon._();");
@@ -763,6 +817,533 @@ function buildDart() {
 }
 
 writeFileSync(path.join(ROOT, "dist/dart/mz_tokens.dart"), buildDart());
+
+// ===========================================================================
+// Dart (Flutter) — Material ThemeData binding
+// ===========================================================================
+//
+// mz_tokens.dart is the raw scale. This file binds it to Material, so a Flutter
+// consumer gets the brand from `Theme.of(context)` rather than reaching for
+// MzColor by hand in every widget (COMPONENTS.md R1: tokens, never literals).
+//
+// Two halves, because Material's ColorScheme is narrower than the brand:
+//   * the slots that DO map (primary, surface, outline, error, …) go into
+//     ColorScheme and the component themes;
+//   * everything Material has no slot for (surface-sunk, anchor, accent-warm,
+//     text-3, the semantic trio) rides along in an MzColors ThemeExtension,
+//     which lerps, so a light/dark swap animates.
+//
+// Component themes encode BRAND.md §9: elevation 0 everywhere (§9.1 — depth is
+// a border and a surface change, never a shadow the cheap phone has to paint)
+// and 44px minimum targets (R8).
+// ---------------------------------------------------------------------------
+
+const themeLightMap = new Map(themeLight);
+const themeDarkMap = new Map(themeDark);
+const semanticResolvedMap = new Map(semantic);
+
+// A rename in tokens.json should fail the build loudly here, not emit Dart that
+// no longer compiles against mz_tokens.dart.
+for (const key of [
+  "bg", "surface", "surface-sunk", "surface-invert", "text", "text-2", "text-3",
+  "text-invert", "border", "accent", "accent-warm", "anchor", "anchor-fill", "on-anchor",
+]) {
+  if (!themeLightMap.has(key) || !themeDarkMap.has(key)) {
+    throw new Error(`color.theme.{light,dark}.${key} is required by the Flutter ThemeData emitter`);
+  }
+}
+for (const key of ["success", "critical", "info", "caution-fill", "on-caution-fill", "restricted"]) {
+  if (!semanticResolvedMap.has(key)) {
+    throw new Error(`color.semantic.${key} is required by the Flutter ThemeData emitter`);
+  }
+}
+
+function srgbToLinear(channel) {
+  const c = channel / 255;
+  return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+}
+
+function relativeLuminance(hex) {
+  const { r, g, b } = hexParts(hex);
+  const [R, G, B] = [r, g, b].map((h) => srgbToLinear(parseInt(h, 16)));
+  return 0.2126 * R + 0.7152 * G + 0.0722 * B;
+}
+
+function contrastRatio(a, b) {
+  const [hi, lo] = [relativeLuminance(a), relativeLuminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+// Material wants an `onX` for every fill. Rather than eyeball one, take whichever
+// of the theme's own two extremes — its text colour and its inverse — scores the
+// higher WCAG ratio on that fill. Ties never happen at these values.
+function pickOn(fillHex, themeMap) {
+  const candidates = [themeMap.get("text"), themeMap.get("text-invert")];
+  const scored = candidates.map((c) => ({ hex: c, ratio: contrastRatio(fillHex, c) }));
+  scored.sort((a, b) => b.ratio - a.ratio);
+  return scored[0];
+}
+
+function buildDartTheme() {
+  // [dartFieldName, lightFillHex, darkFillHex] for every fill Material has no `on` slot for.
+  const onTargets = [
+    ["accent", themeLightMap.get("accent"), themeDarkMap.get("accent")],
+    ["accentWarm", themeLightMap.get("accent-warm"), themeDarkMap.get("accent-warm")],
+    ["success", semanticResolvedMap.get("success"), semanticResolvedMap.get("success-dark")],
+    ["critical", semanticResolvedMap.get("critical"), semanticResolvedMap.get("critical-dark")],
+    ["info", semanticResolvedMap.get("info"), semanticResolvedMap.get("info-dark")],
+  ];
+
+  const onLines = [];
+  for (const [name, lightFill, darkFill] of onTargets) {
+    const l = pickOn(lightFill, themeLightMap);
+    const d = pickOn(darkFill, themeDarkMap);
+    onLines.push(`  static const ${name}Light = ${dartColor(l.hex)}; // ${l.ratio.toFixed(2)}:1 on ${lightFill}`);
+    onLines.push(`  static const ${name}Dark = ${dartColor(d.hex)}; // ${d.ratio.toFixed(2)}:1 on ${darkFill}`);
+  }
+  const onFields = onTargets.map(([n]) => n);
+
+  return `// ${GENERATED_NOTICE}
+//
+// Material binding for the MyMzansi tokens. Use \`MzThemeData.light\` / \`.dark\`
+// on MaterialApp; read brand-only colours with \`context.mz\`.
+import 'package:flutter/material.dart';
+
+import 'mz_tokens.dart';
+
+/// Foreground colours for the brand fills Material has no \`onX\` slot for.
+/// Each is whichever theme extreme (text / text-invert) scores the higher WCAG
+/// contrast ratio on that fill — computed at build time, never eyeballed.
+class MzOn {
+  MzOn._();
+${onLines.join("\n")}
+
+  static const light = MzOnResolved(${onFields.map((n) => `${n}: ${n}Light`).join(", ")});
+  static const dark = MzOnResolved(${onFields.map((n) => `${n}: ${n}Dark`).join(", ")});
+  static MzOnResolved current(Brightness brightness) => brightness == Brightness.dark ? dark : light;
+}
+
+class MzOnResolved {
+  const MzOnResolved({${onFields.map((n) => `required this.${n}`).join(", ")}});
+${onFields.map((n) => `  final Color ${n};`).join("\n")}
+
+  static MzOnResolved lerp(MzOnResolved a, MzOnResolved b, double t) =>
+      MzOnResolved(${onFields.map((n) => `${n}: Color.lerp(a.${n}, b.${n}, t)!`).join(", ")});
+}
+
+/// The brand colours that do not fit ColorScheme, carried on ThemeData so
+/// widgets read them from context instead of importing MzColor directly.
+///
+/// \`\`\`dart
+/// Container(color: context.mz.colors.surfaceSunk)
+/// Text('Approved', style: TextStyle(color: context.mz.semantic.success))
+/// \`\`\`
+@immutable
+class MzColors extends ThemeExtension<MzColors> {
+  const MzColors({required this.colors, required this.semantic, required this.on});
+
+  /// Surface and text roles for the active brightness.
+  final MzTheme colors;
+
+  /// Meaning-carrying colours (success / critical / info) for the active brightness.
+  final MzSemanticColorResolved semantic;
+
+  /// Legible foregrounds for [colors] and [semantic] fills.
+  final MzOnResolved on;
+
+  static MzColors of(Brightness brightness) => MzColors(
+        colors: MzTheme.current(brightness),
+        semantic: MzSemanticColor.current(brightness),
+        on: MzOn.current(brightness),
+      );
+
+  /// Maize ground for the \`limit\` tone. [onCautionFill] (ink) is the only
+  /// permitted foreground on it, in both themes — see COMPONENTS.md, Badge.
+  Color get cautionFill => MzSemanticColor.cautionFill;
+  Color get onCautionFill => MzSemanticColor.onCautionFill;
+  Color get cautionText => MzSemanticColor.cautionText;
+  Color get restricted => MzSemanticColor.restricted;
+
+  @override
+  MzColors copyWith({MzTheme? colors, MzSemanticColorResolved? semantic, MzOnResolved? on}) => MzColors(
+        colors: colors ?? this.colors,
+        semantic: semantic ?? this.semantic,
+        on: on ?? this.on,
+      );
+
+  @override
+  MzColors lerp(covariant ThemeExtension<MzColors>? other, double t) {
+    if (other is! MzColors) return this;
+    return MzColors(
+      colors: MzTheme.lerp(colors, other.colors, t),
+      semantic: MzSemanticColorResolved.lerp(semantic, other.semantic, t),
+      on: MzOnResolved.lerp(on, other.on, t),
+    );
+  }
+}
+
+extension MzColorsContext on BuildContext {
+  /// Brand colours for the current theme. Falls back to the raw tokens if the
+  /// surrounding ThemeData was not built by [MzThemeData], so a widget dropped
+  /// into a plain MaterialApp still renders on-brand instead of throwing.
+  MzColors get mz {
+    final theme = Theme.of(this);
+    return theme.extension<MzColors>() ?? MzColors.of(theme.brightness);
+  }
+}
+
+/// The five button variants of BRAND.md §9.2. ThemeData can only carry one
+/// style per button widget, so the variants that do not map to a Material
+/// widget (both destructive treatments) are exposed here for call sites.
+class MzButtonStyles {
+  MzButtonStyles._();
+
+  static ButtonStyle _base(Color background, Color foreground, {BorderSide? side, required double minHeight}) =>
+      ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(background),
+        foregroundColor: WidgetStatePropertyAll(foreground),
+        overlayColor: WidgetStatePropertyAll(foreground.withValues(alpha: 0.08)),
+        // §9.1: depth is the fill and the border, never a shadow.
+        elevation: const WidgetStatePropertyAll(0),
+        shadowColor: const WidgetStatePropertyAll(Color(0x00000000)),
+        side: side == null ? null : WidgetStatePropertyAll(side),
+        // Height only — width is unconstrained so a label wraps instead of
+        // truncating (R4: isiZulu runs ~2x English).
+        minimumSize: WidgetStatePropertyAll(Size(0, minHeight)),
+        padding: const WidgetStatePropertyAll(
+          EdgeInsets.symmetric(horizontal: MzSpace.lg, vertical: MzSpace.sm),
+        ),
+        textStyle: const WidgetStatePropertyAll(MzFont.bodyEmph),
+        shape: const WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(MzRadius.md))),
+        ),
+        animationDuration: MzDuration.quick,
+      );
+
+  /// One filled primary per screen.
+  static ButtonStyle primary(Brightness brightness) {
+    final t = MzTheme.current(brightness);
+    return _base(t.anchorFill, t.onAnchor, minHeight: MzTouch.min);
+  }
+
+  /// Alternatives — transparent, accent border and label.
+  static ButtonStyle secondary(Brightness brightness) {
+    final t = MzTheme.current(brightness);
+    return _base(
+      const Color(0x00000000),
+      t.accent,
+      side: BorderSide(color: t.accent, width: MzBorder.hairline),
+      minHeight: MzTouch.min,
+    );
+  }
+
+  /// Dismiss, "not now".
+  static ButtonStyle plain(Brightness brightness) {
+    final t = MzTheme.current(brightness);
+    return _base(
+      t.surface,
+      t.text2,
+      side: BorderSide(color: t.border, width: MzBorder.hairline),
+      minHeight: MzTouch.min,
+    );
+  }
+
+  /// Irreversible actions only. Gets the larger spaced target.
+  static ButtonStyle destructive(Brightness brightness) {
+    final sem = MzSemanticColor.current(brightness);
+    final on = MzOn.current(brightness);
+    return _base(sem.critical, on.critical, minHeight: MzTouch.minSpaced);
+  }
+
+  /// Leads somewhere consequential but is not the commit action — "Sign out".
+  static ButtonStyle destructiveOutline(Brightness brightness) {
+    final sem = MzSemanticColor.current(brightness);
+    return _base(
+      const Color(0x00000000),
+      sem.critical,
+      side: BorderSide(color: sem.critical, width: MzBorder.hairline),
+      minHeight: MzTouch.minSpaced,
+    );
+  }
+}
+
+/// The brand as Material [ThemeData].
+///
+/// \`\`\`dart
+/// MaterialApp(
+///   theme: MzThemeData.light,
+///   darkTheme: MzThemeData.dark,
+///   themeMode: ThemeMode.system,
+/// )
+/// \`\`\`
+class MzThemeData {
+  MzThemeData._();
+
+  static final ThemeData light = _build(Brightness.light);
+  static final ThemeData dark = _build(Brightness.dark);
+
+  static ThemeData of(Brightness brightness) => brightness == Brightness.dark ? dark : light;
+
+  static ThemeData _build(Brightness brightness) {
+    final t = MzTheme.current(brightness);
+    final sem = MzSemanticColor.current(brightness);
+    final on = MzOn.current(brightness);
+
+    final scheme = ColorScheme(
+      brightness: brightness,
+      primary: t.anchorFill,
+      onPrimary: t.onAnchor,
+      primaryContainer: t.surfaceSunk,
+      onPrimaryContainer: t.text,
+      secondary: t.accent,
+      onSecondary: on.accent,
+      secondaryContainer: t.surfaceSunk,
+      onSecondaryContainer: t.text,
+      tertiary: t.accentWarm,
+      onTertiary: on.accentWarm,
+      tertiaryContainer: t.surfaceSunk,
+      onTertiaryContainer: t.text,
+      error: sem.critical,
+      onError: on.critical,
+      errorContainer: t.surfaceSunk,
+      onErrorContainer: sem.critical,
+      surface: t.surface,
+      onSurface: t.text,
+      onSurfaceVariant: t.text2,
+      surfaceContainerLowest: t.surface,
+      surfaceContainerLow: t.bg,
+      surfaceContainer: t.surfaceSunk,
+      surfaceContainerHigh: t.surfaceSunk,
+      surfaceContainerHighest: t.surfaceSunk,
+      surfaceBright: t.surface,
+      surfaceDim: t.surfaceSunk,
+      outline: t.border,
+      outlineVariant: t.border,
+      inverseSurface: t.surfaceInvert,
+      onInverseSurface: t.textInvert,
+      inversePrimary: t.anchor,
+      // Material 3 tints elevated surfaces toward the primary. The brand builds
+      // depth from discrete surface tokens instead, so the tint is switched off
+      // here and on every component below.
+      surfaceTint: const Color(0x00000000),
+      shadow: const Color(0xFF000000),
+      scrim: const Color(0xFF000000),
+    );
+
+    final hairline = BorderSide(color: t.border, width: MzBorder.hairline);
+    const cardShape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(MzRadius.lg)),
+    );
+    final fieldShape = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(MzRadius.md)),
+      borderSide: hairline,
+    );
+
+    return ThemeData(
+      useMaterial3: true,
+      brightness: brightness,
+      colorScheme: scheme,
+      extensions: [MzColors.of(brightness)],
+
+      fontFamily: MzFontFamily.sans,
+      fontFamilyFallback: MzFontFamily.sansFallback,
+      textTheme: _textTheme(t),
+
+      scaffoldBackgroundColor: t.bg,
+      canvasColor: t.bg,
+      dividerColor: t.border,
+      splashColor: t.accent.withValues(alpha: 0.10),
+      highlightColor: t.accent.withValues(alpha: 0.06),
+      // R8: every tap target clears 44px even when a widget is laid out smaller.
+      materialTapTargetSize: MaterialTapTargetSize.padded,
+      visualDensity: VisualDensity.standard,
+
+      appBarTheme: AppBarTheme(
+        backgroundColor: t.bg,
+        foregroundColor: t.text,
+        surfaceTintColor: const Color(0x00000000),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        centerTitle: false,
+        titleTextStyle: MzFont.title2.copyWith(color: t.text),
+        iconTheme: IconThemeData(color: t.text, size: MzIconSize.lg),
+      ),
+
+      // §9.1: a card lifts off the bone ground by surface + hairline, not shadow.
+      cardTheme: CardThemeData(
+        color: t.surface,
+        surfaceTintColor: const Color(0x00000000),
+        elevation: 0,
+        margin: EdgeInsets.zero,
+        shape: cardShape.copyWith(side: hairline),
+        clipBehavior: Clip.antiAlias,
+      ),
+
+      elevatedButtonTheme: ElevatedButtonThemeData(style: MzButtonStyles.primary(brightness)),
+      filledButtonTheme: FilledButtonThemeData(style: MzButtonStyles.primary(brightness)),
+      outlinedButtonTheme: OutlinedButtonThemeData(style: MzButtonStyles.secondary(brightness)),
+      textButtonTheme: TextButtonThemeData(style: MzButtonStyles.plain(brightness)),
+
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: t.surfaceSunk,
+        contentPadding: const EdgeInsets.symmetric(horizontal: MzSpace.md, vertical: MzSpace.sm),
+        constraints: const BoxConstraints(minHeight: MzTouch.min),
+        border: fieldShape,
+        enabledBorder: fieldShape,
+        disabledBorder: fieldShape,
+        focusedBorder: fieldShape.copyWith(
+          borderSide: BorderSide(color: t.accent, width: MzBorder.focus),
+        ),
+        errorBorder: fieldShape.copyWith(
+          borderSide: BorderSide(color: sem.critical, width: MzBorder.hairline),
+        ),
+        focusedErrorBorder: fieldShape.copyWith(
+          borderSide: BorderSide(color: sem.critical, width: MzBorder.focus),
+        ),
+        // The label sits above the field and stays there — never a placeholder
+        // standing in for a label (COMPONENTS.md, Input).
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        labelStyle: MzFont.bodySm.copyWith(color: t.text2),
+        floatingLabelStyle: MzFont.bodySm.copyWith(color: t.text2),
+        hintStyle: MzFont.body.copyWith(color: t.text3),
+        errorStyle: MzFont.caption.copyWith(color: sem.critical),
+        errorMaxLines: 3,
+      ),
+
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected) ? on.accent : t.surface,
+        ),
+        trackColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected) ? t.accent : t.surfaceSunk,
+        ),
+        trackOutlineColor: WidgetStatePropertyAll(t.border),
+      ),
+
+      checkboxTheme: CheckboxThemeData(
+        fillColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected) ? t.accent : const Color(0x00000000),
+        ),
+        checkColor: WidgetStatePropertyAll(on.accent),
+        side: hairline,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(MzRadius.sm)),
+        ),
+      ),
+
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.resolveWith(
+          (states) => states.contains(WidgetState.selected) ? t.accent : t.text3,
+        ),
+      ),
+
+      dividerTheme: DividerThemeData(
+        color: t.border,
+        thickness: MzBorder.hairline,
+        space: MzSpace.md,
+      ),
+
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: t.surface,
+        surfaceTintColor: const Color(0x00000000),
+        elevation: 0,
+        modalElevation: 0,
+        showDragHandle: true,
+        dragHandleColor: t.text3,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(MzRadius.lg)),
+        ),
+      ),
+
+      dialogTheme: DialogThemeData(
+        backgroundColor: t.surface,
+        surfaceTintColor: const Color(0x00000000),
+        elevation: 0,
+        shape: cardShape.copyWith(side: hairline),
+        titleTextStyle: MzFont.title2.copyWith(color: t.text),
+        contentTextStyle: MzFont.body.copyWith(color: t.text2),
+      ),
+
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: t.surfaceInvert,
+        contentTextStyle: MzFont.body.copyWith(color: t.textInvert),
+        actionTextColor: t.textInvert,
+        behavior: SnackBarBehavior.floating,
+        elevation: 0,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(MzRadius.md)),
+        ),
+      ),
+
+      chipTheme: ChipThemeData(
+        backgroundColor: t.surfaceSunk,
+        selectedColor: t.accent,
+        side: hairline,
+        labelStyle: MzFont.bodySm.copyWith(color: t.text),
+        padding: const EdgeInsets.symmetric(horizontal: MzSpace.sm, vertical: MzSpace.xxs),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(MzRadius.full)),
+        ),
+      ),
+
+      listTileTheme: ListTileThemeData(
+        iconColor: t.text2,
+        textColor: t.text,
+        titleTextStyle: MzFont.body.copyWith(color: t.text),
+        subtitleTextStyle: MzFont.bodySm.copyWith(color: t.text2),
+        minVerticalPadding: MzSpace.sm,
+        contentPadding: const EdgeInsets.symmetric(horizontal: MzSpace.md),
+      ),
+
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: t.accent,
+        linearTrackColor: t.surfaceSunk,
+        circularTrackColor: t.surfaceSunk,
+      ),
+
+      iconTheme: IconThemeData(color: t.text, size: MzIconSize.lg),
+
+      tooltipTheme: TooltipThemeData(
+        decoration: BoxDecoration(
+          color: t.surfaceInvert,
+          borderRadius: const BorderRadius.all(Radius.circular(MzRadius.sm)),
+        ),
+        textStyle: MzFont.caption.copyWith(color: t.textInvert),
+      ),
+    );
+  }
+
+  static TextTheme _textTheme(MzTheme t) {
+    // Material's roles are a bigger grid than the brand's ten styles, so the
+    // scale is mapped onto them rather than stretched to fill them.
+    TextStyle primary(TextStyle s) => s.copyWith(color: t.text);
+    TextStyle secondary(TextStyle s) => s.copyWith(color: t.text2);
+
+    return TextTheme(
+      displayLarge: primary(MzFont.display),
+      displayMedium: primary(MzFont.display),
+      displaySmall: primary(MzFont.title1),
+      headlineLarge: primary(MzFont.title1),
+      headlineMedium: primary(MzFont.title2),
+      headlineSmall: primary(MzFont.title3),
+      titleLarge: primary(MzFont.title2),
+      titleMedium: primary(MzFont.title3),
+      titleSmall: primary(MzFont.bodyEmph),
+      bodyLarge: primary(MzFont.bodyLg),
+      bodyMedium: primary(MzFont.body),
+      bodySmall: secondary(MzFont.bodySm),
+      labelLarge: primary(MzFont.bodyEmph),
+      labelMedium: secondary(MzFont.caption),
+      // MzFont.label still needs its text upper-cased by the caller.
+      labelSmall: secondary(MzFont.label),
+    );
+  }
+}
+`;
+}
+
+writeFileSync(path.join(ROOT, "dist/dart/mz_theme.dart"), buildDartTheme());
 
 
 // ---------------------------------------------------------------------------
@@ -936,5 +1517,6 @@ console.log("  dist/tailwind/tailwind.config.js");
 console.log("  dist/swift/MzTokens.swift");
 console.log("  dist/kotlin/MzTokens.kt");
 console.log("  dist/dart/mz_tokens.dart");
+console.log("  dist/dart/mz_theme.dart");
 console.log("  dist/js/tokens.js");
 console.log("  dist/js/tokens.d.ts");
